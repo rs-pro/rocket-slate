@@ -23,4 +23,4 @@ Supports slate 0.57 only
 
 MIT License Copyright (c) 2019 glebtv
 
-Uses code and/or is based on [rocket-slate](https://github.com/nossas/rocket-slate) by Nossas (MIT License)
+Uses code and/or is based on [slate-editor](https://github.com/nossas/slate-editor) by Nossas (MIT License)
