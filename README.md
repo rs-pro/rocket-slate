@@ -8,19 +8,30 @@ Supports slate 0.57 only
 
 ## In the box
 
-- SlateJS 0.57
-- A complete wysiwyg toolbar
+- SlateJS 0.57 (no dependency on Immutable.JS)
+- Fully modular and customizeable
+- A complete wysiwyg with common functions and toolbar
+- Text and background color
 - Image, File, Video upload (simple API, golang + s3 backend example)
 - Mentions with async load and examples
 - Tables
 - Checklists
 - Code editing
 - Hotkeys
-- Link auto highlight
+- Autolink on paste
 - Working undo
 
-# License
+# License / Credits
 
+Original code in this repo:
 MIT License Copyright (c) 2019 glebtv
+Uses code from slate [examples](https://github.com/ianstormtaylor/slate/tree/master/site/examples) (MIT License)
 
-Uses code and/or is based on [slate-editor](https://github.com/nossas/slate-editor) by Nossas (MIT License)
+Rocket Slate Table:
+Based on [slate-deep-table](https://github.com/jasonphillips/slate-deep-table) (Apache 2.0 license)
+
+Rocket Slate Code:
+Based on [slate-edit-code](https://github.com/GitbookIO/slate-edit-code) (Apache 2.0 license)
+
+Borrows some code and ideas from [slate-editor](https://github.com/nossas/slate-editor) (MIT License)
+

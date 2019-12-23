@@ -11,15 +11,9 @@
   "author": "Glebtv <glebtv@gmail.com> (http://github.com/glebtv)",
   "license": "MIT",
   "scripts": {
-    "prepare": "babel src --out-dir dist --copy-files"
+    "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments"
   },
   "devDependencies": {
-    "babel-cli": "^6.14.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.11.1",
-    "babel-preset-stage-0": "^6.5.0",
-    "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.0"
   },
   "dependencies": {
     "classnames": "^2.2.6",
