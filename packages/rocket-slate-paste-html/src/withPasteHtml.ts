@@ -1,4 +1,5 @@
 import deserialize from "./deserialize";
+import { Transforms } from 'slate'
 
 export default function withPaseteHtml(editor) {
   const { insertData, isInline, isVoid } = editor

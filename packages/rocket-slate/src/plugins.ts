@@ -36,7 +36,11 @@ const Leaf = ({ attributes, children, leaf }) => {
     }
   })
 
-  return <span {...attributes}>{children}</span>
+  return (
+    <span {...attributes}>
+      {children}
+    </span>
+  )
 }
 
 export { Element, Leaf }

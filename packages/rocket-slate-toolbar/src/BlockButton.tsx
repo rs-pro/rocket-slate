@@ -4,7 +4,7 @@ import Button from "./Button"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const BlockButton = React.forwardRef((props, ref) => {
+const BlockButton = React.forwardRef((props: any, ref) => {
   const { type, icon, value, hasBlock, onClickBlock, ...rest } = props;
   let isActive = hasBlock(type);
   if (["numbered-list", "bulleted-list"].includes(type)) {

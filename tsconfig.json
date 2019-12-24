@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
-    "noEmit": false,
-    "strict": false,
+    "sourceMap": true,
+    "noEmitOnError": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
     "jsx": "react",
     "target": "esnext",
     "module": "esnext",
