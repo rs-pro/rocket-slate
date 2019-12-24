@@ -1,5 +1,9 @@
 import React from "react"
 
+import Button from "./Button"
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const MarkButton = React.forwardRef((props, ref) => {
   const { type, icon, hasMark, onClickMark, ...rest } = props;
   const isActive = hasMark(type);

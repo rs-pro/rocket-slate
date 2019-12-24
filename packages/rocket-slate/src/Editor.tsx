@@ -11,9 +11,12 @@ import { withHtml } from '@rocket-slate/paste-html'
 import { Transforms, createEditor } from 'slate'
 import { withHistory } from 'slate-history'
 
-class Editor externs React.PureComponent {
-  this.state = {
-    value: initialValue
+export default class Editor extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: initialValue
+    }
   }
 
   render() {

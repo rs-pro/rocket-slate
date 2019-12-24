@@ -25,7 +25,6 @@ const Element = ({ attributes, children, element }) => {
     return <RenderFunction {...attributes}>{children}</RenderFunction>
   }
   return <div {...attributes}>{children}</div>
-  }
 }
 
 const Leaf = ({ attributes, children, leaf }) => {

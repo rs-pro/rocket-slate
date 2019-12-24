@@ -1,1 +1,1 @@
-export { default as withPasteHtml } from "./withParsteHtml"
+export { default as withPasteHtml } from "./withPasteHtml"

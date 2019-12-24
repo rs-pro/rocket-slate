@@ -1,6 +1,6 @@
 import deserialize from "./deserialize";
 
-export default const withPaseteHtml = editor => {
+export default function withPaseteHtml(editor) {
   const { insertData, isInline, isVoid } = editor
 
   editor.isInline = element => {

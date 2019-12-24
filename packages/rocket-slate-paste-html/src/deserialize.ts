@@ -1,6 +1,8 @@
 import { ELEMENT_TAGS, TEXT_TAGS } from "./tags";
 
-export default const deserialize = el => {
+import { jsx } from 'slate-hyperscript'
+
+export default function deserialize(el) {
   if (el.nodeType === 3) {
     return el.textContent
   } else if (el.nodeType !== 1) {

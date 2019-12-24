@@ -1,5 +1,5 @@
 {
-  "name": "rocket-slate",
+  "name": "@rocket-slate/paste-html",
   "version": "0.1.0",
   "description": "A rich text editor based on SlateJS framework",
   "main": "dist/index.js",
@@ -19,7 +19,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "slate": "0.57.1",
-    "slate-history": "^0.57.1",
+    "slate-hyperscript": "^0.57.1",
     "slate-react": "0.57.1"
   },
   "peerDependencies": {

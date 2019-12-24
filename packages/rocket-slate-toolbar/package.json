@@ -1,5 +1,5 @@
 {
-  "name": "rocket-slate",
+  "name": "@rocket-slate/toolbar",
   "version": "0.1.0",
   "description": "A rich text editor based on SlateJS framework",
   "main": "dist/index.js",
@@ -15,12 +15,9 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "classnames": "^2.2.6",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "slate": "0.57.1",
-    "slate-history": "^0.57.1",
-    "slate-react": "0.57.1"
+    "@fortawesome/react-fontawesome": "^0.1.8",
+    "@tippy.js/react": "^3.1.1",
+    "classnames": "^2.2.6"
   },
   "peerDependencies": {
     "slate": "0.57.1",
@@ -40,6 +37,6 @@
     "slate-plugins"
   ],
   "bugs": {
-    "url": "https://github.com/nossas/rocket-slate/issues"
+    "url": "https://github.com/rs-pro/rocket-slate/issues"
   }
 }

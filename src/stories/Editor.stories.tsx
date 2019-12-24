@@ -2,8 +2,7 @@ import { text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 
-import { renderMention } from "./renderMention"
-import { Editor } from "rocket-slate/src/Editor.tsx"
+import { renderMention } from "../renderMention"
+import { Editor } from "rocket-slate"
 
-storiesOf('Input', module)
-  .add('default', () => <Editor />);
+storiesOf('Editor', module).add('default', () => <Editor />);
