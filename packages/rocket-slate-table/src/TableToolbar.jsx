@@ -42,7 +42,7 @@ class TableToolbar extends React.PureComponent {
 
     return (
       <div key="tbg6" className="editor__toolbar-group">
-        <Tippy content="Добавить колонку">
+        <Tooltip content={"table.column.add"}>
           <a className="editor__button"
             onClick={this.onInsertColumn}
           >
@@ -51,9 +51,9 @@ class TableToolbar extends React.PureComponent {
               <FontAwesomeIcon icon={faPlus} />
             </span>
           </a>
-        </Tippy>
+        </Tooltip>
 
-        <Tippy content="Добавить строку">
+        <Tooltip content={"table.row.add"}>
           <a className="editor__button"
             onClick={this.onInsertRow}
           >
@@ -62,9 +62,9 @@ class TableToolbar extends React.PureComponent {
               <FontAwesomeIcon icon={faPlus} />
             </span>
           </a>
-        </Tippy>
+        </Tooltip>
 
-        <Tippy content="Удалить колонку">
+        <Tooltip content={"table.column.remove"}>
           <a className="editor__button"
             onClick={this.onRemoveColumn}
           >
@@ -73,20 +73,20 @@ class TableToolbar extends React.PureComponent {
               <FontAwesomeIcon icon={faMinus} />
             </span>
           </a>
-        </Tippy>
+        </Tooltip>
 
-        <Tippy content="Удалить строку">
+        <Tooltip content={"table.row.remove"}>
           <a className="editor__button"
-            onClick={this.onRemoveRow}
+            onClick={this.onToggleHeaders}
           >
             <FontAwesomeIcon icon={faColumns} rotation={90} />
             <span className="editor__button-mark">
               <FontAwesomeIcon icon={faMinus} />
             </span>
           </a>
-        </Tippy>
+        </Tooltip>
 
-        <Tippy content="Удалить таблицу">
+        <Tooltip content={"table.remove"}>
           <a className="editor__button"
             onClick={this.onRemoveTable}
           >
@@ -95,15 +95,15 @@ class TableToolbar extends React.PureComponent {
               <FontAwesomeIcon icon={faMinus} />
             </span>
           </a>
-        </Tippy>
+        </Tooltip>
 
-        <Tippy content="Вкл\выкл заголовки">
+        <Tooltip content={"table.toggle_headers"}>
           <a className="editor__button"
-            onClick={this.onRemoveTable}
+            onClick={this.onToggleHeaders}
           >
             <FontAwesomeIcon icon={faTable} />
           </a>
-        </Tippy>
+        </Tooltip>
       </div>
     )
   }
