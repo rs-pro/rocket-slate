@@ -1,10 +1,10 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTable } from "@fortawesome/pro-regular-svg-icons/faTable";
-import { faColumns } from "@fortawesome/pro-regular-svg-icons/faColumns";
-import { faPlus } from "@fortawesome/pro-regular-svg-icons/faPlus";
-import { faMinus } from "@fortawesome/pro-regular-svg-icons/faMinus";
+import { faTable } from "@fortawesome/free-solid-svg-icons/faTable";
+import { faColumns } from "@fortawesome/free-solid-svg-icons/faColumns";
+import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
+import { faMinus } from "@fortawesome/free-solid-svg-icons/faMinus";
 
 import Button from "./Button";
 import Tippy from "@tippy.js/react";

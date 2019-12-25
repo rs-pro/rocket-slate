@@ -7,8 +7,8 @@ import Tippy from "@tippy.js/react";
 import colors from "./colors"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFill } from "@fortawesome/pro-regular-svg-icons/faFill";
-import { faPalette } from "@fortawesome/pro-regular-svg-icons/faPalette";
+import { faFill } from "@fortawesome/free-solid-svg-icons/faFill";
+import { faPalette } from "@fortawesome/free-solid-svg-icons/faPalette";
 
 const Default = {fg: "#000000", bg: "#ffffff"}
 const Names = {fg: "Цвет текста", bg: "Цвет фона"}

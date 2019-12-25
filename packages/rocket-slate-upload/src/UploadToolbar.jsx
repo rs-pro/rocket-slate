@@ -1,9 +1,9 @@
 import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage } from "@fortawesome/pro-regular-svg-icons/faImage";
-import { faUpload } from "@fortawesome/pro-regular-svg-icons/faUpload";
-import { faLink } from "@fortawesome/pro-regular-svg-icons/faLink";
+import { faImage } from "@fortawesome/free-solid-svg-icons/faImage";
+import { faUpload } from "@fortawesome/free-solid-svg-icons/faUpload";
+import { faLink } from "@fortawesome/free-solid-svg-icons/faLink";
 
 import Button from "./Button";
 import Tippy from "@tippy.js/react";

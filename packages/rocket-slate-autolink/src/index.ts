@@ -1,12 +1,10 @@
 import isUrl from 'is-url'
 
 export default function PasteLinkify(options = {}) {
-  const {
-    isActiveQuery = 'isLinkActive',
-    wrapCommand = 'wrapLink',
-    unwrapCommand = 'unwrapLink',
-  } = options
-
+  const isActiveQuery = options.isLinkActive
+  const wrapCommand = options.wrapLink
+  const unwrapCommand = options.unwrapLink
+  
   return {
     onCommand(command, change, next) {
       const { type, args } = command

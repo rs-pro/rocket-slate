@@ -25,6 +25,7 @@ Supports slate 0.57 only
 
 Original code in this repo:
 MIT License Copyright (c) 2019 glebtv
+
 Uses code from slate [examples](https://github.com/ianstormtaylor/slate/tree/master/site/examples) (MIT License)
 
 Rocket Slate Table:
