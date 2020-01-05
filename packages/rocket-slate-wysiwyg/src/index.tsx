@@ -17,3 +17,4 @@ addMark("wysisyg", "code", (children) => <strong>{children}</strong>)
 addMark("wysisyg", "italic", (children) => <em>{children}</em>)
 addMark("wysisyg", "underline", (children) => <u>{children}</u>)
 
+export { default as withWysiwyg } from "./withWysiwyg"

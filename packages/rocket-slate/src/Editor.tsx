@@ -1,13 +1,16 @@
-// Customize this file to pick the plugins you want
-//
-import React from 'react'
+// This is an example with all the plugins enabled 
+// It is designed for use as-is
+// Copy this file to your project and customize as necessary if you want
 
-import "@rocket-slate/plugin-image"
+import React, { useCallback, useMemo } from 'react'
 
 import { initialEditorState } from "rocket-slate"
 
-import { withHtml } from '@rocket-slate/paste-html'
+import { withWysiwyg } from '@rocket-slate/wysiwyg'
+import { withPasteHtml } from '@rocket-slate/paste-html'
+import { withMentions } from '@rocket-slate/mentions'
 
+import { Editable, withReact, useSlate, Slate } from 'slate-react'
 import { Transforms, createEditor } from 'slate'
 import { withHistory } from 'slate-history'
 
@@ -24,12 +27,16 @@ export default class Editor extends React.PureComponent {
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])
 
     const editor = useMemo(
-      () => withHtml(withReact(withHtml(withHistory(createEditor())))),
+      () => {
+        let editor = withHistory(createEditor())
+        editor = withWysiwyg(withReact(withPasteHtml(withMentions(editor))))
+        return editor
+      },
       []
     )
 
     return (
-      <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+      <Slate editor={editor} value={this.state.value} onChange={value => this.setState({value})}>
         <Editable
           renderElement={renderElement}
           renderLeaf={renderLeaf}
