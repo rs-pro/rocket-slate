@@ -39,7 +39,7 @@ Object.defineProperty(exports, "leaves", {
     return _plugins.leaves;
   }
 });
-Object.defineProperty(exports, "plugins", {
+Object.defineProperty(exports, "Editor", {
   enumerable: true,
   get: function () {
     return _Editor.default;

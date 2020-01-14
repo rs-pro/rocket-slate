@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = _default;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -18,6 +18,8 @@ var _reactFontawesome = require("@fortawesome/react-fontawesome");
 var _faFill = require("@fortawesome/free-solid-svg-icons/faFill");
 
 var _faPalette = require("@fortawesome/free-solid-svg-icons/faPalette");
+
+var _slateReact = require("slate-react");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -164,6 +166,12 @@ class ColorToolbar extends _react.default.PureComponent {
 
 }
 
-var _default = ColorToolbar;
-exports.default = _default;
+function _default() {
+  const editor = (0, _slateReact.useSlate)();
+  return _react.default.createElement(ColorToolbar, {
+    editor: editor
+  });
+}
+
+;
 //# sourceMappingURL=ColorToolbar.js.map

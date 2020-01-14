@@ -2,6 +2,8 @@
 
 var _react = _interopRequireDefault(require("react"));
 
+var _rocketSlate = require("rocket-slate");
+
 var _isUrl = _interopRequireDefault(require("is-url"));
 
 var _slate = require("slate");
@@ -9,6 +11,14 @@ var _slate = require("slate");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+(0, _rocketSlate.addElement)("link", "link", ({
+  attributes,
+  children,
+  element
+}) => _react.default.createElement("a", _extends({}, attributes, {
+  href: element.url
+}), children));
 
 const withLinks = editor => {
   const {
@@ -93,12 +103,4 @@ const wrapLink = (editor, url) => {
     });
   }
 };
-
-addElement("link", "link", ({
-  attributes,
-  children,
-  element
-}) => _react.default.createElement("a", _extends({}, attributes, {
-  href: element.url
-}), children));
 //# sourceMappingURL=index.js.map

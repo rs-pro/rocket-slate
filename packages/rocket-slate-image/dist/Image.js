@@ -87,15 +87,17 @@ class Image extends _react.default.PureComponent {
       className: this.getClasses(),
       size: size,
       onResizeStop: (e, direction, ref, d) => {
-        const width = this.image.width;
-        const height = this.image.height;
-        editor.setNodeByKey(node.key, {
-          data: {
-            src,
-            width,
-            height
-          }
-        });
+        if (this.image.current) {
+          const width = this.image.current.width;
+          const height = this.image.current.height;
+          editor.setNodeByKey(node.key, {
+            data: {
+              src,
+              width,
+              height
+            }
+          });
+        }
       }
     }, attributes), this.renderInner());
   }

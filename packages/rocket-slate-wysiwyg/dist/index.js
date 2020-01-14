@@ -60,10 +60,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   attributes,
   children
 }) => _react.default.createElement("h5", attributes, children));
-(0, _rocketSlate.addMark)("wysisyg", "bold", children => _react.default.createElement("strong", null, children));
-(0, _rocketSlate.addMark)("wysisyg", "code", children => _react.default.createElement("strong", null, children));
-(0, _rocketSlate.addMark)("wysisyg", "italic", children => _react.default.createElement("em", null, children));
-(0, _rocketSlate.addMark)("wysisyg", "underline", children => _react.default.createElement("u", null, children));
+(0, _rocketSlate.addLeaf)("wysisyg", "bold", children => _react.default.createElement("strong", null, children));
+(0, _rocketSlate.addLeaf)("wysisyg", "code", children => _react.default.createElement("strong", null, children));
+(0, _rocketSlate.addLeaf)("wysisyg", "italic", children => _react.default.createElement("em", null, children));
+(0, _rocketSlate.addLeaf)("wysisyg", "underline", children => _react.default.createElement("u", null, children));
 const LIST_TYPES = ['numbered-list', 'bulleted-list', 'checkbox-list'];
 
 const toggleBlock = (editor, format) => {

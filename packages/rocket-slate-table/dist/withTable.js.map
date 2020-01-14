@@ -1,1 +1,0 @@
-{"version":3,"sources":["../src/withTable.ts"],"names":["withTable","editor"],"mappings":";;;;;;;AAAe,SAASA,SAAT,CAAmBC,MAAnB,EAA2B;AACtC,SAAOA,MAAP;AACD","sourcesContent":["export default function withTable(editor) {\n    return editor\n  }\n  "],"file":"withTable.js"}
