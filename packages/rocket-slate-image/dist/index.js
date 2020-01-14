@@ -9,8 +9,6 @@ var _react = _interopRequireDefault(require("react"));
 
 var _Image = _interopRequireDefault(require("./Image"));
 
-var _onKeyDown = _interopRequireDefault(require("./onKeyDown"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 addElement("wysisyg", "image", ({

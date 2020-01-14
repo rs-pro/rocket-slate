@@ -4,22 +4,23 @@
 
 import React, { useCallback, useMemo } from 'react'
 
-import { initialEditorState } from "rocket-slate"
+import { initialEditorState, Element, Leaf } from "rocket-slate"
 
 import { withWysiwyg } from '@rocket-slate/wysiwyg'
 import { withPasteHtml } from '@rocket-slate/paste-html'
 import { withMentions } from '@rocket-slate/mentions'
+import { withLinks } from '@rocket-slate/links'
+import { withTables } from '@rocket-slate/table'
 
-import { Editable, withReact, useSlate, Slate } from 'slate-react'
-import { Transforms, createEditor } from 'slate'
+import { Editable, withReact, Slate } from 'slate-react'
+import { createEditor } from 'slate'
 import { withHistory } from 'slate-history'
+
 
 export default class Editor extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.state = {
-      value: initialValue
-    }
+    this.state = props.initialValue || initialEditorState
   }
 
   render() {
@@ -29,13 +30,14 @@ export default class Editor extends React.PureComponent {
     const editor = useMemo(
       () => {
         let editor = withHistory(createEditor())
-        editor = withWysiwyg(withReact(withPasteHtml(withMentions(editor))))
+        editor = withReact(withPasteHtml(withTables(withWysiwyg(withLinks(withMentions(editor))))))
         return editor
       },
       []
     )
 
     return (
+      // @ts-ignore
       <Slate editor={editor} value={this.state.value} onChange={value => this.setState({value})}>
         <Editable
           renderElement={renderElement}

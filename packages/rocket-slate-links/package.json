@@ -1,0 +1,46 @@
+{
+  "name": "@rocket-slate/links",
+  "version": "0.1.0",
+  "description": "RocketSlate - links plugin",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rs-pro/rocket-slate.git"
+  },
+  "homepage": "https://github.com/rs-pro/rocket-slate",
+  "author": "Glebtv <glebtv@gmail.com> (http://github.com/glebtv)",
+  "license": "MIT",
+  "scripts": {
+    "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "slate": "0.57.1",
+    "slate-hyperscript": "^0.57.1",
+    "slate-react": "0.57.1",
+    "is-url": "^1.2.2"
+  },
+  "peerDependencies": {
+    "slate": "0.57.1",
+    "slate-react": "0.57.1"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "dist"
+  ],
+  "keywords": [
+    "slate",
+    "rich-text",
+    "editor",
+    "react",
+    "slate-plugins"
+  ],
+  "bugs": {
+    "url": "https://github.com/nossas/rocket-slate/issues"
+  }
+}

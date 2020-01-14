@@ -7,6 +7,8 @@ exports.default = withPaseteHtml;
 
 var _deserialize = _interopRequireDefault(require("./deserialize"));
 
+var _slate = require("slate");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function withPaseteHtml(editor) {
@@ -30,7 +32,9 @@ function withPaseteHtml(editor) {
     if (html) {
       const parsed = new DOMParser().parseFromString(html, 'text/html');
       const fragment = (0, _deserialize.default)(parsed.body);
-      Transforms.insertFragment(editor, fragment);
+
+      _slate.Transforms.insertFragment(editor, fragment);
+
       return;
     }
 

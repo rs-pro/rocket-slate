@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/withWysiwyg.tsx"],"names":["withWysiwyg","editor"],"mappings":";;;;;;;AAAe,SAASA,WAAT,CAAqBC,MAArB,EAA6B;AACxC,SAAOA,MAAP;AACD","sourcesContent":["export default function withWysiwyg(editor) {\n    return editor\n  }\n  "],"file":"withWysiwyg.js"}

@@ -14,7 +14,7 @@ exports.elements = elements;
 
 const addElement = function (pluginName, typeName, RenderFunction) {
   if (elements[typeName]) {
-    throw `Error: cannot register element ${typeName} from ${$pluginName} - already registered by ${elements[typeName].pluginName}`;
+    throw `Error: cannot register element ${typeName} from ${pluginName} - already registered by ${elements[typeName].pluginName}`;
   }
 
   elements[typeName] = {
@@ -29,7 +29,7 @@ exports.leaves = leaves;
 
 const addLeaf = function (pluginName, typeName, RenderFunction) {
   if (elements[typeName]) {
-    throw `Error: cannot register leaf ${typeName} from ${$pluginName} - already registered by ${elements[typeName].pluginName}`;
+    throw `Error: cannot register leaf ${typeName} from ${pluginName} - already registered by ${elements[typeName].pluginName}`;
   }
 
   leaves[typeName] = {

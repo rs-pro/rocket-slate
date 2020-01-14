@@ -8,7 +8,9 @@ import { Resizable } from "re-resizable";
  * @type {Component}
  */
 
-class Image extends React.PureComponent {
+class Image extends React.PureComponent<any, any> {
+  private image = React.createRef<HTMLImageElement>()
+
   getClasses() {
     const { selected } = this.props
 
@@ -21,7 +23,7 @@ class Image extends React.PureComponent {
     const src = this.getSrc()
     return (
       <a href={src} target="_blank">
-        <img alt="" src={src} ref={(r) => this.image = r} />
+        <img alt="" src={src} ref={this.image} />
       </a>
     )
   }
@@ -70,15 +72,17 @@ class Image extends React.PureComponent {
         className={this.getClasses()}
         size={size}
         onResizeStop={(e, direction, ref, d) => {
-          const width = this.image.width
-          const height = this.image.height
-          editor.setNodeByKey(node.key, {
-            data: {
-              src,
-              width,
-              height
-            },
-          })
+          if (this.image.current) {
+            const width = this.image.current.width
+            const height = this.image.current.height
+            editor.setNodeByKey(node.key, {
+              data: {
+                src,
+                width,
+                height
+              },
+            })
+          }
         }}
         {...attributes}
       >

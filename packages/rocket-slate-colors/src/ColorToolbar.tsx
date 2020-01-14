@@ -1,7 +1,6 @@
 import React from "react";
 import classNames from "classnames";
 
-import Button from "./Button";
 import Tippy from "@tippy.js/react";
 
 import colors from "./colors"
@@ -9,17 +8,23 @@ import colors from "./colors"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFill } from "@fortawesome/free-solid-svg-icons/faFill";
 import { faPalette } from "@fortawesome/free-solid-svg-icons/faPalette";
+import { useSlate } from "slate-react";
 
 const Default = {fg: "#000000", bg: "#ffffff"}
 const Names = {fg: "Цвет текста", bg: "Цвет фона"}
 const Icons = {fg: faPalette, bg: faFill}
 const Other = {fg: 'bg', bg: 'fg'}
 
-class ColorToolbar extends React.PureComponent {
-  state = {
-    fg: false,
-    bg: false,
+
+class ColorToolbar extends React.PureComponent<any, any> {
+  constructor(props) {
+    super(props)
+    this.state = {
+      fg: false,
+      bg: false,
+    }
   }
+  
 
   toggle(kind) {
     var toSet = {}
@@ -124,4 +129,7 @@ class ColorToolbar extends React.PureComponent {
   }
 }
 
-export default ColorToolbar;
+export default function() {
+  const editor = useSlate()
+  return <ColorToolbar editor={editor} />
+};

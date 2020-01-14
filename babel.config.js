@@ -18,6 +18,7 @@ module.exports = (api) => {
           development: process.env.BABEL_ENV !== 'build',
         },
       ],
+      '@babel/preset-typescript',
     ],
     env: {
       build: {
