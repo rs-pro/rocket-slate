@@ -36,3 +36,4 @@ Based on [slate-edit-code](https://github.com/GitbookIO/slate-edit-code) (Apache
 
 Borrows some code and ideas from [slate-editor](https://github.com/nossas/slate-editor) (MIT License)
 
+Includes icons from [google material-design-icons](https://github.com/google/material-design-icons) [Apache 2.0 license](https://github.com/google/material-design-icons/blob/master/LICENSE)
