@@ -4,7 +4,7 @@
 
 import React, { useCallback, useMemo, useState } from 'react'
 
-import { initialEditorState, Element, Leaf } from "rocket-slate"
+import { initialEditorState, Element, Leaf, Toolbar } from "rocket-slate"
 
 import { withWysiwyg } from '@rocket-slate/wysiwyg'
 import { withPasteHtml } from '@rocket-slate/paste-html'
@@ -18,6 +18,7 @@ import { withHistory } from 'slate-history'
 
 
 function Editor(props) {
+  console.log(initialEditorState)
   const [value, setValue] = useState(props.initialValue || initialEditorState)  
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
@@ -31,10 +32,12 @@ function Editor(props) {
     []
   )
 
+  console.log("render slate", editor, value)
 
   return (
     // @ts-ignore
-    <Slate editor={editor} value={this.state.value} onChange={value => this.setState({value})}>
+    <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+      <Toolbar buttons={} />
       <Editable
         renderElement={renderElement}
         renderLeaf={renderLeaf}
@@ -44,3 +47,4 @@ function Editor(props) {
   )
 }
 
+export default Editor

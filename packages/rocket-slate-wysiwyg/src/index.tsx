@@ -3,7 +3,7 @@ import { addElement, addLeaf } from "rocket-slate"
 import { useSlate } from "slate-react"
 import { Transforms, Editor } from "slate"
 
-import { Button } from "@rocket-slate/toolbar"
+import { Button } from "rocket-slate"
 
 addElement("wysisyg", "block-quote", ({attributes, children}) => <blockquote {...attributes}>{children}</blockquote>)
 addElement("wysisyg", "bulleted-list", ({attributes, children}) => <ul {...attributes}>{children}</ul>)
@@ -96,3 +96,5 @@ const MarkButton = ({ format, icon }) => {
         </Button>
     )
 }
+
+addButton("wysisyg", "heading-five", ({attributes, children}) => <h5 {...attributes}>{children}</h5>)

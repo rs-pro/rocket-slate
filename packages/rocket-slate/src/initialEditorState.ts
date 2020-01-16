@@ -1,15 +1,10 @@
-const initialEditorState = {
-  document: {
-    nodes: [
-      {
-        kind: 'block',
-        type: 'paragraph',
-        nodes: [
-          { kind: 'text', leaves: [{text: ''}] },
-        ]
-      }
-    ]
-  }
-}
+const initialEditorState = [
+    {
+      type: 'paragraph',
+      children: [
+        { text: "" },
+      ]
+    }
+]
 
 export default initialEditorState

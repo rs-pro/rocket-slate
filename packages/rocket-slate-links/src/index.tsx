@@ -70,3 +70,4 @@ const wrapLink = (editor, url) => {
   }
 }
 
+export { withLinks }

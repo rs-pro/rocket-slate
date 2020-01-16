@@ -17,7 +17,7 @@ var _faPlus = require("@fortawesome/free-solid-svg-icons/faPlus");
 
 var _faMinus = require("@fortawesome/free-solid-svg-icons/faMinus");
 
-var _utils = require("@rocket-slate/utils");
+var _rocketSlate = require("rocket-slate");
 
 var _slateReact = require("slate-react");
 
@@ -34,7 +34,7 @@ function TableToolbar() {
   return _react.default.createElement("div", {
     key: "tbg6",
     className: "rocket-slate__toolbar-group"
-  }, _react.default.createElement(_utils.Tooltip, {
+  }, _react.default.createElement(_rocketSlate.Tooltip, {
     content: "table.column.add"
   }, _react.default.createElement("a", {
     className: "rocket-slate__button",
@@ -45,7 +45,7 @@ function TableToolbar() {
     className: "rocket-slate__button-mark"
   }, _react.default.createElement(_reactFontawesome.FontAwesomeIcon, {
     icon: _faPlus.faPlus
-  })))), _react.default.createElement(_utils.Tooltip, {
+  })))), _react.default.createElement(_rocketSlate.Tooltip, {
     content: "table.row.add"
   }, _react.default.createElement("a", {
     className: "rocket-slate__button",
@@ -57,7 +57,7 @@ function TableToolbar() {
     className: "rocket-slate__button-mark"
   }, _react.default.createElement(_reactFontawesome.FontAwesomeIcon, {
     icon: _faPlus.faPlus
-  })))), _react.default.createElement(_utils.Tooltip, {
+  })))), _react.default.createElement(_rocketSlate.Tooltip, {
     content: "table.column.remove"
   }, _react.default.createElement("a", {
     className: "rocket-slate__button",
@@ -68,7 +68,7 @@ function TableToolbar() {
     className: "rocket-slate__button-mark"
   }, _react.default.createElement(_reactFontawesome.FontAwesomeIcon, {
     icon: _faMinus.faMinus
-  })))), _react.default.createElement(_utils.Tooltip, {
+  })))), _react.default.createElement(_rocketSlate.Tooltip, {
     content: "table.row.remove"
   }, _react.default.createElement("a", {
     className: "rocket-slate__button",
@@ -80,7 +80,7 @@ function TableToolbar() {
     className: "rocket-slate__button-mark"
   }, _react.default.createElement(_reactFontawesome.FontAwesomeIcon, {
     icon: _faMinus.faMinus
-  })))), _react.default.createElement(_utils.Tooltip, {
+  })))), _react.default.createElement(_rocketSlate.Tooltip, {
     content: "table.remove"
   }, _react.default.createElement("a", {
     className: "rocket-slate__button",
@@ -91,7 +91,7 @@ function TableToolbar() {
     className: "rocket-slate__button-mark"
   }, _react.default.createElement(_reactFontawesome.FontAwesomeIcon, {
     icon: _faMinus.faMinus
-  })))), _react.default.createElement(_utils.Tooltip, {
+  })))), _react.default.createElement(_rocketSlate.Tooltip, {
     content: "table.toggle_headers"
   }, _react.default.createElement("a", {
     className: "rocket-slate__button",

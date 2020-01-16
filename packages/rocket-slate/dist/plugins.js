@@ -45,16 +45,16 @@ const Element = ({
   children,
   element
 }) => {
-  const {
-    pluginName,
-    RenderFunction
-  } = elements[element.type];
-
-  if (RenderFunction) {
+  if (elements[element.type]) {
+    const {
+      pluginName,
+      RenderFunction
+    } = elements[element.type];
     console.log("render element", element.type, "with function from", pluginName);
     return _react.default.createElement(RenderFunction, attributes, children);
   }
 
+  console.log("render element", element.type, "with div");
   return _react.default.createElement("div", attributes, children);
 };
 

@@ -18,8 +18,6 @@ var _slateReact = require("slate-react");
 
 var _slate = require("slate");
 
-var _toolbar = require("@rocket-slate/toolbar");
-
 var _withWysiwyg = _interopRequireDefault(require("./withWysiwyg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -118,7 +116,7 @@ const BlockButton = ({
   icon
 }) => {
   const editor = (0, _slateReact.useSlate)();
-  return _react.default.createElement(_toolbar.Button, {
+  return _react.default.createElement(_rocketSlate.Button, {
     active: isBlockActive(editor, format),
     onMouseDown: event => {
       event.preventDefault();
@@ -132,7 +130,7 @@ const MarkButton = ({
   icon
 }) => {
   const editor = (0, _slateReact.useSlate)();
-  return _react.default.createElement(_toolbar.Button, {
+  return _react.default.createElement(_rocketSlate.Button, {
     active: isMarkActive(editor, format),
     onMouseDown: event => {
       event.preventDefault();
