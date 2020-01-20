@@ -14,11 +14,13 @@ var _react = _interopRequireDefault(require("react"));
 
 var _rocketSlate = require("rocket-slate");
 
-var _slateReact = require("slate-react");
-
-var _slate = require("slate");
-
 var _withWysiwyg = _interopRequireDefault(require("./withWysiwyg"));
+
+var _BlockButton = _interopRequireDefault(require("./BlockButton"));
+
+var _MarkButton = _interopRequireDefault(require("./MarkButton"));
+
+var _H = _interopRequireDefault(require("@rocket-slate/icons/H1"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42,6 +44,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   attributes,
   children
 }) => _react.default.createElement("h1", attributes, children));
+(0, _rocketSlate.addButton)("wysisyg", "heading-one", () => _react.default.createElement(_BlockButton.default, {
+  name: "heading-one",
+  format: "heading-one",
+  icon: _H.default
+}));
 (0, _rocketSlate.addElement)("wysisyg", "heading-two", ({
   attributes,
   children
@@ -58,84 +65,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   attributes,
   children
 }) => _react.default.createElement("h5", attributes, children));
-(0, _rocketSlate.addLeaf)("wysisyg", "bold", children => _react.default.createElement("strong", null, children));
+(0, _rocketSlate.addLeaf)("wysisyg", "bold", ({
+  attributes,
+  children
+}) => _react.default.createElement("h5", attributes, children));
+(0, _rocketSlate.addButton)("wysisyg", "bold", () => _react.default.createElement(_MarkButton.default, {
+  name: "bold",
+  format: "bold",
+  icon: "format_bold"
+}));
 (0, _rocketSlate.addLeaf)("wysisyg", "code", children => _react.default.createElement("strong", null, children));
 (0, _rocketSlate.addLeaf)("wysisyg", "italic", children => _react.default.createElement("em", null, children));
 (0, _rocketSlate.addLeaf)("wysisyg", "underline", children => _react.default.createElement("u", null, children));
-const LIST_TYPES = ['numbered-list', 'bulleted-list', 'checkbox-list'];
-
-const toggleBlock = (editor, format) => {
-  const isActive = isBlockActive(editor, format);
-  const isList = LIST_TYPES.includes(format);
-
-  _slate.Transforms.unwrapNodes(editor, {
-    match: n => LIST_TYPES.includes(n.type),
-    split: true
-  });
-
-  _slate.Transforms.setNodes(editor, {
-    type: isActive ? 'paragraph' : isList ? 'list-item' : format
-  });
-
-  if (!isActive && isList) {
-    const block = {
-      type: format,
-      children: []
-    };
-
-    _slate.Transforms.wrapNodes(editor, block);
-  }
-};
-
-const toggleMark = (editor, format) => {
-  const isActive = isMarkActive(editor, format);
-
-  if (isActive) {
-    _slate.Editor.removeMark(editor, format);
-  } else {
-    _slate.Editor.addMark(editor, format, true);
-  }
-};
-
-const isBlockActive = (editor, format) => {
-  const [match] = _slate.Editor.nodes(editor, {
-    match: n => n.type === format
-  });
-
-  return !!match;
-};
-
-const isMarkActive = (editor, format) => {
-  const marks = _slate.Editor.marks(editor);
-
-  return marks ? marks[format] === true : false;
-};
-
-const BlockButton = ({
-  format,
-  icon
-}) => {
-  const editor = (0, _slateReact.useSlate)();
-  return _react.default.createElement(_rocketSlate.Button, {
-    active: isBlockActive(editor, format),
-    onMouseDown: event => {
-      event.preventDefault();
-      toggleBlock(editor, format);
-    }
-  }, icon);
-};
-
-const MarkButton = ({
-  format,
-  icon
-}) => {
-  const editor = (0, _slateReact.useSlate)();
-  return _react.default.createElement(_rocketSlate.Button, {
-    active: isMarkActive(editor, format),
-    onMouseDown: event => {
-      event.preventDefault();
-      toggleMark(editor, format);
-    }
-  }, icon);
-};
+(0, _rocketSlate.addLeaf)("wysisyg", "strikethrough", children => _react.default.createElement("u", null, children));
 //# sourceMappingURL=index.js.map

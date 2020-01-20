@@ -24,7 +24,7 @@ Supports slate 0.57 only
 # License / Credits
 
 Original code in this repo:
-MIT License Copyright (c) 2019 glebtv
+MIT License Copyright (c) 2019-2020 glebtv
 
 Uses code from slate [examples](https://github.com/ianstormtaylor/slate/tree/master/site/examples) (MIT License)
 

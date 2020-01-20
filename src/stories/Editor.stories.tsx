@@ -6,5 +6,7 @@ import renderMention from "../renderMention"
 import { Editor } from "rocket-slate"
 
 storiesOf('Editor', module).add('default', () => {
-    return <Editor renderMention={renderMention} />
+    return <Editor
+      renderMention={renderMention}
+    />
 });
