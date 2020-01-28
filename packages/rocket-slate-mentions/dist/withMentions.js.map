@@ -1,1 +1,0 @@
-{"version":3,"sources":["../src/withMentions.ts"],"names":["withMentions","editor"],"mappings":";;;;;;;AAAe,SAASA,YAAT,CAAsBC,MAAtB,EAA8B;AAC3C,SAAOA,MAAP;AACD","sourcesContent":["export default function withMentions(editor) {\n  return editor\n}\n"],"file":"withMentions.js"}

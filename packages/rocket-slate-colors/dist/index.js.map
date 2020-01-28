@@ -1,1 +1,0 @@
-{"version":3,"sources":["../src/index.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;AAAA;;AACA","sourcesContent":["export {default as colors} from \"./colors\"\nexport {default as ColorToolbar} from \"./ColorToolbar\"\n"],"file":"index.js"}
