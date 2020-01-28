@@ -2,11 +2,9 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 
-import renderMention from "../renderMention"
-import { Editor } from "rocket-slate"
+import { Editor } from '@rocket-slate/core';
+import RenderMention from '~/components/RenderMention';
 
 storiesOf('Editor', module).add('default', () => {
-    return <Editor
-      renderMention={renderMention}
-    />
+  return <Editor renderMention={RenderMention} />;
 });

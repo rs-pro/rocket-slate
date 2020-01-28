@@ -1,10 +1,12 @@
-// This is an example with all the plugins enabled 
+// This is an example with all the plugins enabled
 // It is designed for use as-is
 // Copy this file to your project and customize as necessary if you want
 
 import React, { useCallback, useMemo, useState } from 'react'
 
-import { initialEditorState, Element, Leaf, Toolbar } from "rocket-slate"
+import { Element, Leaf } from './plugins';
+import initialEditorState from './initialEditorState';
+import Toolbar from './Toolbar';
 
 import { withWysiwyg } from '@rocket-slate/wysiwyg'
 import { withPasteHtml } from '@rocket-slate/paste-html'
@@ -12,14 +14,14 @@ import { withMentions } from '@rocket-slate/mentions'
 import { withLinks } from '@rocket-slate/links'
 import { withTables } from '@rocket-slate/table'
 
-import { Editable, withReact, Slate } from 'slate-react'
+import { Editable, Slate, withReact } from 'slate-react'
 import { createEditor } from 'slate'
 import { withHistory } from 'slate-history'
 
 
 function Editor(props) {
   console.log(initialEditorState)
-  const [value, setValue] = useState(props.initialValue || initialEditorState)  
+  const [value, setValue] = useState(props.initialValue || initialEditorState)
   const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
 
@@ -37,7 +39,7 @@ function Editor(props) {
   return (
     // @ts-ignore
     <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-      <Toolbar buttons={} />
+      <Toolbar buttons={[]} />
       <Editable
         renderElement={renderElement}
         renderLeaf={renderLeaf}

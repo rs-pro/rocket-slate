@@ -1,12 +1,12 @@
 import React from "react"
-import { addElement, addLeaf, addButton } from "rocket-slate"
+import { addElement, addLeaf, addButton } from "@rocket-slate/core"
 
 export { default as withWysiwyg } from "./withWysiwyg"
 
 import BlockButton from "./BlockButton"
 import MarkButton from "./MarkButton"
 
-
+import IconH1 from '@rocket-slate/core/icons/H1';
 
 addElement("wysisyg", "block-quote", ({attributes, children}) => <blockquote {...attributes}>{children}</blockquote>)
 addElement("wysisyg", "bulleted-list", ({attributes, children}) => <ul {...attributes}>{children}</ul>)
@@ -14,7 +14,6 @@ addElement("wysisyg", "numbered-list", ({attributes, children}) => <ol {...attri
 addElement("wysisyg", "list-item", ({attributes, children}) => <ol {...attributes}>{children}</ol>)
 
 addElement("wysisyg", "heading-one", ({attributes, children}) => <h1 {...attributes}>{children}</h1>)
-import IconH1 from "@rocket-slate/icons/H1"
 addButton("wysisyg", "heading-one", () => <BlockButton name="heading-one" format="heading-one" icon={IconH1} />)
 
 addElement("wysisyg", "heading-two", ({attributes, children}) => <h2 {...attributes}>{children}</h2>)

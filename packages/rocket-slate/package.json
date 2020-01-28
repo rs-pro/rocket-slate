@@ -1,5 +1,5 @@
 {
-  "name": "rocket-slate",
+  "name": "@rocket-slate/core",
   "version": "0.1.0",
   "description": "A rich text editor based on SlateJS framework",
   "main": "dist/index.js",
@@ -13,8 +13,12 @@
   "scripts": {
     "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments"
   },
-  "devDependencies": {},
   "dependencies": {
+    "@rocket-slate/links": "^0.1.0",
+    "@rocket-slate/mentions": "^0.1.0",
+    "@rocket-slate/paste-html": "^0.1.0",
+    "@rocket-slate/table": "^0.1.0",
+    "@rocket-slate/wysiwyg": "^0.1.0",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",

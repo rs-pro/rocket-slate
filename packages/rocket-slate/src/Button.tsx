@@ -1,14 +1,16 @@
-import React from "react";
+import React, {ButtonHTMLAttributes} from "react";
 import classNames from "classnames";
 
-type buttonProps = {
+type IButtonProps = ButtonHTMLAttributes<
+  HTMLButtonElement | HTMLAnchorElement
+> & {
   active: boolean;
-  children: any;
-  className: string | null;
-}
+  className?: string;
+  children?: React.ReactNode;
+};
 
-const Button = React.forwardRef((props: buttonProps, ref: any) => {
-  const { active, children, className, ...rest } = props;
+const Button = React.forwardRef<any, IButtonProps>((props, ref) => {
+  const { children, active, className, ...rest } = props;
 
   const cl = classNames("editor__button", className, {
     "editor__button--active": active

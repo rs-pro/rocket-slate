@@ -14,9 +14,8 @@
     "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments",
     "test": "./node_modules/.bin/mocha ./tests/*.js --require babel-register --reporter=list"
   },
-  "devDependencies": {
-  },
   "dependencies": {
+    "@rocket-slate/core": "^0.1.0",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -44,5 +43,3 @@
     "url": "https://github.com/nossas/rocket-slate/issues"
   }
 }
-
-

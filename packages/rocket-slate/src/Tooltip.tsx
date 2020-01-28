@@ -1,15 +1,13 @@
-// @ts-nocheck
-// TODO fix tooltip / tippy types issue
+import Tippy, { TippyProps } from '@tippy.js/react';
+import React from 'react';
 
-import React from "react";
-import Tippy from "@tippy.js/react";
+interface ITooltipProps extends Pick<TippyProps, 'children'> {
+  title: string;
+}
 
-export default class Tooltip extends React.PureComponent {
-  render() {
-    return (
-      <Tippy content={this.props.title}>
-        {this.props.children}
-      </Tippy>
-    )
+export default class Tooltip extends React.PureComponent<ITooltipProps, any> {
+  public render() {
+    const { title, children } = this.props;
+    return <Tippy content={title}>{children}</Tippy>;
   }
 }

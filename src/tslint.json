@@ -15,6 +15,7 @@
       "jsx-double"
     ],
     "no-submodule-imports": false,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "no-implicit-dependencies": false
   }
 }

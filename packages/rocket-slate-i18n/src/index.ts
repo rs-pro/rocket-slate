@@ -1,7 +1,7 @@
 import en from "./en";
 import ru from "./ru";
 
-const locale = window.locale || "en";
+const locale = (window as Window & { locale?: string }).locale || "en";
 
 const messages = {en: en, ru: ru}
 

@@ -24,7 +24,7 @@ const Element = ({ attributes, children, element }) => {
     console.log("render element", element.type, "with function from", pluginName)
     return <RenderFunction {...attributes}>{children}</RenderFunction>
   }
-  
+
   console.log("render element", element.type, "with div")
   return <div {...attributes}>{children}</div>
 }
@@ -51,7 +51,7 @@ export { Element, Leaf }
 var buttons = {};
 const addButton = function(pluginName, buttonName, Button){
   if (buttons[buttonName]) {
-    throw `Error: cannot register button ${buttonName} from ${pluginName} - already registered by ${buttons[typeName].pluginName}`
+    throw `Error: cannot register button ${buttonName} from ${pluginName} - already registered by ${buttons[buttonName].pluginName}`
   }
   buttons[buttonName] = { pluginName, Button }
 };

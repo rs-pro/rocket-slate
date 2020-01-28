@@ -1,7 +1,8 @@
 import React from "react"
-import { Button } from "rocket-slate"
-import { useSlate } from "slate-react"
-import { t } from "@rocket-slate/i18n"
+import { useSlate } from 'slate-react'
+import { Button } from '@rocket-slate/core'
+import { t } from '@rocket-slate/i18n'
+import { isMarkActive, toggleMark } from './util';
 
 const MarkButton = ({ name, format, icon }) => {
     const editor = useSlate()
