@@ -1,21 +1,32 @@
-import React from 'react'
-import { useSlate } from 'slate-react'
+import React from 'react';
+import { useSlate } from 'slate-react';
 
-const Toolbar = React.forwardRef((props:any, ref:any) => {
-    const { buttons } = props;
-    const editor = useSlate()
-    return (
-        <div
-            className="rocket-slate__toolbar"
-            ref={ref}
-        >
-            {buttons.map((button) => {
-                return (
-                    <a className="rocket-slate__toolbar-button"></a>
-                )
-            })}
-        </div>
-    )
-})
+interface IToolbarProps {
+  buttons: Array<{
+    title: string;
+    icon: any;
+    onClick?: () => void;
+  }>;
+}
 
-export default Toolbar
+const Toolbar = React.forwardRef((props: IToolbarProps, ref: any) => {
+  const { buttons } = props;
+  const editor = useSlate();
+  return (
+    <div className="rocket-slate__toolbar" ref={ref}>
+      {buttons.map(({ title, icon, onClick }, index) => {
+        return (
+          <button
+            className="rocket-slate__toolbar-button"
+            key={index.toString()}
+            title={title}
+          >
+            {icon}
+          </button>
+        );
+      })}
+    </div>
+  );
+});
+
+export default Toolbar;

@@ -1,10 +1,8 @@
 const initialEditorState = [
-    {
-      type: 'paragraph',
-      children: [
-        { text: "" },
-      ]
-    }
-]
+  {
+    type: 'paragraph',
+    children: [{ text: '' }],
+  },
+];
 
-export default initialEditorState
+export default initialEditorState;

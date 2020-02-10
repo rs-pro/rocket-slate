@@ -2,21 +2,19 @@ export {
   elements,
   addElement,
   Element,
-
   leaves,
   addLeaf,
   Leaf,
-
   buttons,
-  addButton
- } from './plugins'
+  addButton,
+} from './plugins';
 
-export { default as Button } from './Button'
-export { default as Toolbar } from './Toolbar'
-export { default as initialEditorState } from './initialEditorState'
-export { default as Editor } from './Editor'
+export { default as Button } from './Button';
+export { default as Toolbar } from './Toolbar';
+export { default as initialEditorState } from './initialEditorState';
+export { default as Editor } from './Editor';
 
-export { default as Tooltip } from './Tooltip'
+export { default as Tooltip } from './Tooltip';
 
 /**
  * A change helper to standardize wrapping links.
@@ -25,8 +23,8 @@ export { default as Tooltip } from './Tooltip'
  */
 export function wrapLink(editor, href) {
   editor.wrapInline({
-    type: "link",
-    data: { href }
+    type: 'link',
+    data: { href },
   });
 
   editor.moveToEnd();
@@ -39,5 +37,5 @@ export function wrapLink(editor, href) {
  */
 
 export function unwrapLink(editor) {
-  editor.unwrapInline("link");
+  editor.unwrapInline('link');
 }
