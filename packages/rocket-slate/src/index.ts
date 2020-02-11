@@ -11,7 +11,7 @@ export {
 
 export { default as Button } from './Button';
 export { default as Toolbar } from './Toolbar';
-export { default as initialEditorState } from './initialEditorState';
+export { default as initialValue } from './initialValue';
 export { default as Editor } from './Editor';
 
 export { default as Tooltip } from './Tooltip';

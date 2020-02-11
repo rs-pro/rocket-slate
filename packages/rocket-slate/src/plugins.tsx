@@ -1,65 +1,81 @@
 import React from 'react';
+import { RenderElementProps, RenderLeafProps } from 'slate-react';
 
-const elements = {};
-const addElement = (pluginName, typeName, RenderFunction) => {
+interface IOptionsButton {
+  icon?: React.ReactNode;
+  title?: string;
+  type: 'mark' | 'block';
+  format: string;
+}
+
+type FCElement = React.FunctionComponent<RenderElementProps>;
+type FCLeaf = React.FunctionComponent<RenderLeafProps>;
+
+const elements: { [key: string]: { pluginName: string; renderFn: FCElement } } = {};
+const leaves: { [key: string]: { pluginName: string; renderFn: FCLeaf } } = {};
+const buttons: { [key: string]: { pluginName: string; options: IOptionsButton } } = {};
+
+const addElement = (pluginName: string, typeName: string, renderFn: FCElement) => {
   if (elements[typeName]) {
-    throw new Error(
-      `Error: cannot register element ${typeName} from ${pluginName} - already registered by ${elements[typeName].pluginName}`,
-    );
+    if (elements[typeName].pluginName !== pluginName) {
+      throw new Error(
+        `Error: cannot register element ${typeName} from ${pluginName} - already registered by ${elements[typeName].pluginName}`,
+      );
+    }
   }
-  elements[typeName] = { pluginName, RenderFunction };
+  elements[typeName] = { pluginName, renderFn };
 };
 
-const leaves = {};
-const addLeaf = (pluginName, typeName, RenderFunction) => {
-  if (elements[typeName]) {
-    throw new Error(
-      `Error: cannot register leaf ${typeName} from ${pluginName} - already registered by ${elements[typeName].pluginName}`,
-    );
+const addLeaf = (pluginName: string, typeName: string, renderFn: FCLeaf) => {
+  if (leaves[typeName]) {
+    if (leaves[typeName].pluginName !== pluginName) {
+      throw new Error(
+        `Error: cannot register leaf ${typeName} from ${pluginName} - already registered by ${elements[typeName].pluginName}`,
+      );
+    }
   }
-  leaves[typeName] = { pluginName, RenderFunction };
+  leaves[typeName] = { pluginName, renderFn };
 };
 
-export { elements, addElement, leaves, addLeaf };
+const addButton = (pluginName: string, buttonName: string, options: IOptionsButton) => {
+  if (buttons[buttonName]) {
+    if (buttons[buttonName].pluginName !== pluginName) {
+      throw new Error(
+        `Error: cannot register button ${buttonName} from ${pluginName} - already registered by ${buttons[buttonName].pluginName}`,
+      );
+    }
+  }
+  buttons[buttonName] = { pluginName, options };
+};
 
-const Element = ({ attributes, children, element }) => {
+export { elements, addElement, leaves, addLeaf, buttons, addButton };
+
+const Element = (props: RenderElementProps) => {
+  const { attributes, children, element } = props;
   if (elements[element.type]) {
-    const { pluginName, RenderFunction } = elements[element.type];
-    console.log(
-      'render element',
-      element.type,
-      'with function from',
-      pluginName,
-    );
-    return <RenderFunction {...attributes}>{children}</RenderFunction>;
+    const { pluginName, renderFn } = elements[element.type];
+    console.log('render element', element.type, 'with function from', pluginName);
+    return renderFn(props);
   }
-
   console.log('render element', element.type, 'with div');
   return <div {...attributes}>{children}</div>;
 };
 
-const Leaf = ({ attributes, children, leaf }) => {
-  Object.keys(elements).forEach((typeName) => {
-    if (leaf[typeName]) {
-      const { pluginName, RenderFunction } = leaf[typeName];
-      console.log('render leaf', typeName, 'with function from', pluginName);
-      children = RenderFunction(children);
-    }
-  });
+const Leaf = (props: RenderLeafProps) => {
+  const { attributes, children, text, leaf } = props;
 
-  return <span {...attributes}>{children}</span>;
+  return (
+    <span {...attributes}>
+      {Object.keys(leaves).reduce((accChildren, typeName) => {
+        if (leaf[typeName]) {
+          const { pluginName, renderFn } = leaves[typeName];
+          console.log('render leaf', typeName, 'with function from', pluginName);
+          return renderFn({ attributes, leaf, text, children: accChildren });
+        }
+        return accChildren;
+      }, children)}
+    </span>
+  );
 };
 
 export { Element, Leaf };
-
-const buttons = {};
-const addButton = (pluginName, buttonName, Button) => {
-  if (buttons[buttonName]) {
-    throw new Error(
-      `Error: cannot register button ${buttonName} from ${pluginName} - already registered by ${buttons[buttonName].pluginName}`,
-    );
-  }
-  buttons[buttonName] = { pluginName, Button };
-};
-
-export { buttons, addButton };

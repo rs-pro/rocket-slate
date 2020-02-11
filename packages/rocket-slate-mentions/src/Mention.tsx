@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RenderMention = ({ data }) => {
+const Mention = ({ data }) => {
   const issueID = data.get('issue');
   const isFocused = false;
   const attributes = {};
@@ -16,4 +16,4 @@ const RenderMention = ({ data }) => {
   );
 };
 
-export default RenderMention;
+export default Mention;

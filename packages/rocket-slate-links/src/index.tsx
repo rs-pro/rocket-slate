@@ -1,73 +1,77 @@
-import React from 'react'
+import React from 'react';
 
-import { addElement } from "@rocket-slate/core"
-addElement("link", "link", ({attributes, children, element}) => <a {...attributes} href={element.url}>{children}</a>)
+import { addElement } from '@rocket-slate/core';
+addElement('link', 'link', ({ attributes, children, element }) => (
+  <a {...attributes} href={element.url}>
+    {children}
+  </a>
+));
 
-import isUrl from 'is-url'
-import { Transforms, Editor, Range } from 'slate'
+import isUrl from 'is-url';
+import { Transforms, Editor, Range } from 'slate';
 
-const withLinks = editor => {
-  const { insertData, insertText, isInline } = editor
+const withLinks = (editor) => {
+  const { insertData, insertText, isInline } = editor;
 
-  editor.isInline = element => {
-    return element.type === 'link' ? true : isInline(element)
-  }
+  editor.isInline = (element) => {
+    return element.type === 'link' ? true : isInline(element);
+  };
 
-  editor.insertText = text => {
+  editor.insertText = (text) => {
     if (text && isUrl(text)) {
-      wrapLink(editor, text)
+      wrapLink(editor, text);
     } else {
-      insertText(text)
+      insertText(text);
     }
-  }
+  };
 
-  editor.insertData = data => {
-    const text = data.getData('text/plain')
+  editor.insertData = (data) => {
+    const text = data.getData('text/plain');
 
     if (text && isUrl(text)) {
-      wrapLink(editor, text)
+      wrapLink(editor, text);
     } else {
-      insertData(data)
+      insertData(data);
     }
-  }
+  };
 
-  return editor
-}
+  return editor;
+};
 
 const insertLink = (editor, url) => {
   if (editor.selection) {
-    wrapLink(editor, url)
+    wrapLink(editor, url);
   }
-}
+};
 
-const isLinkActive = editor => {
-  const [link] = Editor.nodes(editor, { match: n => n.type === 'link' });
-  return !!link
-}
+const isLinkActive = (editor) => {
+  const [link] = Editor.nodes(editor, { match: (n) => n.type === 'link' });
+  return !!link;
+};
 
-const unwrapLink = editor => {
-  Transforms.unwrapNodes(editor, { match: n => n.type === 'link' })
-}
+const unwrapLink = (editor) => {
+  Transforms.unwrapNodes(editor, { match: (n) => n.type === 'link' });
+};
 
 const wrapLink = (editor, url) => {
   if (isLinkActive(editor)) {
-    unwrapLink(editor)
+    unwrapLink(editor);
   }
 
-  const { selection } = editor
-  const isCollapsed = selection && Range.isCollapsed(selection)
+  const { selection } = editor;
+  const isCollapsed = selection && Range.isCollapsed(selection);
   const link = {
     type: 'link',
     url,
     children: isCollapsed ? [{ text: url }] : [],
-  }
+  };
 
   if (isCollapsed) {
-    Transforms.insertNodes(editor, link)
+    Transforms.insertNodes(editor, link);
   } else {
-    Transforms.wrapNodes(editor, link, { split: true })
-    Transforms.collapse(editor, { edge: 'end' })
+    Transforms.wrapNodes(editor, link, { split: true });
+    Transforms.collapse(editor, { edge: 'end' });
   }
-}
+};
 
-export { withLinks }
+export { withLinks };

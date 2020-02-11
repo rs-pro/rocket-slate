@@ -13,15 +13,15 @@
   "scripts": {
     "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments"
   },
-  "devDependencies": {},
   "dependencies": {
+    "@rocket-slate/core": "^0.1.0",
     "classnames": "^2.2.6",
+    "is-url": "^1.2.2",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "slate": "0.57.1",
     "slate-hyperscript": "^0.57.1",
-    "slate-react": "0.57.1",
-    "is-url": "^1.2.2"
+    "slate-react": "0.57.1"
   },
   "peerDependencies": {
     "slate": "0.57.1",

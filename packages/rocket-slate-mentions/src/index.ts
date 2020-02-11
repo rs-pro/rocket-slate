@@ -1,1 +1,1 @@
-export { default as withMentions } from "./withMentions"
+export { default as withMentions } from './withMentions';
