@@ -19,17 +19,14 @@
     "@rocket-slate/mentions": "^0.1.0",
     "@rocket-slate/paste-html": "^0.1.0",
     "@rocket-slate/table": "^0.1.0",
+    "@rocket-slate/utils": "^0.1.0",
     "@rocket-slate/wysiwyg": "^0.1.0",
     "@tippy.js/react": "^3.1.1",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "slate": "0.57.1",
-    "slate-history": "^0.57.1",
-    "slate-react": "0.57.1"
-  },
-  "peerDependencies": {
-    "slate": "0.57.1",
+    "slate-history": "0.57.1",
     "slate-react": "0.57.1"
   },
   "files": [

@@ -1,6 +1,6 @@
-export const LIST_TYPES = ['numbered-list', 'bulleted-list', 'checkbox-list'];
-
 import { Transforms, Editor } from 'slate';
+
+const LIST_TYPES = ['numbered-list', 'bulleted-list', 'checkbox-list'];
 
 const toggleBlock = (editor, format) => {
   const isActive = isBlockActive(editor, format);
@@ -39,9 +39,22 @@ const isBlockActive = (editor, format) => {
   return !!match;
 };
 
-const isMarkActive = (editor, format) => {
+const isMarkActive = (editor: Editor, format) => {
   const marks = Editor.marks(editor);
   return marks ? marks[format] === true : false;
 };
 
-export { toggleBlock, toggleMark, isBlockActive, isMarkActive };
+export function wrapLink(editor, href) {
+  editor.wrapInline({
+    type: 'link',
+    data: { href },
+  });
+
+  editor.moveToEnd();
+}
+
+export function unwrapLink(editor: Editor) {
+  editor.unwrapInline('link');
+}
+
+export { toggleBlock, toggleMark, isBlockActive, isMarkActive, LIST_TYPES };

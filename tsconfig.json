@@ -49,7 +49,9 @@
       "@rocket-slate/upload": ["./packages/rocket-slate-upload/src"],
       "@rocket-slate/upload/*": ["./packages/rocket-slate-upload/src/*"],
       "@rocket-slate/wysiwyg": ["./packages/rocket-slate-wysiwyg/src"],
-      "@rocket-slate/wysiwyg/*": ["./packages/rocket-slate-wysiwyg/src/*"]
+      "@rocket-slate/wysiwyg/*": ["./packages/rocket-slate-wysiwyg/src/*"],
+      "@rocket-slate/utils": ["./packages/rocket-slate-utils/src"],
+      "@rocket-slate/utils/*": ["./packages/rocket-slate-utils/src/*"]
     }
   },
   "exclude": ["node_modules", "**/dist/", "**/*.spec.ts", "**/*.stories.tsx"],

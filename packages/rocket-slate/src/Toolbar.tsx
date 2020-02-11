@@ -1,32 +1,36 @@
 import React from 'react';
-import { buttons as pluginButtons } from './plugins';
 import ButtonMark from './ButtonMark';
 import ButtonBlock from './ButtonBlock';
 
-class Toolbar extends React.PureComponent<{ buttons?: string[] }> {
-  public renderButton(name: string, options) {
-    if (options.type === 'mark') {
-      return <ButtonMark key={name} name={name} icon={options.icon} format={options.format} />;
+export type IButtonList = Array<
+  | {
+      name: string;
+      type: 'block' | 'mark';
+      icon: React.ReactNode;
+      format: string;
     }
-    if (options.type === 'block') {
-      return <ButtonBlock key={name} name={name} icon={options.icon} format={options.format} />;
+  | {
+      name: string;
+      type: 'custom';
+      renderFn: React.FunctionComponent;
     }
-    return `{button.${name}} - not implemented type`;
-  }
+>;
 
+class Toolbar extends React.PureComponent<{ buttons?: IButtonList }> {
   public renderButtons() {
-    const { buttons } = this.props;
-    if (buttons) {
-      return buttons.map((name) => {
-        if (pluginButtons[name]) {
-          return this.renderButton(name, pluginButtons[name].options);
-        }
-        return `{button.${name}} - not implemented`;
-      });
-    }
-    return Object.entries(pluginButtons).map(([buttonName, { options }], index) =>
-      this.renderButton(buttonName, options),
-    );
+    const { buttons = [] } = this.props;
+    return buttons.map((button) => {
+      if (button.type === 'mark') {
+        return <ButtonMark key={button.name} {...button} />;
+      }
+      if (button.type === 'block') {
+        return <ButtonBlock key={button.name} {...button} />;
+      }
+      if (button.type === 'custom') {
+        return <React.Fragment key={button.name}>{button.renderFn({})}</React.Fragment>;
+      }
+      return `{button.${name}} - not implemented type`;
+    });
   }
 
   public render() {

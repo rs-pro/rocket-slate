@@ -1,60 +1,89 @@
-// This is an example with all the plugins enabled
-// It is designed for use as-is
-// Copy this file to your project and customize as necessary if you want
-
 import React, { useCallback, useMemo, useState } from 'react';
-import { createEditor, Node } from 'slate';
-import { withHistory } from 'slate-history';
-import { Slate, Editable, withReact, RenderElementProps, RenderLeafProps } from 'slate-react';
+import { Editor, Node } from 'slate';
+import { Slate, Editable, RenderElementProps, RenderLeafProps, useEditor } from 'slate-react';
 
-import { Element, Leaf } from './plugins';
-import initialValue from './initialValue';
-import Toolbar from './Toolbar';
+import _initialValue from './initialValue';
+import { useButtons, useEditorWithPlugin, useElements, useHandlers, useLeaves } from './hooks';
+import Toolbar, { IButtonList } from './Toolbar';
+import Element from './Element';
+import Leaf from './Leaf';
 
-import { withWysiwyg } from '@rocket-slate/wysiwyg';
-// import { withPasteHtml } from '@rocket-slate/paste-html';
-// import { withMentions } from '@rocket-slate/mentions';
-// import { withLinks } from '@rocket-slate/links';
-// import { withTables } from '@rocket-slate/table';
+import wysiwygPluginConfig from '@rocket-slate/wysiwyg';
 
-const plugins = [
-  withWysiwyg,
+const defaultPlugins = [
+  wysiwygPluginConfig,
   // withPasteHtml,
   // withTables,
   // withLinks,
   // withMentions
 ];
 
-interface IEditorProps {
-  initialValue?: Node[];
-  toolbarButtons?: string[];
+export interface IRocketSlatePlugin {
+  name: string;
+  elements?: Array<{
+    type: string;
+    renderFn: React.FunctionComponent<RenderElementProps>;
+  }>;
+  leaves?: Array<{
+    type: string;
+    renderFn: React.FunctionComponent<RenderLeafProps>;
+  }>;
+  withHOC?: <T extends Editor>(editor: T) => T;
+  handlers?: {
+    [eventName in keyof Omit<React.DOMAttributes<HTMLDivElement>, 'children' | 'dangerouslySetInnerHTML'>]: (
+      // @ts-ignore
+      event: Parameters<React.DOMAttributes<HTMLDivElement>[eventName]>[0],
+      editor: Editor,
+    ) => void;
+  };
+  buttons?: IButtonList;
 }
 
-const Editor: React.FunctionComponent<IEditorProps> = (props) => {
-  const { toolbarButtons } = props;
-  const [value, setValue] = useState(props.initialValue || initialValue);
-  const renderElement = useCallback((props: RenderElementProps) => <Element {...props} />, []);
-  const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props} />, []);
-  const handlerChangeValueEditor = useCallback((value) => setValue(value), []);
+export interface IRocketSlateEditorProps {
+  initialValue?: Node[];
+  plugins?: IRocketSlatePlugin[];
+  placeholder?: string;
+  readOnly?: boolean;
+}
 
-  const editor = useMemo(() => {
-    return withReact(
-      [...plugins].reduce((editorWithPlugins, plugin) => plugin(editorWithPlugins), withHistory(createEditor())),
-    );
-  }, []);
+const RocketSlateEditor: React.FunctionComponent<IRocketSlateEditorProps> = ({
+  plugins = defaultPlugins,
+  initialValue = _initialValue,
+  placeholder = 'Paste in some HTML...',
+  readOnly,
+  children,
+}) => {
+  const [value, setValue] = useState(initialValue);
+
+  const editor = useEditorWithPlugin(plugins);
+  const elements = useElements(plugins);
+  const leaves = useLeaves(plugins);
+  const buttons = useButtons(plugins);
+  const handlers = useHandlers(plugins, editor);
+
+  const renderElement = useCallback((props: RenderElementProps) => <Element {...props} elements={elements} />, []);
+  const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props} leaves={leaves} />, []);
+  const handlerChangeValueEditor = useCallback((value) => setValue(value), []);
 
   return (
     <div className="RocketSlate">
       <Slate editor={editor} value={value} onChange={handlerChangeValueEditor}>
         <div className="RocketSlate__Toolbar">
-          <Toolbar buttons={toolbarButtons} />
+          <Toolbar buttons={buttons} />
         </div>
         <div className="RocketSlate__Editor">
-          <Editable renderElement={renderElement} renderLeaf={renderLeaf} placeholder="Paste in some HTML..." />
+          <Editable
+            renderElement={renderElement}
+            renderLeaf={renderLeaf}
+            placeholder={placeholder}
+            readOnly={readOnly}
+            {...handlers}
+          />
         </div>
+        {children}
       </Slate>
     </div>
   );
 };
 
-export default Editor;
+export default RocketSlateEditor;

@@ -1,0 +1,26 @@
+{
+  "name": "@rocket-slate/utils",
+  "version": "0.1.0",
+  "description": "> TODO: description",
+  "author": "Glebtv <glebtv@gmail.com> (http://github.com/glebtv)",
+  "homepage": "https://github.com/rs-pro/rocket-slate#readme",
+  "license": "MIT",
+  "main": "src/index.js",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rs-pro/rocket-slate.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/rs-pro/rocket-slate/issues"
+  }
+}

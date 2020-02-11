@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { addElement } from '@rocket-slate/core';
-addElement('link', 'link', ({ attributes, children, element }) => (
-  <a {...attributes} href={element.url}>
-    {children}
-  </a>
-));
+// import { addElement } from '@rocket-slate/core';
+// addElement('link', 'link', ({ attributes, children, element }) => (
+//   <a {...attributes} href={element.url}>
+//     {children}
+//   </a>
+// ));
 
 import isUrl from 'is-url';
 import { Transforms, Editor, Range } from 'slate';

@@ -2,7 +2,7 @@ import React, { useCallback, MouseEvent } from 'react';
 import Button from './Button';
 import { useSlate } from 'slate-react';
 import { t } from '@rocket-slate/i18n';
-import { isBlockActive, toggleBlock } from './util';
+import { isBlockActive, toggleBlock } from '@rocket-slate/utils';
 
 const ButtonBlock = ({ name, format, icon }) => {
   const editor = useSlate();
