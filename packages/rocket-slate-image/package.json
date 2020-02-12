@@ -13,11 +13,10 @@
   "scripts": {
     "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments"
   },
-  "devDependencies": {
-  },
   "dependencies": {
     "classnames": "^2.2.6",
-    "re-resizable": "^6.1.1"
+    "re-resizable": "^6.1.1",
+    "styled-components": "^5.0.1"
   },
   "peerDependencies": {
     "slate": "0.57.1",
@@ -40,5 +39,3 @@
     "url": "https://github.com/rs-pro/rocket-slate/issues"
   }
 }
-
-

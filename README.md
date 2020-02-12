@@ -28,6 +28,9 @@ MIT License Copyright (c) 2019-2020 glebtv
 
 Uses code from slate [examples](https://github.com/ianstormtaylor/slate/tree/master/site/examples) (MIT License)
 
+Rocket Slate Plugins:
+Based on [slate-plugins-next](https://github.com/zbeyens/slate-plugins-next) (MIT license)
+
 Rocket Slate Table:
 Based on [slate-deep-table](https://github.com/jasonphillips/slate-deep-table) (Apache 2.0 license)
 

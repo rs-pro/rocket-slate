@@ -1,2 +1,2 @@
-export { default as Editor } from './Editor';
-export { default as Tooltip } from './Tooltip';
+export { default as RocketSlate } from './Editor';
+export { default as RocketTooltip } from './Tooltip';

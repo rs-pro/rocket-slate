@@ -1,64 +1,131 @@
 import React from 'react';
-import isHotkey from 'is-hotkey';
-
-import { toggleMark } from '@rocket-slate/utils';
-
-import IconH1 from './icons/H1';
-import IconBold from './icons/Bold';
+import { Range } from 'slate';
 import { IRocketSlatePlugin } from '@rocket-slate/core/Editor';
+import { BlockquotePlugin, BoldPlugin, HeadingPlugin, ItalicPlugin, ListPlugin } from 'slate-plugins-next';
+import { DeserializeHtml } from 'slate-plugins-next/dist/paste-html/types';
 
-export const HOTKEYS = {
-  'mod+b': 'bold',
-  'mod+i': 'italic',
-  'mod+u': 'underline',
-  'mod+`': 'code',
+enum WysiwygPluginTypes {
+  BLOCKQUOTE = 'blockquote',
+  BOLD = 'bold',
+  HEADING = 'heading',
+  ITALIC = 'italic',
+  LIST = 'list',
+}
+
+const WysiwygPlugins = {
+  [WysiwygPluginTypes.BLOCKQUOTE]: BlockquotePlugin,
+  [WysiwygPluginTypes.BOLD]: BoldPlugin,
+  [WysiwygPluginTypes.HEADING]: HeadingPlugin,
+  [WysiwygPluginTypes.ITALIC]: ItalicPlugin,
+  [WysiwygPluginTypes.LIST]: ListPlugin,
 };
 
-const pluginConfig: IRocketSlatePlugin = {
-  name: 'wysiwyg',
-  elements: [
-    {
-      type: 'block-quote',
-      renderFn: ({ children, attributes }) => <blockquote {...attributes}>{children}</blockquote>,
-    },
-    { type: 'bulleted-list', renderFn: ({ children, attributes }) => <ul {...attributes}>{children}</ul> },
-    { type: 'numbered-list', renderFn: ({ children, attributes }) => <ol {...attributes}>{children}</ol> },
-    { type: 'list-item', renderFn: ({ children, attributes }) => <ol {...attributes}>{children}</ol> },
-    { type: 'heading-one', renderFn: ({ children, attributes }) => <h1 {...attributes}>{children}</h1> },
-    { type: 'heading-two', renderFn: ({ children, attributes }) => <h2 {...attributes}>{children}</h2> },
-    { type: 'heading-three', renderFn: ({ children, attributes }) => <h3 {...attributes}>{children}</h3> },
-    { type: 'heading-four', renderFn: ({ children, attributes }) => <h4 {...attributes}>{children}</h4> },
-    { type: 'heading-five', renderFn: ({ children, attributes }) => <h5 {...attributes}>{children}</h5> },
-    {
-      type: 'code',
-      renderFn: ({ children, attributes }) => (
-        <pre {...attributes}>
-          <code>{children}</code>
-        </pre>
-      ),
-    },
+type WysiwygPluginsWithParams =
+  | [WysiwygPluginTypes.BLOCKQUOTE, Parameters<typeof BlockquotePlugin>[0]]
+  | [WysiwygPluginTypes.BOLD, Parameters<typeof BoldPlugin>[0]]
+  | [WysiwygPluginTypes.HEADING, Parameters<typeof HeadingPlugin>[0]]
+  | [WysiwygPluginTypes.ITALIC, Parameters<typeof ItalicPlugin>[0]]
+  | [WysiwygPluginTypes.LIST, Parameters<typeof ListPlugin>[0]];
+
+const RocketWysiwygPlugin = (
+  plugins: Array<WysiwygPluginTypes | WysiwygPluginsWithParams> = [
+    WysiwygPluginTypes.BLOCKQUOTE,
+    WysiwygPluginTypes.BOLD,
+    WysiwygPluginTypes.HEADING,
+    WysiwygPluginTypes.ITALIC,
+    WysiwygPluginTypes.LIST,
   ],
-  leaves: [
-    { type: 'bold', renderFn: ({ children }) => <b>{children}</b> },
-    { type: 'italic', renderFn: ({ children }) => <em>{children}</em> },
-    { type: 'underline', renderFn: ({ children }) => <u>{children}</u> },
-    { type: 'strikethrough', renderFn: ({ children }) => <u>{children}</u> },
-  ],
-  buttons: [
-    { name: 'bold', type: 'mark', format: 'bold', icon: <IconBold /> },
-    { name: 'heading-one', type: 'block', format: 'heading-one', icon: <IconH1 /> },
-  ],
-  handlers: {
-    onKeyDown: (event, editor): void => {
-      for (const hotkey in HOTKEYS) {
-        if (isHotkey(hotkey, event.nativeEvent)) {
-          event.preventDefault();
-          const mark = HOTKEYS[hotkey];
-          toggleMark(editor, mark);
+): IRocketSlatePlugin => {
+  const pluginsInitialized = plugins.map((option) => {
+    if (Array.isArray(option)) {
+      return WysiwygPlugins[option[0]](option[1]);
+    }
+    return WysiwygPlugins[option]();
+  });
+  return {
+    plugin: {
+      onDOMBeforeInput: (event, editor) => {
+        pluginsInitialized.forEach(({ onDOMBeforeInput }) => {
+          if (onDOMBeforeInput) {
+            onDOMBeforeInput(event, editor);
+          }
+        });
+      },
+      decorate: (entry) => {
+        let ranges: Range[] = [];
+        pluginsInitialized.forEach(({ decorate }) => {
+          if (decorate) {
+            const newRanges = decorate(entry) || [];
+            if (newRanges.length) {
+              ranges = [...ranges, ...newRanges];
+            }
+          }
+        });
+        return ranges;
+      },
+      renderElement: (props) => {
+        let element;
+        pluginsInitialized.some(({ renderElement }) => {
+          element = renderElement && renderElement(props);
+          return !!element;
+        });
+        if (element) {
+          return element;
         }
-      }
+        return undefined;
+      },
+      renderLeaf: (props) => {
+        pluginsInitialized.forEach(({ renderLeaf }) => {
+          if (renderLeaf) {
+            props.children = renderLeaf(props);
+          }
+        });
+        return props.children;
+      },
+      onKeyDown: (event, editor) => {
+        pluginsInitialized.forEach(({ onKeyDown }) => {
+          if (onKeyDown) {
+            onKeyDown(event, editor);
+          }
+        });
+      },
+      deserialize: pluginsInitialized.reduce((deserializeAll, plugin) => {
+        return {
+          element:
+            (plugin.deserialize &&
+              plugin.deserialize.element &&
+              Object.entries(plugin.deserialize.element).reduce((elements, [elName, elFn]: [any, any]) => {
+                if (elements[elName]) {
+                  elements[elName] = (el) => ({
+                    ...elements[elName](el),
+                    ...elFn(el),
+                  });
+                } else {
+                  elements[elName] = elFn;
+                }
+                return elements;
+              }, deserializeAll.element || {})) ||
+            deserializeAll.element,
+          leaf:
+            (plugin.deserialize &&
+              plugin.deserialize.leaf &&
+              Object.entries(plugin.deserialize.leaf).reduce((leaf, [elName, elFn]: [any, any]) => {
+                if (leaf[elName]) {
+                  leaf[elName] = (el) => ({
+                    ...leaf[elName](el),
+                    ...elFn(el),
+                  });
+                } else {
+                  leaf[elName] = elFn;
+                }
+                return leaf;
+              }, deserializeAll.leaf || {})) ||
+            deserializeAll.leaf,
+        };
+        // tslint:disable-next-line:no-object-literal-type-assertion
+      }, {} as DeserializeHtml),
     },
-  },
+  };
 };
 
-export default pluginConfig;
+export { RocketWysiwygPlugin };

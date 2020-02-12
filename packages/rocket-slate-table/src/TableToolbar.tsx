@@ -5,7 +5,7 @@ import { faTable } from "@fortawesome/free-solid-svg-icons/faTable";
 import { faColumns } from "@fortawesome/free-solid-svg-icons/faColumns";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faMinus } from "@fortawesome/free-solid-svg-icons/faMinus";
-import { Tooltip } from '@rocket-slate/core';
+import { RocketTooltip } from '@rocket-slate/core';
 import { useSlate } from 'slate-react';
 
 function TableToolbar() {
@@ -18,7 +18,7 @@ const isTable = editor && editor.isSelectionInTable(editor.state);
 
     return (
         <div key="tbg6" className="rocket-slate__toolbar-group">
-        <Tooltip title="table.column.add">
+        <RocketTooltip title="table.column.add">
             <a className="rocket-slate__button"
             onClick={() => editor.insertColumn()}
             >
@@ -27,9 +27,9 @@ const isTable = editor && editor.isSelectionInTable(editor.state);
                 <FontAwesomeIcon icon={faPlus} />
             </span>
             </a>
-        </Tooltip>
+        </RocketTooltip>
 
-        <Tooltip title="table.row.add">
+        <RocketTooltip title="table.row.add">
             <a className="rocket-slate__button"
             onClick={() => editor.insertRow()}
             >
@@ -38,9 +38,9 @@ const isTable = editor && editor.isSelectionInTable(editor.state);
                 <FontAwesomeIcon icon={faPlus} />
             </span>
             </a>
-        </Tooltip>
+        </RocketTooltip>
 
-        <Tooltip title="table.column.remove">
+        <RocketTooltip title="table.column.remove">
             <a className="rocket-slate__button"
             onClick={editor.removeColumn()}
             >
@@ -49,9 +49,9 @@ const isTable = editor && editor.isSelectionInTable(editor.state);
                 <FontAwesomeIcon icon={faMinus} />
             </span>
             </a>
-        </Tooltip>
+        </RocketTooltip>
 
-        <Tooltip title="table.row.remove">
+        <RocketTooltip title="table.row.remove">
             <a className="rocket-slate__button"
             onClick={() => editor.toggleHeaders()}
             >
@@ -60,9 +60,9 @@ const isTable = editor && editor.isSelectionInTable(editor.state);
                 <FontAwesomeIcon icon={faMinus} />
             </span>
             </a>
-        </Tooltip>
+        </RocketTooltip>
 
-        <Tooltip title="table.remove">
+        <RocketTooltip title="table.remove">
             <a className="rocket-slate__button"
             onClick={() => editor.removeTable()}
             >
@@ -71,15 +71,15 @@ const isTable = editor && editor.isSelectionInTable(editor.state);
                 <FontAwesomeIcon icon={faMinus} />
             </span>
             </a>
-        </Tooltip>
+        </RocketTooltip>
 
-        <Tooltip title="table.toggle_headers">
+        <RocketTooltip title="table.toggle_headers">
             <a className="rocket-slate__button"
             onClick={() => editor.toggleHeaders()}
             >
             <FontAwesomeIcon icon={faTable} />
             </a>
-        </Tooltip>
+        </RocketTooltip>
         </div>
     )
 }
