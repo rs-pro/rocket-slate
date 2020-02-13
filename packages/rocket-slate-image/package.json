@@ -14,6 +14,7 @@
     "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments"
   },
   "dependencies": {
+    "@types/styled-components": "^4.4.3",
     "classnames": "^2.2.6",
     "re-resizable": "^6.1.1",
     "styled-components": "^5.0.1"

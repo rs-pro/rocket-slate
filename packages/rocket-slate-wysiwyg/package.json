@@ -17,6 +17,7 @@
     "@rocket-slate/core": "^0.1.0",
     "@rocket-slate/i18n": "^0.1.0",
     "@rocket-slate/utils": "^0.1.0",
+    "@types/styled-components": "^4.4.3",
     "classnames": "^2.2.6",
     "is-hotkey": "^0.1.6",
     "prop-types": "^15.7.2",

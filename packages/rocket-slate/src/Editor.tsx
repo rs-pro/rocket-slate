@@ -1,7 +1,17 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { Editor, Node } from 'slate';
-import { Slate } from 'slate-react';
-import { SlatePlugin, EditablePlugins } from 'slate-plugins-next';
+import styled from 'styled-components';
+import { createEditor, Editor, Node } from 'slate';
+import { withHistory } from 'slate-history';
+import { Slate, withReact } from 'slate-react';
+import {
+  SlatePlugin,
+  EditablePlugins,
+  withBlock,
+  withBreakEmptyReset,
+  withDeleteStartReset,
+  ACTION_ITEM,
+  BLOCKQUOTE,
+} from 'slate-plugins-next';
 
 import _initialValue from './initialValue';
 import { useEditorWithPlugin, useHandlers } from './hooks';
@@ -18,11 +28,17 @@ export interface IRocketSlatePlugin {
   };
 }
 
+export interface IResetOption {
+  types: string[];
+  onUnwrap?: any;
+}
+
 export interface IRocketSlateEditorProps {
-  initialValue?: Node[];
   plugins?: IRocketSlatePlugin[];
+  initialValue?: Node[];
   placeholder?: string;
   readOnly?: boolean;
+  className?: string;
 }
 
 const RocketSlateEditor: React.FunctionComponent<IRocketSlateEditorProps> = ({
@@ -31,6 +47,7 @@ const RocketSlateEditor: React.FunctionComponent<IRocketSlateEditorProps> = ({
   placeholder = 'Paste in some text...',
   readOnly,
   children,
+  className,
 }) => {
   const [value, setValue] = useState(initialValue);
 
@@ -41,9 +58,9 @@ const RocketSlateEditor: React.FunctionComponent<IRocketSlateEditorProps> = ({
   const handlerChangeValueEditor = useCallback((value) => setValue(value), []);
 
   return (
-    <div className="RocketSlate">
+    <div className={`RocketSlate ${className}`}>
       <Slate editor={editor} value={value} onChange={handlerChangeValueEditor}>
-        <div className="RocketSlate__Children">{children}</div>
+        {children}
         <div className="RocketSlate__Editor">
           <EditablePlugins plugins={slatePlugins} placeholder={placeholder} readOnly={readOnly} {...handlers} />
         </div>

@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
 import { createEditor, Editor } from 'slate';
+import { IRocketSlatePlugin, IResetOption } from './Editor';
+import { withBlock, withBreakEmptyReset, withDeleteStartReset } from 'slate-plugins-next';
 import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';
-import { IRocketSlatePlugin } from './Editor';
 
 const useEditorWithPlugin = (plugins: IRocketSlatePlugin[]) =>
   useMemo(() => {
-    return plugins.reduce((editorWithPlugins, plugin) => {
+    return plugins.reduce(<T extends Editor>(editorWithPlugins: T, plugin): T => {
       if (plugin.withPlugin) {
         return plugin.withPlugin(editorWithPlugins);
       }
@@ -14,7 +15,7 @@ const useEditorWithPlugin = (plugins: IRocketSlatePlugin[]) =>
     }, withHistory(withReact(createEditor())));
   }, plugins);
 
-const useHandlers = (plugins: IRocketSlatePlugin[], editor: Editor) =>
+const useHandlers = <T extends Editor>(plugins: IRocketSlatePlugin[], editor: T) =>
   useMemo(() => {
     const handlers = plugins.reduce((handlers, plugin) => {
       if (plugin.handlers) {

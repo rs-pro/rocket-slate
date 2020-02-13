@@ -24,6 +24,7 @@
     "url": "https://github.com/rs-pro/rocket-slate/issues"
   },
   "dependencies": {
+    "@types/styled-components": "^4.4.3",
     "styled-components": "^5.0.1"
   }
 }

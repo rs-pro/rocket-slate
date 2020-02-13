@@ -22,6 +22,7 @@
     "@rocket-slate/utils": "^0.1.0",
     "@rocket-slate/wysiwyg": "^0.1.0",
     "@tippy.js/react": "^3.1.1",
+    "@types/styled-components": "^4.4.3",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
