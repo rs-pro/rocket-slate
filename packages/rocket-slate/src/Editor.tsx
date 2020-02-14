@@ -1,17 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
-import { createEditor, Editor, Node } from 'slate';
-import { withHistory } from 'slate-history';
+import styled, { ThemedStyledFunction } from 'styled-components';
+import { Editor, Node } from 'slate';
 import { Slate, withReact } from 'slate-react';
-import {
-  SlatePlugin,
-  EditablePlugins,
-  withBlock,
-  withBreakEmptyReset,
-  withDeleteStartReset,
-  ACTION_ITEM,
-  BLOCKQUOTE,
-} from 'slate-plugins-next';
+import { SlatePlugin, EditablePlugins } from 'slate-plugins-next';
 
 import _initialValue from './initialValue';
 import { useEditorWithPlugin, useHandlers } from './hooks';
@@ -41,6 +32,18 @@ export interface IRocketSlateEditorProps {
   className?: string;
 }
 
+const RocketSlateWrapper = styled.div`
+  border: 1px solid #ccc;
+  border-radius: 2px;
+`;
+
+type EditablePluginsProps = React.ComponentProps<typeof EditablePlugins>;
+const RocketSlateEditable: React.FunctionComponent<EditablePluginsProps> = styled(EditablePlugins)<
+  EditablePluginsProps
+>`
+  padding: 10px;
+`;
+
 const RocketSlateEditor: React.FunctionComponent<IRocketSlateEditorProps> = ({
   plugins = [],
   initialValue = _initialValue,
@@ -58,14 +61,18 @@ const RocketSlateEditor: React.FunctionComponent<IRocketSlateEditorProps> = ({
   const handlerChangeValueEditor = useCallback((value) => setValue(value), []);
 
   return (
-    <div className={`RocketSlate ${className}`}>
+    <RocketSlateWrapper className={`RocketSlate ${className || ''}`}>
       <Slate editor={editor} value={value} onChange={handlerChangeValueEditor}>
         {children}
-        <div className="RocketSlate__Editor">
-          <EditablePlugins plugins={slatePlugins} placeholder={placeholder} readOnly={readOnly} {...handlers} />
-        </div>
+        <RocketSlateEditable
+          className="RocketSlate__Editor"
+          plugins={slatePlugins}
+          placeholder={placeholder}
+          readOnly={readOnly}
+          {...handlers}
+        />
       </Slate>
-    </div>
+    </RocketSlateWrapper>
   );
 };
 

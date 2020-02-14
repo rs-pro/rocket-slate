@@ -1,3 +1,3 @@
 export * from './RocketWysiwygPlugin';
-export * from './RocketToolbar';
-export * from './RocketToolbarButton';
+export * from './RocketWysiwygToolbar';
+export * from './RocketWysiwygButton';

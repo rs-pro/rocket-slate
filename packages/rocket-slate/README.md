@@ -4,12 +4,6 @@
 
 See root package readme at: [rocket-slate](https://github.com/rs-pro/rocket-slate)
 
-## Updating icons from SVG:
-
-```
-npx @svgr/cli --ext tsx --icon svg_icons/*.svg --out-dir icons/ 
-```
-
 ## License
 
 MIT License
