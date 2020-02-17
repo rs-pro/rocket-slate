@@ -80,7 +80,7 @@ const RocketWysiwygPlugin = (
   ];
   return {
     withPlugin: (editor) => {
-      return withList(withBreakEmptyReset(resetOptions)(withDeleteStartReset(resetOptions)(withBlock(editor))));
+      return withList(withBreakEmptyReset(resetOptions)(withDeleteStartReset(resetOptions)(editor)));
     },
     plugin: {
       onDOMBeforeInput: (event, editor) => {

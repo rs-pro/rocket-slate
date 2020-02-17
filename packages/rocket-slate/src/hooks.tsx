@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { createEditor, Editor } from 'slate';
 import { IRocketSlatePlugin, IResetOption } from './Editor';
-import { withBlock, withBreakEmptyReset, withDeleteStartReset } from 'slate-plugins-next';
+import { withBlock } from 'slate-plugins-next';
 import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';
 
@@ -12,7 +12,7 @@ const useEditorWithPlugin = (plugins: IRocketSlatePlugin[]) =>
         return plugin.withPlugin(editorWithPlugins);
       }
       return editorWithPlugins;
-    }, withHistory(withReact(createEditor())));
+    }, withBlock(withHistory(withReact(createEditor()))));
   }, plugins);
 
 const useHandlers = <T extends Editor>(plugins: IRocketSlatePlugin[], editor: T) =>
