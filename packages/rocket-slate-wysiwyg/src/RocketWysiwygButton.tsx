@@ -1,4 +1,5 @@
-import React, { PureComponent, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
+import ReactDOM from 'react-dom';
 import styled, { css } from 'styled-components';
 
 import {
@@ -13,6 +14,7 @@ import {
   BLOCKQUOTE,
   HeadingType,
   ListType,
+  ToolbarButtonProps,
 } from 'slate-plugins-next';
 import Tooltip from '@rocket-slate/core/Tooltip';
 
@@ -28,6 +30,7 @@ import IconH3 from './icons/H3';
 import IconH4 from './icons/H4';
 import IconH5 from './icons/H5';
 import IconH6 from './icons/H6';
+import { ToolbarFormatProps } from 'slate-plugins-next/dist/common/types';
 
 export enum RocketToolbarButtons {
   BOLD = MARK_BOLD as any,
@@ -61,7 +64,7 @@ const RocketButtonIcons = {
 };
 
 interface IRocketToolbarButtonProps {
-  format: RocketToolbarButtons;
+  format: RocketToolbarButtons | string;
   icon?: ReactNode;
   title?: string;
 }
@@ -78,19 +81,43 @@ const styledButton = css`
   }
 `;
 
-const RocketWysiwygToolbarButton = styled(ToolbarButton)`
+const withRef = <T extends {}>(Component: React.ComponentType<T>) => {
+  class WithRef extends React.PureComponent<
+    T & {
+      onRef: React.Ref<any>;
+    },
+    any
+  > {
+    public componentDidMount(): void {
+      const { onRef } = this.props;
+      const node = ReactDOM.findDOMNode(this);
+      if (typeof onRef === 'function') {
+        onRef(node);
+      }
+    }
+
+    public render() {
+      const { onRef, ...props } = this.props;
+      return <Component {...(props as T)} />;
+    }
+  }
+
+  return React.forwardRef<any, T>((props, ref) => <WithRef {...(props as T)} onRef={ref} />);
+};
+
+const RocketWysiwygToolbarButton: React.FC<ToolbarButtonProps> = styled(withRef<ToolbarButtonProps>(ToolbarButton))`
   ${styledButton}
 `;
 
-const RocketWysiwygToolbarButtonBlock = styled(ToolbarBlock)`
+const RocketWysiwygToolbarButtonBlock: React.FC<ToolbarFormatProps> = styled(withRef<ToolbarFormatProps>(ToolbarBlock))`
   ${styledButton}
 `;
 
-const RocketWysiwygToolbarButtonMark = styled(ToolbarMark)`
+const RocketWysiwygToolbarButtonMark: React.FC<ToolbarFormatProps> = styled(withRef<ToolbarFormatProps>(ToolbarMark))`
   ${styledButton}
 `;
 
-const RocketWysiwygToolbarButtonList = styled(ToolbarList)`
+const RocketWysiwygToolbarButtonList: React.FC<ToolbarFormatProps> = styled(withRef<ToolbarFormatProps>(ToolbarList))`
   ${styledButton}
 `;
 
@@ -106,9 +133,9 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.H6:
     case RocketToolbarButtons.BLOCKQUOTE: {
       return (
-        // <Tooltip title={title || defaultTitle}>
-          <RocketWysiwygToolbarButtonBlock format={format} icon={<Icon />} {...restProps} />
-        // </Tooltip>
+        <Tooltip title={title || defaultTitle}>
+          <RocketWysiwygToolbarButtonBlock format={(format as unknown) as string} icon={<Icon />} {...restProps} />
+        </Tooltip>
       );
     }
     case RocketToolbarButtons.BOLD:
@@ -116,24 +143,24 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.UNDERLINE:
     case RocketToolbarButtons.STRIKETHROUGH: {
       return (
-        // <Tooltip title={title || defaultTitle}>
-          <RocketWysiwygToolbarButtonMark format={format} icon={<Icon />} {...restProps} />
-        // </Tooltip>
+        <Tooltip title={title || defaultTitle}>
+          <RocketWysiwygToolbarButtonMark format={(format as unknown) as string} icon={<Icon />} {...restProps} />
+        </Tooltip>
       );
     }
     case RocketToolbarButtons.OL:
     case RocketToolbarButtons.UL: {
       return (
-        // <Tooltip title={title || defaultTitle}>
-          <RocketWysiwygToolbarButtonList format={format} icon={<Icon />} {...restProps} />
-        // </Tooltip>
+        <Tooltip title={title || defaultTitle}>
+          <RocketWysiwygToolbarButtonList format={(format as unknown) as string} icon={<Icon />} {...restProps} />
+        </Tooltip>
       );
     }
     default:
       return (
-        // <Tooltip title={title || ''}>
-          <RocketWysiwygToolbarButton format={format} icon={icon} {...restProps} />
-        // </Tooltip>
+        <Tooltip title={title || ''}>
+          <RocketWysiwygToolbarButton format={(format as unknown) as string} icon={icon} {...restProps} />
+        </Tooltip>
       );
   }
 };
