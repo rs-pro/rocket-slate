@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css } from 'styled-components';
-import { ToolbarButton, ToolbarButtonProps } from 'slate-plugins-next';
+import { ToolbarButton, ToolbarMark, ToolbarBlock, ToolbarButtonProps } from 'slate-plugins-next';
+import { ToolbarFormatProps } from 'slate-plugins-next/dist/common/types';
 
 const baseStyleButton = css`
   display: inline-block;
@@ -46,3 +47,5 @@ export const withBaseStyleButton = <T extends ToolbarButtonProps>(Component: Rea
 `;
 
 export const RocketButton: React.FC<ToolbarButtonProps> = withButtonRef(withBaseStyleButton(ToolbarButton));
+export const RocketButtonBlock: React.FC<ToolbarFormatProps> = withButtonRef(withBaseStyleButton(ToolbarBlock));
+export const RocketButtonMark: React.FC<ToolbarFormatProps> = withButtonRef(withBaseStyleButton(ToolbarMark));

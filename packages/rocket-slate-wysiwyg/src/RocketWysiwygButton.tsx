@@ -12,7 +12,14 @@ import {
   ToolbarBlock,
   ToolbarMark,
 } from 'slate-plugins-next';
-import { RocketTooltip, RocketButton, withBaseStyleButton, withButtonRef } from '@rocket-slate/core';
+import {
+  RocketTooltip,
+  RocketButton,
+  withBaseStyleButton,
+  withButtonRef,
+  RocketButtonBlock,
+  RocketButtonMark
+} from '@rocket-slate/core';
 
 import IconBold from './icons/Bold';
 import IconItalic from './icons/Italic';
@@ -65,12 +72,6 @@ interface IRocketToolbarButtonProps {
   title?: string;
 }
 
-const RocketWysiwygButtonBlock: React.FC<ToolbarFormatProps> = withButtonRef(
-  withBaseStyleButton<ToolbarFormatProps>(ToolbarBlock),
-);
-const RocketWysiwygButtonMark: React.FC<ToolbarFormatProps> = withButtonRef(
-  withBaseStyleButton<ToolbarFormatProps>(ToolbarMark),
-);
 const RocketWysiwygButtonList: React.FC<ToolbarFormatProps> = withButtonRef(
   withBaseStyleButton<ToolbarFormatProps>(ToolbarList),
 );
@@ -88,7 +89,7 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.BLOCKQUOTE: {
       return (
         <RocketTooltip title={title || defaultTitle}>
-          <RocketWysiwygButtonBlock format={(format as unknown) as string} icon={<Icon />} {...restProps} />
+          <RocketButtonBlock format={(format as unknown) as string} icon={<Icon />} {...restProps} />
         </RocketTooltip>
       );
     }
@@ -98,7 +99,7 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.STRIKETHROUGH: {
       return (
         <RocketTooltip title={title || defaultTitle}>
-          <RocketWysiwygButtonMark format={(format as unknown) as string} icon={<Icon />} {...restProps} />
+          <RocketButtonMark format={(format as unknown) as string} icon={<Icon />} {...restProps} />
         </RocketTooltip>
       );
     }
@@ -119,4 +120,4 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
   }
 };
 
-export { RocketWysiwygButton, RocketWysiwygButtonBlock, RocketWysiwygButtonMark, RocketWysiwygButtonList };
+export { RocketWysiwygButton };
