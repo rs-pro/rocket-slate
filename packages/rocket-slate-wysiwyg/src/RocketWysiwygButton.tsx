@@ -8,9 +8,11 @@ import {
   MARK_UNDERLINE,
   BLOCKQUOTE,
   HeadingType,
-  ListType, ToolbarBlock, ToolbarMark,
+  ListType,
+  ToolbarBlock,
+  ToolbarMark,
 } from 'slate-plugins-next';
-import { RocketTooltip, RocketButton, withBaseStyleButton } from '@rocket-slate/core';
+import { RocketTooltip, RocketButton, withBaseStyleButton, withButtonRef } from '@rocket-slate/core';
 
 import IconBold from './icons/Bold';
 import IconItalic from './icons/Italic';
@@ -63,9 +65,15 @@ interface IRocketToolbarButtonProps {
   title?: string;
 }
 
-const RocketWysiwygButtonBlock: React.FC<ToolbarFormatProps> = withBaseStyleButton<ToolbarFormatProps>(ToolbarBlock);
-const RocketWysiwygButtonMark: React.FC<ToolbarFormatProps> = withBaseStyleButton<ToolbarFormatProps>(ToolbarMark);
-const RocketWysiwygButtonList: React.FC<ToolbarFormatProps> = withBaseStyleButton<ToolbarFormatProps>(ToolbarList);
+const RocketWysiwygButtonBlock: React.FC<ToolbarFormatProps> = withButtonRef(
+  withBaseStyleButton<ToolbarFormatProps>(ToolbarBlock),
+);
+const RocketWysiwygButtonMark: React.FC<ToolbarFormatProps> = withButtonRef(
+  withBaseStyleButton<ToolbarFormatProps>(ToolbarMark),
+);
+const RocketWysiwygButtonList: React.FC<ToolbarFormatProps> = withButtonRef(
+  withBaseStyleButton<ToolbarFormatProps>(ToolbarList),
+);
 
 const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = (props) => {
   const { format, icon, title, ...restProps } = props;
@@ -111,9 +119,4 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
   }
 };
 
-export {
-  RocketWysiwygButton,
-  RocketWysiwygButtonBlock,
-  RocketWysiwygButtonMark,
-  RocketWysiwygButtonList,
-};
+export { RocketWysiwygButton, RocketWysiwygButtonBlock, RocketWysiwygButtonMark, RocketWysiwygButtonList };

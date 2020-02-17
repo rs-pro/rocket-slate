@@ -15,7 +15,7 @@ const baseStyleButton = css`
   }
 `;
 
-const withRef = <T extends {}>(Component: React.FunctionComponent<T>) => {
+export const withButtonRef = <T extends ToolbarButtonProps>(Component: React.FunctionComponent<T>) => {
   class WithRef extends React.PureComponent<
     T & {
       onRef: React.Ref<any>;
@@ -40,9 +40,9 @@ const withRef = <T extends {}>(Component: React.FunctionComponent<T>) => {
 };
 
 export const withBaseStyleButton = <T extends ToolbarButtonProps>(Component: React.FunctionComponent<T>) => styled(
-  withRef<T>(Component),
+  Component,
 )`
   ${baseStyleButton}
 `;
 
-export const RocketButton: React.FC<ToolbarButtonProps> = withBaseStyleButton(ToolbarButton);
+export const RocketButton: React.FC<ToolbarButtonProps> = withButtonRef(withBaseStyleButton(ToolbarButton));
