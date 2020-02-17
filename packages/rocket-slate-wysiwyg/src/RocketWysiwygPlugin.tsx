@@ -1,6 +1,6 @@
 import React from 'react';
 import { Range } from 'slate';
-import {IResetOption, IRocketSlatePlugin} from '@rocket-slate/core/Editor';
+import { IResetOption, IRocketSlatePlugin} from '@rocket-slate/core/Editor';
 import {
   ParagraphPlugin,
   BlockquotePlugin,
@@ -18,7 +18,10 @@ import {
   StrikethroughPluginOptions,
   UnderlinePluginOptions,
   withList,
-  BLOCKQUOTE, withBreakEmptyReset, withDeleteStartReset, withBlock,
+  BLOCKQUOTE,
+  withBreakEmptyReset,
+  withDeleteStartReset,
+  withBlock,
 } from 'slate-plugins-next';
 import { DeserializeHtml } from 'slate-plugins-next/dist/paste-html/types';
 
@@ -50,7 +53,6 @@ type WysiwygPluginsWithParams =
   | [WysiwygPluginTypes.LIST, RenderElementListOptions]
   | [WysiwygPluginTypes.STRIKETHROUGH, StrikethroughPluginOptions]
   | [WysiwygPluginTypes.UNDERLINE, UnderlinePluginOptions];
-
 
 const resetOptions: IResetOption = {
   types: [BLOCKQUOTE],
