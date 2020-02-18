@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled, { ThemedStyledFunction } from 'styled-components';
 import { Editor, Node } from 'slate';
 import { Slate, withReact } from 'slate-react';
@@ -11,7 +11,10 @@ export interface IRocketSlatePlugin {
   plugin: SlatePlugin;
   withPlugin?: <T extends Editor>(editor: T) => T;
   handlers?: {
-    [eventName in keyof Omit<React.DOMAttributes<HTMLDivElement>, 'children' | 'dangerouslySetInnerHTML'>]: (
+    [eventName in keyof Omit<
+      React.DOMAttributes<HTMLDivElement>,
+      'children' | 'dangerouslySetInnerHTML' | 'onKeyDown'
+    >]: (
       // @ts-ignore
       event: Parameters<React.DOMAttributes<HTMLDivElement>[eventName]>[0],
       editor: Editor,
