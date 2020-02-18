@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import styled, { ThemedStyledFunction } from 'styled-components';
 import { Editor, Node } from 'slate';
 import { Slate, withReact } from 'slate-react';
@@ -55,6 +55,9 @@ const RocketSlateEditor: React.FunctionComponent<IRocketSlateEditorProps> = ({
   onChange,
 }) => {
   const [editorValue, setValue] = useState(value);
+  useEffect(() => {
+    setValue(value);
+  }, [value]);
 
   const editor = useEditorWithPlugin(plugins);
   const handlers = useHandlers(plugins, editor);
