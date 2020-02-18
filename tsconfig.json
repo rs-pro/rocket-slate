@@ -51,7 +51,9 @@
       "@rocket-slate/wysiwyg": ["./packages/rocket-slate-wysiwyg/src"],
       "@rocket-slate/wysiwyg/*": ["./packages/rocket-slate-wysiwyg/src/*"],
       "@rocket-slate/utils": ["./packages/rocket-slate-utils/src"],
-      "@rocket-slate/utils/*": ["./packages/rocket-slate-utils/src/*"]
+      "@rocket-slate/utils/*": ["./packages/rocket-slate-utils/src/*"],
+      "@rocket-slate/icons": ["./packages/rocket-slate-icons/src"],
+      "@rocket-slate/icons/*": ["./packages/rocket-slate-icons/src/*"]
     }
   },
   "exclude": ["node_modules", "**/dist/", "**/*.spec.ts", "**/*.stories.tsx"],

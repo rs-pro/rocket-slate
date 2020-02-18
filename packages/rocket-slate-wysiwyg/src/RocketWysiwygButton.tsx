@@ -21,19 +21,21 @@ import {
   RocketButtonMark
 } from '@rocket-slate/core';
 
-import IconBold from './icons/Bold';
-import IconItalic from './icons/Italic';
-import IconStrike from './icons/Strike';
-import IconUnderline from './icons/Underline';
-import IconUl from './icons/ListBulleted';
-import IconOl from './icons/ListNumbered';
-import IconH1 from './icons/H1';
-import IconH2 from './icons/H2';
-import IconH3 from './icons/H3';
-import IconH4 from './icons/H4';
-import IconH5 from './icons/H5';
-import IconH6 from './icons/H6';
 import { ToolbarFormatProps } from 'slate-plugins-next/dist/common/types';
+import {
+  IconBold,
+  IconItalic,
+  IconStrike,
+  IconUnderline,
+  IconListBulleted,
+  IconListNumbered,
+  IconH1,
+  IconH2,
+  IconH3,
+  IconH4,
+  IconH5,
+  IconH6,
+} from '@rocket-slate/icons/index';
 
 export enum RocketToolbarButtons {
   BOLD = MARK_BOLD as any,
@@ -56,8 +58,8 @@ const RocketButtonIcons = {
   [RocketToolbarButtons.ITALIC]: { icon: IconItalic, title: 'Курсив' },
   [RocketToolbarButtons.STRIKETHROUGH]: { icon: IconStrike, title: 'Перечеркнутый' },
   [RocketToolbarButtons.UNDERLINE]: { icon: IconUnderline, title: 'Подчеркнутый' },
-  [RocketToolbarButtons.UL]: { icon: IconUl, title: 'Не нумерованый список' },
-  [RocketToolbarButtons.OL]: { icon: IconOl, title: 'Нумерованый список' },
+  [RocketToolbarButtons.UL]: { icon: IconListBulleted, title: 'Не нумерованый список' },
+  [RocketToolbarButtons.OL]: { icon: IconListNumbered, title: 'Нумерованый список' },
   [RocketToolbarButtons.H1]: { icon: IconH1, title: 'Заголовок 1' },
   [RocketToolbarButtons.H2]: { icon: IconH2, title: 'Заголовок 2' },
   [RocketToolbarButtons.H3]: { icon: IconH3, title: 'Заголовок 3' },

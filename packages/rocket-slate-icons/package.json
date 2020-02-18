@@ -1,0 +1,33 @@
+{
+  "name": "@rocket-slate/icons",
+  "version": "0.1.0",
+  "description": "> TODO: description",
+  "author": "",
+  "homepage": "https://github.com/rs-pro/rocket-slate#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "src"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rs-pro/rocket-slate.git"
+  },
+  "scripts": {
+    "generate:icons": "svgr --ext tsx --icon src/svg_icons/*.svg --out-dir src/icons/",
+    "generate:index": "node create_index.js",
+    "generate": "yarn generate:icons && yarn generate:index"
+  },
+  "bugs": {
+    "url": "https://github.com/rs-pro/rocket-slate/issues"
+  },
+  "dependencies": {
+    "@svgr/cli": "^5.1.0"
+  }
+}
