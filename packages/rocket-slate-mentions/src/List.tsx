@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useRef, useEffect } from 'react';
+import { Editor, Range } from 'slate';
 import styled from 'styled-components';
 import { useEditor, useSlate, ReactEditor } from 'slate-react';
 import { PortalBody, onChangeMention, onKeyDownMention } from 'slate-plugins-next';
@@ -69,6 +70,34 @@ const RocketSlateMentionList = ({
   );
 };
 
+const onChangeRocketMention = ({ editor, setTarget, setSearch, setIndex, beforeRegex = /^@(\w+$|$)/ }) => {
+  const { selection } = editor;
+
+  if (selection && Range.isCollapsed(selection)) {
+    const [start] = Range.edges(selection);
+    const wordBefore = Editor.before(editor, start, {
+      unit: 'word',
+    });
+    const before = wordBefore && Editor.before(editor, wordBefore);
+    const beforeRange = before && Editor.range(editor, before, start);
+    const beforeText = beforeRange && Editor.string(editor, beforeRange);
+    const beforeMatch = beforeText && beforeText.match(beforeRegex);
+    const after = Editor.after(editor, start);
+    const afterRange = Editor.range(editor, start, after);
+    const afterText = Editor.string(editor, afterRange);
+    const afterMatch = afterText.match(/^(\s|$)/);
+
+    if (beforeMatch && afterMatch) {
+      setTarget(beforeRange);
+      setSearch(beforeMatch[1]);
+      setIndex(0);
+      return;
+    }
+  }
+
+  setTarget(null);
+};
+
 const RocketSlateMentionSelect = (props: {
   mentions: IMention[];
   renderMention?: (mention: IMention, isActive: boolean) => React.ReactElement;
@@ -112,9 +141,11 @@ const RocketSlateMentionSelect = (props: {
   MENTION_ON_CHANGE.set(editor, handlerChangeValueEditor);
   MENTION_ON_KEYDOWN.set(editor, handlerKeyDown);
 
-  return (
-    <>{target && mentions.length > 0 && <RocketSlateMentionList target={target} index={index} mentions={mentions} />}</>
-  );
+  if (target && mentions.length > 0) {
+    return <RocketSlateMentionList target={target} index={index} mentions={mentions} />;
+  }
+
+  return null;
 };
 
 export {
