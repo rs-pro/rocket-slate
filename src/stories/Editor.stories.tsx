@@ -7,6 +7,7 @@ import initialValue from '@rocket-slate/core/initialValue';
 import { RocketToolbarButtons, RocketWysiwygButton, RocketWysiwygPlugin } from '@rocket-slate/wysiwyg';
 import { RocketSlateChecklistPlugin, RocketSlateChecklistButton } from '@rocket-slate/checklist';
 import { RocketSlateMentionPlugin, RocketSlateMentionSelect, IMention } from '@rocket-slate/mentions';
+import { RocketSlateLinksPlugin, RocketSlateLinksButton } from '@rocket-slate/links';
 
 const fakeUser: IMention[] = [
   { id: 1, data: {}, text: 'User 1' },
@@ -28,7 +29,7 @@ let timeoutUser: number | undefined;
 let timeoutTask: number | undefined;
 
 storiesOf('Editor', module).add('default', () => {
-  const plugins = useMemo(() => [RocketWysiwygPlugin(), RocketSlateChecklistPlugin(), RocketSlateMentionPlugin()], []);
+  const plugins = useMemo(() => [RocketWysiwygPlugin(), RocketSlateChecklistPlugin(), RocketSlateMentionPlugin(), RocketSlateLinksPlugin()], []);
 
   const [editorValue, setValue] = useState(initialValue);
   const [isLoading, setLoading] = useState(false);
@@ -79,6 +80,9 @@ storiesOf('Editor', module).add('default', () => {
           <RocketWysiwygButton format={RocketToolbarButtons.UL} />
           <RocketWysiwygButton format={RocketToolbarButtons.OL} />
           <RocketSlateChecklistButton />
+        </RocketToolbarGroup>
+        <RocketToolbarGroup>
+          <RocketSlateLinksButton />
         </RocketToolbarGroup>
       </RocketToolbar>
       <RocketSlateMentionSelect

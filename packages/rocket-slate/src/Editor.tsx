@@ -1,15 +1,16 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled, { ThemedStyledFunction } from 'styled-components';
 import { Editor, Node } from 'slate';
-import { Slate, withReact } from 'slate-react';
-import { SlatePlugin, EditablePlugins } from 'slate-plugins-next';
+import { ReactEditor, Slate, withReact } from 'slate-react';
+import { HistoryEditor } from 'slate-history';
+import { SlatePlugin, EditablePlugins, ToggleBlockEditor } from 'slate-plugins-next';
 
 import initialValue from './initialValue';
 import { useEditorWithPlugin, useHandlers } from './hooks';
 
 export interface IRocketSlatePlugin {
   plugin: SlatePlugin;
-  withPlugin?: <T extends Editor>(editor: T) => T;
+  withPlugin?: <T extends Editor & ReactEditor & HistoryEditor & ToggleBlockEditor>(editor: T) => T;
   handlers?: {
     [eventName in keyof Omit<
       React.DOMAttributes<HTMLDivElement>,

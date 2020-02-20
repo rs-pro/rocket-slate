@@ -1,77 +1,23 @@
 import React from 'react';
+import { withLink, LinkPlugin, RenderElementOptions, ToolbarLink } from 'slate-plugins-next';
+import { IRocketSlatePlugin } from '@rocket-slate/core/Editor';
+import { RocketButtonBlock, RocketTooltip, withBaseStyleButton, withButtonRef } from '@rocket-slate/core';
 
-// import { addElement } from '@rocket-slate/core';
-// addElement('link', 'link', ({ attributes, children, element }) => (
-//   <a {...attributes} href={element.url}>
-//     {children}
-//   </a>
-// ));
-
-import isUrl from 'is-url';
-import { Transforms, Editor, Range } from 'slate';
-
-const withLinks = (editor) => {
-  const { insertData, insertText, isInline } = editor;
-
-  editor.isInline = (element) => {
-    return element.type === 'link' ? true : isInline(element);
+const RocketSlateLinksPlugin = (options?: RenderElementOptions): IRocketSlatePlugin => {
+  return {
+    plugin: LinkPlugin(options),
+    withPlugin: (editor) => {
+      return withLink(editor);
+    },
   };
-
-  editor.insertText = (text) => {
-    if (text && isUrl(text)) {
-      wrapLink(editor, text);
-    } else {
-      insertText(text);
-    }
-  };
-
-  editor.insertData = (data) => {
-    const text = data.getData('text/plain');
-
-    if (text && isUrl(text)) {
-      wrapLink(editor, text);
-    } else {
-      insertData(data);
-    }
-  };
-
-  return editor;
 };
 
-const insertLink = (editor, url) => {
-  if (editor.selection) {
-    wrapLink(editor, url);
-  }
-};
+const RocketSlateLinksButtonWrap = withButtonRef(withBaseStyleButton(ToolbarLink));
 
-const isLinkActive = (editor) => {
-  const [link] = Editor.nodes(editor, { match: (n) => n.type === 'link' });
-  return !!link;
-};
+const RocketSlateLinksButton = () => (
+  <RocketTooltip title="Добавить ссылку">
+    <RocketSlateLinksButtonWrap />
+  </RocketTooltip>
+)
 
-const unwrapLink = (editor) => {
-  Transforms.unwrapNodes(editor, { match: (n) => n.type === 'link' });
-};
-
-const wrapLink = (editor, url) => {
-  if (isLinkActive(editor)) {
-    unwrapLink(editor);
-  }
-
-  const { selection } = editor;
-  const isCollapsed = selection && Range.isCollapsed(selection);
-  const link = {
-    type: 'link',
-    url,
-    children: isCollapsed ? [{ text: url }] : [],
-  };
-
-  if (isCollapsed) {
-    Transforms.insertNodes(editor, link);
-  } else {
-    Transforms.wrapNodes(editor, link, { split: true });
-    Transforms.collapse(editor, { edge: 'end' });
-  }
-};
-
-export { withLinks };
+export { RocketSlateLinksPlugin, RocketSlateLinksButton };
