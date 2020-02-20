@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useState, useRef, useEffect, useMemo } from 'react';
 import { Editor, Range } from 'slate';
 import styled from 'styled-components';
 import { useEditor, useSlate, ReactEditor } from 'slate-react';
@@ -11,7 +11,7 @@ interface IMention {
   data: any;
 }
 
-const RocketSlateMentionListItem = styled.div<{ isActive: boolean }>`
+const RocketSlateMentionListItem = styled.div<{ isActive?: boolean; isLoading?: boolean; isEmpty?: boolean }>`
   padding: 1px 3px;
   border-radius: 3px;
   background: ${(props) => (props.isActive ? '#B4D5FF' : 'transparent')};
@@ -28,22 +28,25 @@ const RocketSlateMentionListWrap = styled.div`
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 `;
 
-const RocketSlateMentionList = ({
-  target,
-  index,
-  mentions,
-  renderMention,
-}: {
-  target: any;
-  index: number;
+interface IRenderMentionList {
   mentions: IMention[];
   renderMention?: (mention: IMention, isActive: boolean) => React.ReactElement;
-}) => {
+  isLoading?: boolean;
+}
+
+type RocketMentionList = {
+  target: any;
+  index: number;
+} & IRenderMentionList;
+
+const RocketSlateMentionList = ({ target, index, mentions, renderMention, isLoading }: RocketMentionList) => {
   const ref: any = useRef();
   const editor = useSlate();
 
+  console.log('isLoading', isLoading);
+
   useEffect(() => {
-    if (target && mentions.length > 0) {
+    if (target) {
       const el = ref.current;
       const domRange = ReactEditor.toDOMRange(editor, target);
       const rect = domRange.getBoundingClientRect();
@@ -52,87 +55,135 @@ const RocketSlateMentionList = ({
         el.style.left = `${rect.left + window.pageXOffset}px`;
       }
     }
-  }, [mentions.length, editor, target]);
+  }, [mentions, editor, target, isLoading]);
   return (
     <PortalBody>
       <RocketSlateMentionListWrap ref={ref}>
-        {renderMention
-          ? mentions.map((mention, i) => (
-              <React.Fragment key={mention.id}>{renderMention(mention, i === index)}</React.Fragment>
-            ))
-          : mentions.map((mention, i) => (
-              <RocketSlateMentionListItem key={mention.id} isActive={i === index}>
-                {mention.text}
-              </RocketSlateMentionListItem>
-            ))}
+        {isLoading ? (
+          <RocketSlateMentionListItem isLoading={true}>Загрузка...</RocketSlateMentionListItem>
+        ) : (
+          <>
+            {mentions.length === 0 && (
+              <RocketSlateMentionListItem isLoading={true}>Ничего не найдено</RocketSlateMentionListItem>
+            )}
+            {mentions.length > 0 && (
+              <>
+                {renderMention
+                  ? mentions.map((mention, i) => (
+                      <React.Fragment key={mention.id}>{renderMention(mention, i === index)}</React.Fragment>
+                    ))
+                  : mentions.map((mention, i) => (
+                      <RocketSlateMentionListItem key={mention.id} isActive={i === index}>
+                        {mention.text}
+                      </RocketSlateMentionListItem>
+                    ))}
+              </>
+            )}
+          </>
+        )}
       </RocketSlateMentionListWrap>
     </PortalBody>
   );
 };
 
-const onChangeRocketMention = ({ editor, setTarget, setSearch, setIndex, beforeRegex = /^@(\w+$|$)/ }) => {
+const beforeRegexSpace = /^(\s|$)/;
+const afterRegexSpace = /^(\s|$)/;
+
+const onChangeRocketMention = ({
+  editor,
+  callback,
+  beforeRegex,
+}: {
+  editor: Editor;
+  beforeRegex: RegExp;
+  callback: (targetRange, match) => void;
+}) => {
   const { selection } = editor;
 
   if (selection && Range.isCollapsed(selection)) {
     const [start] = Range.edges(selection);
-    const wordBefore = Editor.before(editor, start, {
-      unit: 'word',
+    const beforeLine = Editor.before(editor, start, {
+      unit: 'line',
     });
-    const before = wordBefore && Editor.before(editor, wordBefore);
-    const beforeRange = before && Editor.range(editor, before, start);
-    const beforeText = beforeRange && Editor.string(editor, beforeRange);
-    const beforeMatch = beforeText && beforeText.match(beforeRegex);
-    const after = Editor.after(editor, start);
-    const afterRange = Editor.range(editor, start, after);
-    const afterText = Editor.string(editor, afterRange);
-    const afterMatch = afterText.match(/^(\s|$)/);
 
-    if (beforeMatch && afterMatch) {
-      setTarget(beforeRange);
-      setSearch(beforeMatch[1]);
-      setIndex(0);
-      return;
+    if (beforeLine) {
+      const beforeLineRange = beforeLine && Editor.range(editor, beforeLine, start);
+      const beforeLineText = beforeLineRange && Editor.string(editor, beforeLineRange);
+      const beforeLineMatch = beforeLineText && beforeLineText.match(beforeRegex);
+
+      if (beforeLineMatch) {
+        // изменяем указатель на позицию найденную регуляркой
+        beforeLine.offset = beforeLineMatch.index || 0;
+
+        // Проверяем что перед найденным совпадением есть пробел или пустая строка
+        const before = Editor.before(editor, beforeLine);
+        const beforeRange = Editor.range(editor, beforeLine, before);
+        const beforeText = Editor.string(editor, beforeRange);
+        const beforeMatch = beforeText.match(beforeRegexSpace);
+
+        // Проверяем что после найденнлшл совпадения есть пробел или пустая строка
+        const after = Editor.after(editor, start);
+        const afterRange = Editor.range(editor, start, after);
+        const afterText = Editor.string(editor, afterRange);
+        const afterMatch = afterText.match(afterRegexSpace);
+
+        if (beforeMatch && afterMatch) {
+          const targetRange = Editor.range(editor, beforeLine, start);
+          callback(targetRange, beforeLineMatch);
+          return;
+        }
+      }
     }
   }
 
-  setTarget(null);
+  callback(null, null);
 };
 
-const RocketSlateMentionSelect = (props: {
-  mentions: IMention[];
-  renderMention?: (mention: IMention, isActive: boolean) => React.ReactElement;
-  onChangeSearch?: (search: string) => void;
-}) => {
-  const { mentions = [], onChangeSearch } = props;
+type RocketMentionSelect = {
+  prefix?: string[];
+  onChangeSearch?: (search: string, searchPrefix: string) => void;
+} & IRenderMentionList;
+
+const RocketSlateMentionSelect = (props: RocketMentionSelect) => {
+  const { mentions = [], prefix = ['@'], onChangeSearch, renderMention, isLoading } = props;
 
   const editor = useEditor();
   const [target, setTarget] = useState();
   const [index, setIndex] = useState(0);
   const [search, setSearch] = useState('');
+  const [searchPrefix, setSearchPrefix] = useState();
+
+  const beforeRegex = useMemo(() => new RegExp(`([${[prefix.join('|')]}])(\\w+$|$)`), prefix);
 
   useEffect(() => {
     if (target) {
       if (onChangeSearch) {
-        onChangeSearch(search);
+        onChangeSearch(search, searchPrefix);
       }
     }
-  }, [target, search]);
+  }, [target, search, searchPrefix]);
 
   const handlerChangeValueEditor = useCallback(() => {
-    onChangeMention({
+    onChangeRocketMention({
       editor,
-      setTarget,
-      setSearch,
-      setIndex,
+      beforeRegex,
+      callback: (target1, match) => {
+        setIndex(0);
+        setTarget(target1);
+        if (match) {
+          setSearch(match[2]);
+          setSearchPrefix(match[1]);
+        }
+      },
     });
-  }, [mentions, target, index, search]);
+  }, [mentions, target, index, search, searchPrefix]);
 
   const handlerKeyDown = useCallback(
     onKeyDownMention({
       chars: mentions,
       target,
-      setTarget,
       index,
+      setTarget,
       setIndex,
     }),
     [mentions, target, index],
@@ -141,8 +192,16 @@ const RocketSlateMentionSelect = (props: {
   MENTION_ON_CHANGE.set(editor, handlerChangeValueEditor);
   MENTION_ON_KEYDOWN.set(editor, handlerKeyDown);
 
-  if (target && mentions.length > 0) {
-    return <RocketSlateMentionList target={target} index={index} mentions={mentions} />;
+  if (target) {
+    return (
+      <RocketSlateMentionList
+        target={target}
+        index={index}
+        mentions={mentions}
+        renderMention={renderMention}
+        isLoading={isLoading}
+      />
+    );
   }
 
   return null;

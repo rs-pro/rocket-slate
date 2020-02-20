@@ -9,7 +9,6 @@ const MENTION_ON_KEYDOWN = new WeakMap();
 
 const RocketSlateMentionElement = (props: RenderElementProps) => {
   const { attributes, children, element } = props;
-  console.log('RocketSlateMentionElement', props);
   const selected = useSelected();
   const focused = useFocused();
   return (
@@ -33,12 +32,14 @@ const RocketSlateMentionElement = (props: RenderElementProps) => {
   );
 };
 
-const RocketSlateMentionPlugin = (options?: RenderElementOptions): IRocketSlatePlugin => {
+const RocketSlateMentionPlugin = <T extends RenderElementProps>(options?: {
+  component?: React.ComponentType<T>;
+}): IRocketSlatePlugin => {
   return {
     plugin: {
       ...MentionPlugin({
-        ...options,
         component: RocketSlateMentionElement,
+        ...options,
       }),
       onKeyDown: (e, editor) => {
         const onKeyDownMention = MENTION_ON_KEYDOWN.get(editor);

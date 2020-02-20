@@ -2,11 +2,13 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { RocketSlate, RocketToolbar, RocketToolbarGroup } from '@rocket-slate/core';
+import initialValue from '@rocket-slate/core/initialValue';
+
 import { RocketToolbarButtons, RocketWysiwygButton, RocketWysiwygPlugin } from '@rocket-slate/wysiwyg';
 import { RocketSlateChecklistPlugin, RocketSlateChecklistButton } from '@rocket-slate/checklist';
 import { RocketSlateMentionPlugin, RocketSlateMentionSelect, IMention } from '@rocket-slate/mentions';
 
-const fakeMention: IMention[] = [
+const fakeUser: IMention[] = [
   { id: 1, data: {}, text: 'User 1' },
   { id: 2, data: {}, text: 'User 2' },
   { id: 3, data: {}, text: 'User 3' },
@@ -14,19 +16,53 @@ const fakeMention: IMention[] = [
   { id: 5, data: {}, text: 'User 5' },
 ];
 
+const fakeTasks: IMention[] = [
+  { id: 1, data: {}, text: 'Task 1' },
+  { id: 2, data: {}, text: 'Task 2' },
+  { id: 3, data: {}, text: 'Task 3' },
+  { id: 4, data: {}, text: 'Task 4' },
+  { id: 5, data: {}, text: 'Task 5' },
+];
+
+let timeoutUser: number | undefined;
+let timeoutTask: number | undefined;
+
 storiesOf('Editor', module).add('default', () => {
   const plugins = useMemo(() => [RocketWysiwygPlugin(), RocketSlateChecklistPlugin(), RocketSlateMentionPlugin()], []);
-  // tslint:disable-next-line:no-console
-  const handlerChangeValue = useCallback((value) => console.log(value), []);
+
+  const [editorValue, setValue] = useState(initialValue);
+  const [isLoading, setLoading] = useState(false);
   const [mentions, setMention] = useState<IMention[]>([]);
-  const handlerChangeSearchMention = useCallback((search) => {
-    console.log('handlerChangeSearchMention');
-    setTimeout(() => {
-      setMention(fakeMention);
-    }, 1000);
+
+  const handlerChangeSearchMention = useCallback((search, searchPrefix) => {
+    setLoading(true);
+    if (search !== null && search !== undefined) {
+      if (searchPrefix === '@') {
+        clearTimeout(timeoutUser);
+        timeoutUser = setTimeout(() => {
+          setMention(fakeUser);
+          setLoading(false);
+        }, 1000);
+      }
+      if (searchPrefix === '#') {
+        clearTimeout(timeoutTask);
+        timeoutTask = setTimeout(() => {
+          setMention(fakeTasks);
+          setLoading(false);
+        }, 1000);
+      }
+    } else {
+      setMention([]);
+      setLoading(false);
+    }
   }, []);
+
+  const handlerChangeValue = useCallback((value) => {
+    setValue(value);
+  }, []);
+
   return (
-    <RocketSlate plugins={plugins} onChange={handlerChangeValue}>
+    <RocketSlate plugins={plugins} value={editorValue} onChange={handlerChangeValue}>
       <RocketToolbar>
         <RocketToolbarGroup>
           <RocketWysiwygButton format={RocketToolbarButtons.H1} />
@@ -45,7 +81,12 @@ storiesOf('Editor', module).add('default', () => {
           <RocketSlateChecklistButton />
         </RocketToolbarGroup>
       </RocketToolbar>
-      <RocketSlateMentionSelect mentions={mentions} onChangeSearch={handlerChangeSearchMention} />
+      <RocketSlateMentionSelect
+        mentions={mentions}
+        prefix={['@', '#']}
+        onChangeSearch={handlerChangeSearchMention}
+        isLoading={isLoading}
+      />
     </RocketSlate>
   );
 });

@@ -28,8 +28,8 @@ export interface IResetOption {
 }
 
 export interface IRocketSlateEditorProps {
+  value: Node[];
   plugins?: IRocketSlatePlugin[];
-  value?: Node[];
   placeholder?: string;
   readOnly?: boolean;
   className?: string;
@@ -49,8 +49,8 @@ const RocketSlateEditable: React.FunctionComponent<EditablePluginsProps> = style
 `;
 
 const RocketSlateEditor: React.FunctionComponent<IRocketSlateEditorProps> = ({
+  value,
   plugins = [],
-  value = initialValue,
   placeholder = 'Paste in some text...',
   readOnly,
   children,
