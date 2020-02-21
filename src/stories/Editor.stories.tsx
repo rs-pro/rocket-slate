@@ -1,13 +1,13 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { RocketSlate, RocketToolbar, RocketToolbarGroup } from '@rocket-slate/core';
-import initialValue from '@rocket-slate/core/initialValue';
+import { RocketSlate, RocketToolbar, RocketToolbarGroup, initialValue } from '@rocket-slate/core';
 
 import { RocketToolbarButtons, RocketWysiwygButton, RocketWysiwygPlugin } from '@rocket-slate/wysiwyg';
 import { RocketSlateChecklistPlugin, RocketSlateChecklistButton } from '@rocket-slate/checklist';
 import { RocketSlateMentionPlugin, RocketSlateMentionSelect, IMention } from '@rocket-slate/mentions';
 import { RocketSlateLinksPlugin, RocketSlateLinksButton } from '@rocket-slate/links';
+import { RocketSlateImagePlugin } from '@rocket-slate/image';
 
 const fakeUser: IMention[] = [
   { id: 1, data: {}, text: 'User 1' },
@@ -29,7 +29,16 @@ let timeoutUser: number | undefined;
 let timeoutTask: number | undefined;
 
 storiesOf('Editor', module).add('default', () => {
-  const plugins = useMemo(() => [RocketWysiwygPlugin(), RocketSlateChecklistPlugin(), RocketSlateMentionPlugin(), RocketSlateLinksPlugin()], []);
+  const plugins = useMemo(
+    () => [
+      RocketWysiwygPlugin(),
+      RocketSlateChecklistPlugin(),
+      RocketSlateMentionPlugin(),
+      RocketSlateLinksPlugin(),
+      RocketSlateImagePlugin(),
+    ],
+    [],
+  );
 
   const [editorValue, setValue] = useState(initialValue);
   const [isLoading, setLoading] = useState(false);

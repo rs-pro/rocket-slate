@@ -5,7 +5,6 @@ import { ReactEditor, Slate, withReact } from 'slate-react';
 import { HistoryEditor } from 'slate-history';
 import { SlatePlugin, EditablePlugins, ToggleBlockEditor } from 'slate-plugins-next';
 
-import initialValue from './initialValue';
 import { useEditorWithPlugin, useHandlers } from './hooks';
 
 export interface IRocketSlatePlugin {
@@ -49,7 +48,7 @@ const RocketSlateEditable: React.FunctionComponent<EditablePluginsProps> = style
   padding: 10px;
 `;
 
-const RocketSlateEditor: React.FunctionComponent<IRocketSlateEditorProps> = ({
+export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
   value,
   plugins = [],
   placeholder = 'Paste in some text...',
@@ -89,5 +88,3 @@ const RocketSlateEditor: React.FunctionComponent<IRocketSlateEditorProps> = ({
     </RocketSlateWrapper>
   );
 };
-
-export default RocketSlateEditor;

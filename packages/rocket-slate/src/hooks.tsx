@@ -12,7 +12,15 @@ const useEditorWithPlugin = (plugins: IRocketSlatePlugin[]) =>
         return plugin.withPlugin(editorWithPlugins);
       }
       return editorWithPlugins;
-    }, withBlock(withHistory(withReact(createEditor()))));
+    },
+      // withBlock(
+      //   withHistory(
+          withReact(
+            createEditor()
+          )
+      //   )
+      // )
+    );
   }, plugins);
 
 const useHandlers = <T extends Editor>(plugins: IRocketSlatePlugin[], editor: T) =>
