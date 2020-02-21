@@ -15,6 +15,7 @@ export { default as IconH6 } from './icons/H6';
 export { default as IconIndentDecrease } from './icons/IndentDecrease';
 export { default as IconIndentIncrease } from './icons/IndentIncrease';
 export { default as IconItalic } from './icons/Italic';
+export { default as IconLink } from './icons/Link';
 export { default as IconListBulleted } from './icons/ListBulleted';
 export { default as IconListNumbered } from './icons/ListNumbered';
 export { default as IconQuote } from './icons/Quote';
