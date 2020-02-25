@@ -1,7 +1,7 @@
 import React from 'react';
 import { withLink, LinkPlugin, RenderElementOptions, ToolbarLink } from 'slate-plugins-next';
 import { IRocketSlatePlugin } from '@rocket-slate/core/Editor';
-import { RocketButtonBlock, RocketTooltip, withBaseStyleButton, withButtonRef } from '@rocket-slate/core';
+import { RocketTooltip, withBaseStyleButton, withButtonRef } from '@rocket-slate/core';
 import { IconLink } from '@rocket-slate/icons';
 
 const RocketSlateLinksPlugin = (options?: RenderElementOptions): IRocketSlatePlugin => {

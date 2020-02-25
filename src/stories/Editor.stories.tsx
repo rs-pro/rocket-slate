@@ -7,7 +7,7 @@ import { RocketToolbarButtons, RocketWysiwygButton, RocketWysiwygPlugin } from '
 import { RocketSlateChecklistPlugin, RocketSlateChecklistButton } from '@rocket-slate/checklist';
 import { RocketSlateMentionPlugin, RocketSlateMentionSelect, IMention } from '@rocket-slate/mentions';
 import { RocketSlateLinksPlugin, RocketSlateLinksButton } from '@rocket-slate/links';
-import { RocketSlateImagePlugin } from '@rocket-slate/image';
+import { RocketSlateImagePlugin, RocketSlateButtonImage } from '@rocket-slate/image';
 
 const fakeUser: IMention[] = [
   { id: 1, data: {}, text: 'User 1' },
@@ -35,7 +35,14 @@ storiesOf('Editor', module).add('default', () => {
       RocketSlateChecklistPlugin(),
       RocketSlateMentionPlugin(),
       RocketSlateLinksPlugin(),
-      RocketSlateImagePlugin(),
+      RocketSlateImagePlugin({
+        onInsertImage: (file, callback) => {
+          const url = URL.createObjectURL(file);
+          setTimeout(() => {
+            callback(url);
+          }, 1000);
+        },
+      }),
     ],
     [],
   );
@@ -92,6 +99,7 @@ storiesOf('Editor', module).add('default', () => {
         </RocketToolbarGroup>
         <RocketToolbarGroup>
           <RocketSlateLinksButton />
+          <RocketSlateButtonImage />
         </RocketToolbarGroup>
       </RocketToolbar>
       <RocketSlateMentionSelect

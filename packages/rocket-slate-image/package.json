@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@rocket-slate/core": "^0.1.0",
+    "@rocket-slate/icons": "^0.1.0",
     "@types/styled-components": "^4.4.3",
     "classnames": "^2.2.6",
     "re-resizable": "^6.1.1",

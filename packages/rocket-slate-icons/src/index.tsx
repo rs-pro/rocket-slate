@@ -12,6 +12,7 @@ export { default as IconH3 } from './icons/H3';
 export { default as IconH4 } from './icons/H4';
 export { default as IconH5 } from './icons/H5';
 export { default as IconH6 } from './icons/H6';
+export { default as IconImage } from './icons/Image';
 export { default as IconIndentDecrease } from './icons/IndentDecrease';
 export { default as IconIndentIncrease } from './icons/IndentIncrease';
 export { default as IconItalic } from './icons/Italic';
