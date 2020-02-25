@@ -3,6 +3,8 @@ export { default as IconCheckBox } from './icons/CheckBox';
 export { default as IconCheckBoxBlank } from './icons/CheckBoxBlank';
 export { default as IconCheckList } from './icons/CheckList';
 export { default as IconClearFormat } from './icons/ClearFormat';
+export { default as IconCodeBlock } from './icons/CodeBlock';
+export { default as IconCodeInline } from './icons/CodeInline';
 export { default as IconColorFill } from './icons/ColorFill';
 export { default as IconColorReset } from './icons/ColorReset';
 export { default as IconColorText } from './icons/ColorText';

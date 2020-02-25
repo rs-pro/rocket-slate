@@ -14,9 +14,10 @@
     "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments"
   },
   "dependencies": {
-    "@tippy.js/react": "^3.1.1",
-    "@types/styled-components": "^4.4.3",
-    "classnames": "^2.2.6",
+    "@rocket-slate/core": "^0.1.0",
+    "@rocket-slate/icons": "^0.1.0",
+    "react": "^16.12.0",
+    "slate-plugins-next": "^0.57.8",
     "styled-components": "^5.0.1"
   },
   "peerDependencies": {

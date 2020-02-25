@@ -28,6 +28,7 @@
     "url": "https://github.com/rs-pro/rocket-slate/issues"
   },
   "dependencies": {
-    "@svgr/cli": "^5.1.0"
+    "@svgr/cli": "^5.1.0",
+    "react": "^16.12.0"
   }
 }

@@ -8,6 +8,7 @@ import { RocketSlateChecklistPlugin, RocketSlateChecklistButton } from '@rocket-
 import { RocketSlateMentionPlugin, RocketSlateMentionSelect, IMention } from '@rocket-slate/mentions';
 import { RocketSlateLinksPlugin, RocketSlateLinksButton } from '@rocket-slate/links';
 import { RocketSlateImagePlugin, RocketSlateButtonImage } from '@rocket-slate/image';
+import { RocketSlateCodeButton, RocketSlateCodeInlineButton } from '@rocket-slate/code';
 
 const fakeUser: IMention[] = [
   { id: 1, data: {}, text: 'User 1' },
@@ -96,6 +97,10 @@ storiesOf('Editor', module).add('default', () => {
           <RocketWysiwygButton format={RocketToolbarButtons.UL} />
           <RocketWysiwygButton format={RocketToolbarButtons.OL} />
           <RocketSlateChecklistButton />
+        </RocketToolbarGroup>
+        <RocketToolbarGroup>
+          <RocketSlateCodeInlineButton />
+          <RocketSlateCodeButton />
         </RocketToolbarGroup>
         <RocketToolbarGroup>
           <RocketSlateLinksButton />
