@@ -26,8 +26,7 @@ const fakeTasks: IMention[] = [
   { id: 5, data: {}, text: 'Task 5' },
 ];
 
-let timeoutUser: number | undefined;
-let timeoutTask: number | undefined;
+let timeOutId: number | undefined;
 
 storiesOf('Editor', module).add('default', () => {
   const plugins = useMemo(
@@ -54,17 +53,16 @@ storiesOf('Editor', module).add('default', () => {
 
   const handlerChangeSearchMention = useCallback((search, searchPrefix) => {
     setLoading(true);
+    clearTimeout(timeOutId);
     if (search !== null && search !== undefined) {
       if (searchPrefix === '@') {
-        clearTimeout(timeoutUser);
-        timeoutUser = setTimeout(() => {
+        timeOutId = setTimeout(() => {
           setMention(fakeUser);
           setLoading(false);
         }, 1000);
       }
       if (searchPrefix === '#') {
-        clearTimeout(timeoutTask);
-        timeoutTask = setTimeout(() => {
+        timeOutId = setTimeout(() => {
           setMention(fakeTasks);
           setLoading(false);
         }, 1000);
