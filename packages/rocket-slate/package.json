@@ -30,7 +30,6 @@
     "slate": "0.57.1",
     "slate-history": "0.57.1",
     "slate-plugins-next": "^0.57.8",
-    "slate-react": "0.57.1",
     "styled-components": "^5.0.1"
   },
   "files": [

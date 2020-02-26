@@ -65,7 +65,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "slate": "0.57.1",
-    "slate-react": "0.57.1"
+    "slate-react": "https://gitpkg.now.sh/SvyatoslavPozhydaev/slate/packages/slate-react?master"
   },
   "peerDependencies": {
     "react": "^16.12.0",
