@@ -1,11 +1,14 @@
 import React from 'react';
-import { RocketButton, RocketTooltip } from '@rocket-slate/core';
+import { useSlate } from 'slate-react';
+import { MARK_CODE, CODE } from 'slate-plugins-next';
+import { RocketButtonMark, RocketButtonBlock, RocketTooltip } from '@rocket-slate/core';
 import { IconCodeBlock, IconCodeInline } from '@rocket-slate/icons';
 
 export const RocketSlateCodeButton = () => {
+  const editor = useSlate();
   return (
     <RocketTooltip title="Блок кода">
-      <RocketButton icon={<IconCodeBlock />} />
+      <RocketButtonBlock format={CODE} icon={<IconCodeBlock />} />
     </RocketTooltip>
   );
 };
@@ -13,7 +16,7 @@ export const RocketSlateCodeButton = () => {
 export const RocketSlateCodeInlineButton = () => {
   return (
     <RocketTooltip title="Код">
-      <RocketButton icon={<IconCodeInline />} />
+      <RocketButtonMark format={MARK_CODE} icon={<IconCodeInline />} />
     </RocketTooltip>
   );
 };

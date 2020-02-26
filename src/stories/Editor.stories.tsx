@@ -1,14 +1,22 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { storiesOf } from '@storybook/react';
+import { highlight, languages } from 'prismjs/components/prism-core';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/themes/prism.css';
 
 import { RocketSlate, RocketToolbar, RocketToolbarGroup, initialValue } from '@rocket-slate/core';
-
 import { RocketToolbarButtons, RocketWysiwygButton, RocketWysiwygPlugin } from '@rocket-slate/wysiwyg';
 import { RocketSlateChecklistPlugin, RocketSlateChecklistButton } from '@rocket-slate/checklist';
 import { RocketSlateMentionPlugin, RocketSlateMentionSelect, IMention } from '@rocket-slate/mentions';
 import { RocketSlateLinksPlugin, RocketSlateLinksButton } from '@rocket-slate/links';
 import { RocketSlateImagePlugin, RocketSlateButtonImage } from '@rocket-slate/image';
-import { RocketSlateCodeButton, RocketSlateCodeInlineButton } from '@rocket-slate/code';
+import {
+  RocketSlateCodeInlinePlugin,
+  RocketSlateCodePlugin,
+  RocketSlateCodeButton,
+  RocketSlateCodeInlineButton,
+} from '@rocket-slate/code';
 
 const fakeUser: IMention[] = [
   { id: 1, data: {}, text: 'User 1' },
@@ -42,6 +50,10 @@ storiesOf('Editor', module).add('default', () => {
             callback(url);
           }, 1000);
         },
+      }),
+      RocketSlateCodeInlinePlugin(),
+      RocketSlateCodePlugin({
+        highlight: (code) => highlight(code, languages.js),
       }),
     ],
     [],

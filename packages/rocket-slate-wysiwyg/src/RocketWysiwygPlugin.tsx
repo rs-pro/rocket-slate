@@ -21,7 +21,6 @@ import {
   BLOCKQUOTE,
   withBreakEmptyReset,
   withDeleteStartReset,
-  withBlock,
 } from 'slate-plugins-next';
 import { DeserializeHtml } from 'slate-plugins-next/dist/paste-html/types';
 
