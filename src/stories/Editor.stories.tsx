@@ -2,7 +2,17 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-markup-templating';
 import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-jsx';
+import 'prismjs/components/prism-tsx';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-php';
+import 'prismjs/components/prism-ruby';
+import 'prismjs/components/prism-go';
+import 'prismjs/components/prism-sql';
 import 'prismjs/themes/prism.css';
 
 import { RocketSlate, RocketToolbar, RocketToolbarGroup, initialValue } from '@rocket-slate/core';
@@ -16,6 +26,7 @@ import {
   RocketSlateCodePlugin,
   RocketSlateCodeButton,
   RocketSlateCodeInlineButton,
+  escapeHTML,
 } from '@rocket-slate/code';
 
 const fakeUser: IMention[] = [
@@ -36,6 +47,19 @@ const fakeTasks: IMention[] = [
 
 let timeOutId: number | undefined;
 
+const languagesList = [
+  { value: 'js', label: 'JavaScript' },
+  { value: 'ts', label: 'TypeScript' },
+  { value: 'jsx', label: 'JSX' },
+  { value: 'tsx', label: 'TSX' },
+  { value: 'rb', label: 'Ruby' },
+  { value: 'go', label: 'Go' },
+  { value: 'php', label: 'PHP' },
+  { value: 'sql', label: 'SQL' },
+  { value: 'markup', label: 'HTML' },
+  { value: 'css', label: 'CSS' },
+];
+
 storiesOf('Editor', module).add('default', () => {
   const plugins = useMemo(
     () => [
@@ -53,7 +77,13 @@ storiesOf('Editor', module).add('default', () => {
       }),
       RocketSlateCodeInlinePlugin(),
       RocketSlateCodePlugin({
-        highlight: (code) => highlight(code, languages.js),
+        highlight: (code, lang) => {
+          if (lang !== undefined && languages[lang] !== undefined) {
+            return highlight(code, languages[lang], lang);
+          }
+          return escapeHTML(code);
+        },
+        languages: languagesList,
       }),
     ],
     [],

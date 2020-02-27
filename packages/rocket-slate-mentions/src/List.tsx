@@ -43,8 +43,6 @@ const RocketSlateMentionList = ({ target, index, mentions, renderMention, isLoad
   const ref: any = useRef();
   const editor = useSlate();
 
-  console.log('isLoading', isLoading);
-
   useEffect(() => {
     if (target) {
       const el = ref.current;
@@ -56,6 +54,7 @@ const RocketSlateMentionList = ({ target, index, mentions, renderMention, isLoad
       }
     }
   }, [mentions, editor, target, isLoading]);
+
   return (
     <PortalBody>
       <RocketSlateMentionListWrap ref={ref}>
