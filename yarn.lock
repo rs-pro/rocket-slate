@@ -14515,10 +14515,10 @@ slate-hyperscript@^0.57.1:
   dependencies:
     is-plain-object "^3.0.0"
 
-slate-plugins-next@^0.57.8:
-  version "0.57.8"
-  resolved "https://registry.yarnpkg.com/slate-plugins-next/-/slate-plugins-next-0.57.8.tgz#334cf976dac156aeb047d48d902188d5db6cd204"
-  integrity sha512-M/qqkOSPuU2Yd1ewYStKwVL73bhOd1bPfZnf8C4bwKyeRxO/YPjrj1sS2I71geyOpgXzk8Thd32+lR5RgWSccg==
+slate-plugins-next@^0.57.10:
+  version "0.57.10"
+  resolved "https://registry.yarnpkg.com/slate-plugins-next/-/slate-plugins-next-0.57.10.tgz#1be1240c77d983c29819b1065546a9e99d21ddf8"
+  integrity sha512-FMXY8I1oa3568I8jOtnN3G8jfLN8KmYrHbEhiaFZrutXjob/I8IDWUQumLttmwRqvpFW3yEa9eZShgFC0Kw+qQ==
   dependencies:
     image-extensions "^1.1.0"
     is-hotkey "^0.1.6"

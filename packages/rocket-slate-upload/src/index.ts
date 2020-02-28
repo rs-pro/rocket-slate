@@ -1,1 +1,1 @@
-export { default as UploadToolbar } from "./UploadToolbar";
+export * from './Button';
