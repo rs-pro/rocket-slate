@@ -18,6 +18,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@fortawesome/react-fontawesome": "^0.1.8",
     "@rocket-slate/core": "^0.1.0",
+    "@rocket-slate/image": "^0.1.0",
+    "slate-plugins-next": "^0.57.10",
     "styled-components": "^5.0.1"
   },
   "peerDependencies": {

@@ -28,6 +28,7 @@ import {
   RocketSlateCodeInlineButton,
   escapeHTML,
 } from '@rocket-slate/code';
+import { RocketSlateUploadPlugin, RocketSlateUploadButton } from '@rocket-slate/upload';
 
 const fakeUser: IMention[] = [
   { id: 1, data: {}, text: 'User 1' },
@@ -67,14 +68,7 @@ storiesOf('Editor', module).add('default', () => {
       RocketSlateChecklistPlugin(),
       RocketSlateMentionPlugin(),
       RocketSlateLinksPlugin(),
-      RocketSlateImagePlugin({
-        onInsertImage: (file, callback) => {
-          const url = URL.createObjectURL(file);
-          setTimeout(() => {
-            callback(url);
-          }, 1000);
-        },
-      }),
+      RocketSlateImagePlugin(),
       RocketSlateCodeInlinePlugin(),
       RocketSlateCodePlugin({
         highlight: (code, lang) => {
@@ -84,6 +78,14 @@ storiesOf('Editor', module).add('default', () => {
           return escapeHTML(code);
         },
         languages: languagesList,
+      }),
+      RocketSlateUploadPlugin({
+        onInsertFile: (file, onComplete, onError) => {
+          const url = URL.createObjectURL(file);
+          setTimeout(() => {
+            onComplete({ url, name: file.name });
+          }, 1000);
+        },
       }),
     ],
     [],
@@ -145,6 +147,7 @@ storiesOf('Editor', module).add('default', () => {
         <RocketToolbarGroup>
           <RocketSlateLinksButton />
           <RocketSlateButtonImage />
+          <RocketSlateUploadButton />
         </RocketToolbarGroup>
       </RocketToolbar>
       <RocketSlateMentionSelect

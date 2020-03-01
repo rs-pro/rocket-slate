@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import { Transforms } from 'slate';
 import { RenderElementProps, useSlate, useFocused, useReadOnly, useSelected, ReactEditor } from 'slate-react';
 import { Resizable } from 're-resizable';
@@ -22,6 +22,13 @@ export const RocketImageElement = (props: RenderElementProps) => {
   const { src, height, width, isLoading } = data as IImageData;
   const path = useMemo(() => ReactEditor.findPath(editor, element), [editor, element]);
 
+  const handlerResize = useCallback(() => {
+    if (image && image.current) {
+      const { width, height } = image.current;
+      Transforms.setNodes(editor, { data: { ...data, width, height } }, { at: path });
+    }
+  }, [editor, image, path]);
+
   const size =
     (width !== undefined &&
       height !== undefined && {
@@ -41,17 +48,7 @@ export const RocketImageElement = (props: RenderElementProps) => {
             {isLoading && <div style={{ position: 'absolute', top: 0, left: 0 }}>Загрузка...</div>}
           </div>
         ) : (
-          <Resizable
-            size={size}
-            minHeight={100}
-            minWidth={100}
-            onResizeStop={(e, direction, ref, d) => {
-              if (image && image.current) {
-                const { width, height } = image.current;
-                Transforms.setNodes(editor, { data: { ...data, width, height } }, { at: path });
-              }
-            }}
-          >
+          <Resizable size={size} minHeight={100} minWidth={100} onResizeStop={handlerResize}>
             <img
               ref={image}
               src={src}
