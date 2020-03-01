@@ -16,8 +16,6 @@
   "dependencies": {
     "@rocket-slate/core": "^0.1.0",
     "@rocket-slate/icons": "^0.1.0",
-    "@types/diff": "^4.0.2",
-    "diff": "^4.0.2",
     "react": "^16.12.0",
     "react-simple-code-editor": "^0.11.0",
     "slate-plugins-next": "^0.57.10",

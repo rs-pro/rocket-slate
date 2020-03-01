@@ -1,9 +1,8 @@
-import React, { useState, useMemo, useCallback, useRef } from 'react';
+import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { diffChars } from 'diff';
 import { Editor, Transforms } from 'slate';
 import { RenderElementProps, ReactEditor, useSlate, useFocused, useSelected, useReadOnly } from 'slate-react';
-import { CODE, CodePlugin } from 'slate-plugins-next';
+import { CODE } from 'slate-plugins-next';
 import EditorCode from 'react-simple-code-editor';
 
 const CodeWrap = styled.div`
@@ -50,45 +49,35 @@ export const RocketSlateCodeBlock = (props: RenderElementProps & IHighlights) =>
   const pathElement = useMemo(() => ReactEditor.findPath(editor, element), [editor, element]);
   const [code, setCode] = useState(text);
 
+  useEffect(() => {
+    if (text && text !== code) {
+      setCode(text);
+    }
+  }, [text]);
+
   const handlerChangeCode = useCallback(
     (code) => {
       setCode(code);
       const at = Editor.range(editor, pathElement);
-      const { path } = at.anchor;
-      setTimeout(() => {
-        const diff = diffChars(text, code);
-        let offset = 0;
-        diff.forEach((change) => {
-          if (change.added) {
-            editor.apply({
-              type: 'insert_text',
-              path,
-              offset,
-              text: change.value,
-            });
-          }
-          if (change.removed) {
-            editor.apply({
-              type: 'remove_text',
-              path,
-              offset,
-              text: change.value,
-            });
-          }
-          offset += change.count || 0;
-        });
+      const { path, offset } = at.anchor;
+      editor.apply({
+        type: 'remove_text',
+        path,
+        offset,
+        text,
+      });
+      editor.apply({
+        type: 'insert_text',
+        path,
+        offset,
+        text: code,
       });
     },
     [text, element],
   );
 
-  const handlerHighlight = useCallback(
-    (code) => {
-      console.log('handlerHighlight');
-      return highlight(code, lang);
-    },
-    [lang, highlight],
-  );
+  const highlitedCode = useMemo(() => highlight(code, lang), [code, lang]);
+  const handlerHighlight = useCallback(() => highlitedCode, [highlitedCode]);
 
   const handlerChangeSelect = useCallback(
     (e) => {
@@ -120,6 +109,7 @@ export const RocketSlateCodeBlock = (props: RenderElementProps & IHighlights) =>
           </select>
         </SelectWrap>
       )}
+      {text}
       {children}
     </CodeWrap>
   );
