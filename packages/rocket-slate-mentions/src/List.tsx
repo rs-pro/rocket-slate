@@ -2,8 +2,8 @@ import React, { useCallback, useState, useRef, useEffect, useMemo } from 'react'
 import { Editor, Range } from 'slate';
 import styled from 'styled-components';
 import { useEditor, useSlate, ReactEditor } from 'slate-react';
-import { PortalBody, onChangeMention, onKeyDownMention } from 'slate-plugins-next';
-import { MENTION_ON_CHANGE, MENTION_ON_KEYDOWN } from './Plugin';
+import { PortalBody, onKeyDownMention } from 'slate-plugins-next';
+import { MENTION_ON_CHANGE, MENTION_ON_KEYDOWN } from './events';
 
 interface IMention {
   id: string | number;

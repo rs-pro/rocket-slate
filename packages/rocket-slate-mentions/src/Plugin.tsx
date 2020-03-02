@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import { MentionPlugin, withMention, MENTION } from 'slate-plugins-next';
 import { IRocketSlatePlugin } from '@rocket-slate/core/Editor';
 import { RenderElementProps, useFocused, useSelected } from 'slate-react';
-
-const MENTION_ON_CHANGE = new WeakMap();
-const MENTION_ON_KEYDOWN = new WeakMap();
+import { MENTION_ON_CHANGE, MENTION_ON_KEYDOWN } from './events';
 
 const RocketSlateMentionElement = (props: RenderElementProps) => {
   const { attributes, children, element } = props;
@@ -64,4 +62,4 @@ const RocketSlateMentionPlugin = <T extends RenderElementProps>(options?: {
   };
 };
 
-export { RocketSlateMentionPlugin, MENTION_ON_CHANGE, MENTION_ON_KEYDOWN };
+export { RocketSlateMentionPlugin };

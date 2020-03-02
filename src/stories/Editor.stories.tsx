@@ -28,7 +28,7 @@ import {
   RocketSlateCodeInlineButton,
   escapeHTML,
 } from '@rocket-slate/code';
-import { RocketSlateUploadPlugin, RocketSlateUploadButton } from '@rocket-slate/upload';
+import { RocketSlateUploadPlugin, RocketSlateUploadButton, RocketSlateUploadProgress } from '@rocket-slate/upload';
 
 const fakeUser: IMention[] = [
   { id: 1, data: {}, text: 'User 1' },
@@ -61,6 +61,22 @@ const languagesList = [
   { value: 'css', label: 'CSS' },
 ];
 
+const fakeProgress = (duration, onProgress, onComplete) => {
+  const start = performance.now();
+  requestAnimationFrame(function tick(time) {
+    let progress = (time - start) / duration;
+    if (progress > 1) {
+      progress = 1;
+    }
+    onProgress(Math.floor(progress * 100));
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      onComplete();
+    }
+  });
+};
+
 storiesOf('Editor', module).add('default', () => {
   const plugins = useMemo(
     () => [
@@ -80,11 +96,11 @@ storiesOf('Editor', module).add('default', () => {
         languages: languagesList,
       }),
       RocketSlateUploadPlugin({
-        onInsertFile: (file, onComplete, onError) => {
-          const url = URL.createObjectURL(file);
-          setTimeout(() => {
-            onComplete({ url, name: file.name });
-          }, 1000);
+        onInsertFile: (file, onComplete, onError, onProgress) => {
+          fakeProgress(1000 + Math.random() * (5000 - 1000), onProgress, () => {
+            const url = URL.createObjectURL(file);
+            onComplete({ url, text: file.name });
+          });
         },
       }),
     ],
@@ -122,40 +138,50 @@ storiesOf('Editor', module).add('default', () => {
   }, []);
 
   return (
-    <RocketSlate plugins={plugins} value={editorValue} onChange={handlerChangeValue}>
-      <RocketToolbar>
-        <RocketToolbarGroup>
-          <RocketWysiwygButton format={RocketToolbarButtons.H1} />
-          <RocketWysiwygButton format={RocketToolbarButtons.H2} />
-          <RocketWysiwygButton format={RocketToolbarButtons.H3} />
-        </RocketToolbarGroup>
-        <RocketToolbarGroup>
-          <RocketWysiwygButton format={RocketToolbarButtons.BOLD} />
-          <RocketWysiwygButton format={RocketToolbarButtons.ITALIC} />
-          <RocketWysiwygButton format={RocketToolbarButtons.UNDERLINE} />
-          <RocketWysiwygButton format={RocketToolbarButtons.STRIKETHROUGH} />
-        </RocketToolbarGroup>
-        <RocketToolbarGroup>
-          <RocketWysiwygButton format={RocketToolbarButtons.UL} />
-          <RocketWysiwygButton format={RocketToolbarButtons.OL} />
-          <RocketSlateChecklistButton />
-        </RocketToolbarGroup>
-        <RocketToolbarGroup>
-          <RocketSlateCodeInlineButton />
-          <RocketSlateCodeButton />
-        </RocketToolbarGroup>
-        <RocketToolbarGroup>
-          <RocketSlateLinksButton />
-          <RocketSlateButtonImage />
-          <RocketSlateUploadButton />
-        </RocketToolbarGroup>
-      </RocketToolbar>
-      <RocketSlateMentionSelect
-        mentions={mentions}
-        prefix={['@', '#']}
-        onChangeSearch={handlerChangeSearchMention}
-        isLoading={isLoading}
-      />
-    </RocketSlate>
+    <RocketSlate
+      plugins={plugins}
+      value={editorValue}
+      onChange={handlerChangeValue}
+      before={
+        <RocketToolbar>
+          <RocketToolbarGroup>
+            <RocketWysiwygButton format={RocketToolbarButtons.H1} />
+            <RocketWysiwygButton format={RocketToolbarButtons.H2} />
+            <RocketWysiwygButton format={RocketToolbarButtons.H3} />
+          </RocketToolbarGroup>
+          <RocketToolbarGroup>
+            <RocketWysiwygButton format={RocketToolbarButtons.BOLD} />
+            <RocketWysiwygButton format={RocketToolbarButtons.ITALIC} />
+            <RocketWysiwygButton format={RocketToolbarButtons.UNDERLINE} />
+            <RocketWysiwygButton format={RocketToolbarButtons.STRIKETHROUGH} />
+          </RocketToolbarGroup>
+          <RocketToolbarGroup>
+            <RocketWysiwygButton format={RocketToolbarButtons.UL} />
+            <RocketWysiwygButton format={RocketToolbarButtons.OL} />
+            <RocketSlateChecklistButton />
+          </RocketToolbarGroup>
+          <RocketToolbarGroup>
+            <RocketSlateCodeInlineButton />
+            <RocketSlateCodeButton />
+          </RocketToolbarGroup>
+          <RocketToolbarGroup>
+            <RocketSlateLinksButton />
+            <RocketSlateButtonImage />
+            <RocketSlateUploadButton />
+          </RocketToolbarGroup>
+        </RocketToolbar>
+      }
+      after={
+        <>
+          <RocketSlateMentionSelect
+            mentions={mentions}
+            prefix={['@', '#']}
+            onChangeSearch={handlerChangeSearchMention}
+            isLoading={isLoading}
+          />
+          <RocketSlateUploadProgress />
+        </>
+      }
+    />
   );
 });

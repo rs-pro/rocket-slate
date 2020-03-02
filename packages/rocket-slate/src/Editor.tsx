@@ -34,6 +34,8 @@ export interface IRocketSlateEditorProps {
   readOnly?: boolean;
   className?: string;
   onChange?: (value: Node[]) => void;
+  before?: React.ReactNode;
+  after?: React.ReactNode;
 }
 
 const RocketSlateWrapper = styled.div`
@@ -53,9 +55,10 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
   plugins = [],
   placeholder = 'Paste in some text...',
   readOnly,
-  children,
   className,
   onChange,
+  before,
+  after,
 }) => {
   const [editorValue, setValue] = useState(value);
   useEffect(() => {
@@ -76,7 +79,7 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
   return (
     <RocketSlateWrapper className={`RocketSlate ${className || ''}`}>
       <Slate editor={editor} value={editorValue} onChange={handlerChangeValueEditor}>
-        {children}
+        {before}
         <RocketSlateEditable
           className="RocketSlate__Editor"
           plugins={slatePlugins}
@@ -84,6 +87,7 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
           readOnly={readOnly}
           {...handlers}
         />
+        {after}
       </Slate>
     </RocketSlateWrapper>
   );

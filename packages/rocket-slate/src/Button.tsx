@@ -7,8 +7,11 @@ import { ToolbarFormatProps } from 'slate-plugins-next/dist/common/types';
 const baseStyleButton = css`
   display: inline-block;
   padding: 5px;
+  min-width: 30px;
+  text-align: center;
   border: 1px solid currentColor;
   border-radius: 2px;
+  box-sizing: border-box;
   > svg {
     display: inline-block;
     fill: currentColor;
@@ -16,7 +19,7 @@ const baseStyleButton = css`
   }
 `;
 
-export const withButtonRef = <T extends ToolbarButtonProps>(Component: React.FunctionComponent<T>) => {
+export function withButtonRef<T = any>(Component: React.FunctionComponent<T>) {
   class WithRef extends React.PureComponent<
     T & {
       onRef: React.Ref<any>;
@@ -38,13 +41,15 @@ export const withButtonRef = <T extends ToolbarButtonProps>(Component: React.Fun
   }
 
   return React.forwardRef<any, T>((props, ref) => <WithRef {...(props as T)} onRef={ref} />);
-};
+}
 
-export const withBaseStyleButton = <T extends ToolbarButtonProps>(Component: React.FunctionComponent<T>) => styled(
-  Component,
-)`
-  ${baseStyleButton}
-`;
+export function withBaseStyleButton<T = any>(
+  Component: React.FunctionComponent<T> | 'a' | 'button' | 'div' | 'label' | 'span',
+) {
+  return styled(Component)`
+    ${baseStyleButton}
+  `;
+}
 
 export const RocketButton: React.FC<ToolbarButtonProps> = withButtonRef(withBaseStyleButton(ToolbarButton));
 export const RocketButtonBlock: React.FC<ToolbarFormatProps> = withButtonRef(withBaseStyleButton(ToolbarBlock));
