@@ -109,7 +109,6 @@ export const RocketSlateCodeBlock = (props: RenderElementProps & IHighlights) =>
           </select>
         </SelectWrap>
       )}
-      {text}
       {children}
     </CodeWrap>
   );
