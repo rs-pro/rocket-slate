@@ -6,6 +6,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
+    "resolveJsonModule": true,
     "jsx": "react",
     "target": "es5",
     "module": "esnext",

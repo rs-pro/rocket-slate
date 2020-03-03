@@ -30,20 +30,24 @@ import {
 } from '@rocket-slate/code';
 import { RocketSlateUploadPlugin, RocketSlateUploadButton, RocketSlateUploadProgress } from '@rocket-slate/upload';
 
+import editorState from '../converter/editorState.json';
+import editorStateOld from '../converter/oldEditorState.json';
+import { convertSlateState47toRocketSlate } from '../converter';
+
 const fakeUser: IMention[] = [
-  { id: 1, data: {}, text: 'User 1' },
-  { id: 2, data: {}, text: 'User 2' },
-  { id: 3, data: {}, text: 'User 3' },
-  { id: 4, data: {}, text: 'User 4' },
-  { id: 5, data: {}, text: 'User 5' },
+  { id: 1, text: 'User 1', type: 'user' },
+  { id: 2, text: 'User 2', type: 'user' },
+  { id: 3, text: 'User 3', type: 'user' },
+  { id: 4, text: 'User 4', type: 'user' },
+  { id: 5, text: 'User 5', type: 'user' },
 ];
 
 const fakeTasks: IMention[] = [
-  { id: 1, data: {}, text: 'Task 1' },
-  { id: 2, data: {}, text: 'Task 2' },
-  { id: 3, data: {}, text: 'Task 3' },
-  { id: 4, data: {}, text: 'Task 4' },
-  { id: 5, data: {}, text: 'Task 5' },
+  { id: 1, text: 'Task 1', type: 'task' },
+  { id: 2, text: 'Task 2', type: 'task' },
+  { id: 3, text: 'Task 3', type: 'task' },
+  { id: 4, text: 'Task 4', type: 'task' },
+  { id: 5, text: 'Task 5', type: 'task' },
 ];
 
 let timeOutId: number | undefined;
@@ -99,7 +103,7 @@ storiesOf('Editor', module).add('default', () => {
         onInsertFile: (file, onComplete, onError, onProgress) => {
           fakeProgress(1000 + Math.random() * (5000 - 1000), onProgress, () => {
             const url = URL.createObjectURL(file);
-            onComplete({ url, text: file.name });
+            onComplete({ url, text: file.name, id: Math.round(Math.random() * 1000) });
           });
         },
       }),
@@ -107,7 +111,9 @@ storiesOf('Editor', module).add('default', () => {
     [],
   );
 
-  const [editorValue, setValue] = useState(initialValue);
+  // const [editorValue, setValue] = useState(editorState || initialValue);
+  console.log(convertSlateState47toRocketSlate(editorStateOld));
+  const [editorValue, setValue] = useState(convertSlateState47toRocketSlate(editorStateOld) || initialValue);
   const [isLoading, setLoading] = useState(false);
   const [mentions, setMention] = useState<IMention[]>([]);
 
@@ -134,6 +140,7 @@ storiesOf('Editor', module).add('default', () => {
   }, []);
 
   const handlerChangeValue = useCallback((value) => {
+    // console.log('value', JSON.stringify(value));
     setValue(value);
   }, []);
 
@@ -154,6 +161,7 @@ storiesOf('Editor', module).add('default', () => {
             <RocketWysiwygButton format={RocketToolbarButtons.ITALIC} />
             <RocketWysiwygButton format={RocketToolbarButtons.UNDERLINE} />
             <RocketWysiwygButton format={RocketToolbarButtons.STRIKETHROUGH} />
+            <RocketWysiwygButton format={RocketToolbarButtons.BLOCKQUOTE} />
           </RocketToolbarGroup>
           <RocketToolbarGroup>
             <RocketWysiwygButton format={RocketToolbarButtons.UL} />

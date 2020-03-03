@@ -6,6 +6,7 @@ import { IMAGE } from 'slate-plugins-next';
 
 export interface IImageData {
   src: string;
+  id?: string | number;
   width?: number;
   height?: number;
   isLoading?: boolean;

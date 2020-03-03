@@ -5,8 +5,10 @@ import { IRocketSlatePlugin } from '@rocket-slate/core/Editor';
 import { RenderElementProps, useFocused, useSelected } from 'slate-react';
 import { MENTION_ON_CHANGE, MENTION_ON_KEYDOWN } from './events';
 
+// TODO: https://github.com/ianstormtaylor/slate/issues/3518
+
 const RocketSlateMentionElement = (props: RenderElementProps) => {
-  const { attributes, children, element } = props;
+  const { attributes, children, element, element: { children: [{ text }] } } = props;
   const selected = useSelected();
   const focused = useFocused();
   return (
@@ -24,7 +26,7 @@ const RocketSlateMentionElement = (props: RenderElementProps) => {
         boxShadow: selected && focused ? '0 0 0 2px #B4D5FF' : 'none',
       }}
     >
-      {element.character.text}
+      {text}
       {children}
     </span>
   );

@@ -2,12 +2,12 @@ import { IRocketSlatePlugin } from '@rocket-slate/core';
 import { ReactEditor } from 'slate-react';
 import { Editor, Range, Transforms } from 'slate';
 import { insertImage } from '@rocket-slate/image';
-import { wrapLink } from 'slate-plugins-next';
+import { wrapLink } from '@rocket-slate/links';
 import { ON_INSERT_FILE, ON_UPLOAD_START, ON_UPLOAD_PROGRESS, ON_UPLOAD_COMPLETE } from './events';
 
 type HandlerInsertFile = (
   file: File,
-  onComplete: (uploadedFile: { url: string; text: string }) => void,
+  onComplete: (uploadedFile: { id: string | number; url: string; text: string }) => void,
   onError: () => void,
   onProgress?: (progress: number) => void,
 ) => void;
@@ -74,8 +74,8 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
             const range = beforeBlock && Editor.range(editor, beforeBlock, start);
             onInsertFile(
               file,
-              ({ url }) => {
-                Transforms.setNodes(editor, { data: { src: url } }, { at: range });
+              ({ id, url }) => {
+                Transforms.setNodes(editor, { data: { id, src: url } }, { at: range });
                 if (window.URL && window.URL.revokeObjectURL && objectURL) {
                   window.URL.revokeObjectURL(objectURL);
                 }
@@ -88,7 +88,7 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
         } else {
           onInsertFile(
             file,
-            ({ url, text }) => {
+            ({ id, url, text }) => {
               if (editor.selection) {
                 if (!Range.isCollapsed(editor.selection)) {
                   Transforms.collapse(editor, {
@@ -100,7 +100,7 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
                 const [end] = Range.edges(editor.selection);
                 const range = Editor.range(editor, start, end);
                 Transforms.setSelection(editor, range);
-                wrapLink(editor, url);
+                wrapLink(editor, { id, url });
                 editor.insertBreak();
               }
             },

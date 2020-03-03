@@ -1,14 +1,14 @@
 import React, { useCallback, useState, useRef, useEffect, useMemo } from 'react';
-import { Editor, Range } from 'slate';
+import { Editor, Range, Transforms } from 'slate';
 import styled from 'styled-components';
 import { useEditor, useSlate, ReactEditor } from 'slate-react';
-import { PortalBody, onKeyDownMention } from 'slate-plugins-next';
+import { PortalBody } from 'slate-plugins-next';
 import { MENTION_ON_CHANGE, MENTION_ON_KEYDOWN } from './events';
 
 interface IMention {
   id: string | number;
   text: string;
-  data: any;
+  [kye: string]: any;
 }
 
 const RocketSlateMentionListItem = styled.div<{ isActive?: boolean; isLoading?: boolean; isEmpty?: boolean }>`
@@ -120,7 +120,7 @@ const onChangeRocketMention = ({
         const beforeText = Editor.string(editor, beforeRange);
         const beforeMatch = beforeText.match(beforeRegexSpace);
 
-        // Проверяем что после найденнлшл совпадения есть пробел или пустая строка
+        // Проверяем что после найденного совпадения есть пробел или пустая строка
         const after = Editor.after(editor, start);
         const afterRange = Editor.range(editor, start, after);
         const afterText = Editor.string(editor, afterRange);
@@ -136,6 +136,60 @@ const onChangeRocketMention = ({
   }
 
   callback(null, null);
+};
+
+const insertMention = (editor, mention: IMention) => {
+  const { text, ...mentionData } = mention;
+  const mentionNode = {
+    type: 'mention',
+    data: {
+      ...mentionData,
+    },
+    children: [{ text }],
+  };
+  Transforms.insertNodes(editor, mentionNode);
+  Transforms.move(editor);
+};
+
+const onKeyDownMention = (options: {
+  mentions: IMention[];
+  index: number;
+  target: any;
+  setIndex: any;
+  setTarget: any;
+}) => (e, editor) => {
+  const { mentions, index, target, setIndex, setTarget } = options;
+
+  if (target) {
+    switch (e.key) {
+      case 'ArrowDown': {
+        e.preventDefault();
+        const prevIndex = index >= mentions.length - 1 ? 0 : index + 1;
+        setIndex(prevIndex);
+        break;
+      }
+
+      case 'ArrowUp': {
+        e.preventDefault();
+        const nextIndex = index <= 0 ? mentions.length - 1 : index - 1;
+        setIndex(nextIndex);
+        break;
+      }
+
+      case 'Tab':
+      case 'Enter':
+        e.preventDefault();
+        Transforms.select(editor, target);
+        insertMention(editor, mentions[index]);
+        setTarget(null);
+        break;
+
+      case 'Escape':
+        e.preventDefault();
+        setTarget(null);
+        break;
+    }
+  }
 };
 
 type RocketMentionSelect = {
@@ -179,7 +233,7 @@ const RocketSlateMentionSelect = (props: RocketMentionSelect) => {
 
   const handlerKeyDown = useCallback(
     onKeyDownMention({
-      chars: mentions,
+      mentions,
       target,
       index,
       setTarget,
