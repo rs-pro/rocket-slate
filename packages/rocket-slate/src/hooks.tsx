@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { createEditor, Editor } from 'slate';
-import { IRocketSlatePlugin, IResetOption } from './Editor';
+import { IRocketSlatePlugin } from './Editor';
 import { withBlock } from 'slate-plugins-next';
 import { withHistory } from 'slate-history';
 import { withReact } from 'slate-react';

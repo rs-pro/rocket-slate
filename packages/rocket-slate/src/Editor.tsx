@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import styled, { ThemedStyledFunction } from 'styled-components';
+import styled from 'styled-components';
 import { Editor, Node } from 'slate';
-import { ReactEditor, Slate, withReact } from 'slate-react';
+import { ReactEditor, Slate } from 'slate-react';
 import { HistoryEditor } from 'slate-history';
 import { SlatePlugin, EditablePlugins, ToggleBlockEditor } from 'slate-plugins-next';
 
