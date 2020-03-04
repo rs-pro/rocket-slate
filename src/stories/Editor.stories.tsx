@@ -30,8 +30,8 @@ import {
 } from '@rocket-slate/code';
 import { RocketSlateUploadPlugin, RocketSlateUploadButton, RocketSlateUploadProgress } from '@rocket-slate/upload';
 
-import editorState from '../converter/editorState.json';
-import editorStateOld from '../converter/oldEditorState.json';
+import editorStateNew from '../converter/editorStateNew.json';
+import editorStateOld from '../converter/editorStateOld.json';
 import { convertSlateState47toRocketSlate } from '../converter';
 
 const fakeUser: IMention[] = [
@@ -103,7 +103,7 @@ storiesOf('Editor', module).add('default', () => {
         onInsertFile: (file, onComplete, onError, onProgress) => {
           fakeProgress(1000 + Math.random() * (5000 - 1000), onProgress, () => {
             const url = URL.createObjectURL(file);
-            onComplete({ url, text: file.name, id: Math.round(Math.random() * 1000) });
+            onComplete({ url, name: file.name, id: Math.round(Math.random() * 1000) });
           });
         },
       }),
@@ -111,9 +111,10 @@ storiesOf('Editor', module).add('default', () => {
     [],
   );
 
-  // const [editorValue, setValue] = useState(editorState || initialValue);
-  console.log(convertSlateState47toRocketSlate(editorStateOld));
-  const [editorValue, setValue] = useState(convertSlateState47toRocketSlate(editorStateOld) || initialValue);
+  const initialState = useMemo(() => {
+    return convertSlateState47toRocketSlate(editorStateOld) || editorStateNew || initialValue;
+  }, []);
+  const [editorValue, setValue] = useState(initialState);
   const [isLoading, setLoading] = useState(false);
   const [mentions, setMention] = useState<IMention[]>([]);
 

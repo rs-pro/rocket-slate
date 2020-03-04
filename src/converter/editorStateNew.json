@@ -119,17 +119,10 @@
     ]
   },
   {
-    "type": "action-item",
-    "children": [
-      {
-        "text": "test"
-      }
-    ],
-    "checked": true
-  },
-  {
-    "type": "action-item",
-    "checked": false,
+    "type": "check-list-item",
+    "data": {
+      "checked": true
+    },
     "children": [
       {
         "text": "test"
@@ -137,8 +130,10 @@
     ]
   },
   {
-    "type": "action-item",
-    "checked": false,
+    "type": "check-list-item",
+    "data": {
+      "checked": false
+    },
     "children": [
       {
         "text": "test"
@@ -146,8 +141,21 @@
     ]
   },
   {
-    "type": "action-item",
-    "checked": false,
+    "type": "check-list-item",
+    "data": {
+      "checked": false
+    },
+    "children": [
+      {
+        "text": "test"
+      }
+    ]
+  },
+  {
+    "type": "check-list-item",
+    "data": {
+      "checked": false
+    },
     "children": [
       {
         "text": "test"
@@ -246,7 +254,7 @@
     "type": "code",
     "children": [
       {
-        "text": "code block"
+        "text": "import React from 'react';\n\nclass SomeCompoenent extends React.PureComponent {\n   render () {\n     return (\n       <div>\n         text\n       </div>\n     );\n   }\n}\n\nexport default SomeCompoenent;"
       }
     ]
   },
@@ -341,7 +349,10 @@
       {
         "type": "link",
         "data": {
-          "id": 1,
+          "file": {
+            "id": 1,
+            "size": 2547145
+          },
           "url": "blob:http://localhost:9009/9d2d125c-3aa5-4303-9d70-c2d935f90c19"
         },
         "children": [

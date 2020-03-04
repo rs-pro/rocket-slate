@@ -17,7 +17,7 @@ const RocketSlateMentionElement = (props: RenderElementProps) => {
       data-slate-type={MENTION}
       contentEditable={false}
       style={{
-        padding: '3px 3px 2px',
+        padding: '3px 10px 2px',
         margin: '0 1px',
         verticalAlign: 'middle',
         display: 'inline-block',

@@ -355,7 +355,151 @@
         "type": "code_line",
         "nodes": [
           {
-            "text": "code block",
+            "text": "import React from 'react';",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "class SomeCompoenent extends React.PureComponent {",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "   render () {",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "     return (",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "       <div>",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "         text",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "       </div>",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "     );",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "   }",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "}",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "code_line",
+        "nodes": [
+          {
+            "text": "export default SomeCompoenent;",
             "marks": [],
             "object": "text"
           }
@@ -507,6 +651,17 @@
       }
     ],
     "object": "block"
+  },
+  {
+    "data": {},
+    "type": "paragraph",
+    "nodes": [
+      {
+        "text": "",
+        "marks": [],
+        "object": "text"
+      }
+    ]
   },
   {
     "data": {},

@@ -1,11 +1,4 @@
-// tslint:disable:object-literal-sort-keys
-
 function covertData(node) {
-  if (node.type === 'check-list-item') {
-    return {
-      checked: !!node.data.checked,
-    };
-  }
   if (node.type === 'mention') {
     return {
       data: {
@@ -14,18 +7,9 @@ function covertData(node) {
       },
     };
   }
-  if (node.type === 'image') {
+  if (node.type === 'image' || node.type === 'check-list-item') {
     return {
       data: node.data,
-    };
-  }
-  if (node.type === 'file') {
-    const { id, url } = node.data;
-    return {
-      data: {
-        id,
-        url,
-      },
     };
   }
   if (node.type === 'link') {
@@ -39,26 +23,36 @@ function covertData(node) {
 }
 
 function convertType(node) {
-  if (node.type === 'check-list-item') {
-    return 'action-item';
-  }
   if (node.type === 'file') {
-    return 'link';
+    return 'paragraph';
   }
   return node.type;
 }
 
 function convertChildren(node) {
   if (node.type === 'file') {
-    return [{ text: node.data.name }];
+    const { id, size, url } = node.data;
+    return [ {
+      type: 'link',
+      data: {
+        file: {
+          id,
+          size,
+        },
+        url,
+      },
+      children: [{ text: node.data.name }]
+    }];
   }
   if (node.type === 'code') {
-    // tslint:disable-next-line:no-shadowed-variable
-    return node.nodes.map((node) => {
-      return {
-        text: node.nodes[0].text,
-      };
-    });
+    return [{ text: node.nodes.map((node) => node.nodes[0].text).join('\n') }];
+  }
+  if (node.type === 'mention') {
+    return [
+      {
+        text: node.nodes[0].text.split(' (@')[0]
+      }
+    ]
   }
   return node.nodes.map(covertSlateNode47toRocketSlate);
 }
@@ -76,7 +70,7 @@ function covertSlateNode47toRocketSlate(node) {
     if (marks && marks.length > 0) {
       return {
         text,
-        ...(marks as any[]).reduce((marksFlag, mark) => {
+        ...(marks).reduce((marksFlag, mark) => {
           return {
             ...marksFlag,
             [mark.type]: true,
@@ -90,6 +84,6 @@ function covertSlateNode47toRocketSlate(node) {
   }
 }
 
-export function convertSlateState47toRocketSlate(state47: any[]) {
+export function convertSlateState47toRocketSlate(state47) {
   return state47.map(covertSlateNode47toRocketSlate);
 }

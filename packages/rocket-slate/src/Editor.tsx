@@ -8,7 +8,7 @@ import { SlatePlugin, EditablePlugins, ToggleBlockEditor } from 'slate-plugins-n
 import { useEditorWithPlugin, useHandlers } from './hooks';
 
 export interface IRocketSlatePlugin {
-  plugin: SlatePlugin;
+  plugin?: SlatePlugin;
   withPlugin?: <T extends Editor & ReactEditor & HistoryEditor & ToggleBlockEditor>(editor: T) => T;
   handlers?: {
     [eventName in keyof Omit<
@@ -67,7 +67,7 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
 
   const editor = useEditorWithPlugin(plugins);
   const handlers = useHandlers(plugins, editor);
-  const slatePlugins = useMemo(() => plugins.map(({ plugin }) => plugin), plugins);
+  const slatePlugins = useMemo(() => plugins.filter(({ plugin }) => plugin).map(({ plugin }) => plugin), plugins);
 
   const handlerChangeValueEditor = useCallback((value) => {
     setValue(value);

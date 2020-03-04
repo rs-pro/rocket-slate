@@ -1,21 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import isUrl from 'is-url';
 import { Range, Transforms } from 'slate';
 import { RenderElementProps, useSlate } from 'slate-react';
-import {
-  withLink,
-  LinkPlugin,
-  RenderElementOptions,
-  ToolbarBlock,
-  isLinkActive,
-  LINK,
-  unwrapLink,
-} from 'slate-plugins-next';
-import { RocketTooltip, withBaseStyleButton, withButtonRef, IRocketSlatePlugin } from '@rocket-slate/core';
+import { LinkPlugin, RenderElementOptions, isLinkActive, LINK, unwrapLink } from 'slate-plugins-next';
+import { RocketTooltip, RocketButtonBlock, IRocketSlatePlugin } from '@rocket-slate/core';
 import { IconLink } from '@rocket-slate/icons';
 
 export { unwrapLink };
 
-export const wrapLink = (editor, { id, url }) => {
+export const wrapLink = (editor, { url, file }: { url: string; file?: any }) => {
   if (isLinkActive(editor)) {
     unwrapLink(editor);
   }
@@ -25,8 +18,8 @@ export const wrapLink = (editor, { id, url }) => {
   const link = {
     type: LINK,
     data: {
-      id,
       url,
+      ...(file ? { file } : undefined),
     },
     children: isCollapsed
       ? [
@@ -51,7 +44,7 @@ export const wrapLink = (editor, { id, url }) => {
 
 export const insertLink = (editor, url) => {
   if (editor.selection) {
-    wrapLink(editor, url);
+    wrapLink(editor, { url });
   }
 };
 
@@ -73,28 +66,52 @@ const RocketSlateLinksPlugin = (options?: RenderElementOptions): IRocketSlatePlu
       component: RocketSlateLinkElement,
       ...options,
     }),
-    withPlugin: withLink,
+    withPlugin: (editor) => {
+      const { insertData, insertText, isInline } = editor;
+
+      editor.isInline = (element) => {
+        return element.type === LINK ? true : isInline(element);
+      };
+
+      editor.insertText = (text) => {
+        if (text && isUrl(text)) {
+          wrapLink(editor, { url: text });
+        } else {
+          insertText(text);
+        }
+      };
+
+      editor.insertData = (data) => {
+        const text = data.getData('text/plain');
+
+        if (text && isUrl(text)) {
+          wrapLink(editor, { url: text });
+        } else {
+          insertData(data);
+        }
+      };
+
+      return editor;
+    },
   };
 };
 
-const RocketSlateLinksButtonWrap = withButtonRef(withBaseStyleButton(ToolbarBlock));
-
 const RocketSlateLinksButton = () => {
   const editor = useSlate();
+  const handlerMouseDownLinkButton = useCallback(
+    (event: React.MouseEvent<any>) => {
+      event.preventDefault();
+      const url = window.prompt('Enter the URL of the link:');
+      if (!url) {
+        return;
+      }
+      insertLink(editor, url);
+    },
+    [editor],
+  );
   return (
     <RocketTooltip title="Добавить ссылку">
-      <RocketSlateLinksButtonWrap
-        icon={<IconLink />}
-        format={LINK}
-        onMouseDown={(event) => {
-          event.preventDefault();
-          const url = window.prompt('Enter the URL of the link:');
-          if (!url) {
-            return;
-          }
-          insertLink(editor, url);
-        }}
-      />
+      <RocketButtonBlock icon={<IconLink />} format={LINK} onMouseDown={handlerMouseDownLinkButton} />
     </RocketTooltip>
   );
 };

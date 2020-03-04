@@ -1,16 +1,11 @@
+import React from 'react';
 import { IRocketSlatePlugin } from '@rocket-slate/core';
-import { ReactEditor } from 'slate-react';
 import { Editor, Range, Transforms } from 'slate';
+import { ReactEditor } from 'slate-react';
 import { insertImage } from '@rocket-slate/image';
 import { wrapLink } from '@rocket-slate/links';
 import { ON_INSERT_FILE, ON_UPLOAD_START, ON_UPLOAD_PROGRESS, ON_UPLOAD_COMPLETE } from './events';
-
-type HandlerInsertFile = (
-  file: File,
-  onComplete: (uploadedFile: { id: string | number; url: string; text: string }) => void,
-  onError: () => void,
-  onProgress?: (progress: number) => void,
-) => void;
+import { HandlerInsertFile } from './types';
 
 let globalProgressArray: any[] = [];
 
@@ -88,19 +83,20 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
         } else {
           onInsertFile(
             file,
-            ({ id, url, text }) => {
+            (file) => {
               if (editor.selection) {
                 if (!Range.isCollapsed(editor.selection)) {
                   Transforms.collapse(editor, {
                     edge: 'end',
                   });
                 }
+                const { id, url, name, size } = file;
                 const [start] = Range.edges(editor.selection);
-                Transforms.insertText(editor, text);
+                Transforms.insertText(editor, name || url);
                 const [end] = Range.edges(editor.selection);
                 const range = Editor.range(editor, start, end);
                 Transforms.setSelection(editor, range);
-                wrapLink(editor, { id, url });
+                wrapLink(editor, { url, file: { id, size } });
                 editor.insertBreak();
               }
             },
@@ -119,9 +115,8 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
 export const RocketSlateUploadPlugin = (options: { onInsertFile: HandlerInsertFile }): IRocketSlatePlugin => {
   const { onInsertFile } = options;
   return {
-    plugin: {},
     withPlugin: <T extends ReactEditor>(editor: T): T => {
-      const { insertData } = editor;
+      const { insertData, isInline } = editor;
 
       ON_INSERT_FILE.set(editor, onInsertFile);
 

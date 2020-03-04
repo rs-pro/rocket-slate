@@ -6,7 +6,7 @@ import { InlineCodePluginOptions } from 'slate-plugins-next/dist/marks/inline-co
 
 const CodeInline = styled.code`
   font-family: monospace;
-  background-color: #eee;
+  background-color: #f7f7f7;
   font-size: 1em;
   padding: 0.25em 0.4em;
   margin: 0 0.3em;
