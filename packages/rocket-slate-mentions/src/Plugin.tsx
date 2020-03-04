@@ -32,8 +32,8 @@ const RocketSlateMentionElement = (props: RenderElementProps) => {
   );
 };
 
-const RocketSlateMentionPlugin = <T extends RenderElementProps>(options?: {
-  component?: React.ComponentType<T>;
+const RocketSlateMentionPlugin = (options?: {
+  component?: React.ComponentType<RenderElementProps>;
 }): IRocketSlatePlugin => {
   return {
     plugin: {
