@@ -34,24 +34,21 @@ const Text = styled.span<{ checked: boolean }>`
   }
 `;
 
-export const ActionItemElement: React.FunctionComponent<RenderElementProps> = (props) => {
-  const { attributes, children, element } = props;
-  const editor = useEditor();
-  const readOnly = useReadOnly();
-  const { data: { checked } } = element;
+export type ActionItemProps = RenderElementProps & {
+  onChange: React.EventHandler<React.ChangeEvent<any>>;
+};
 
-  const handlerChangeChecked = useCallback(
-    (e) => {
-      const path = ReactEditor.findPath(editor, element);
-      Transforms.setNodes(editor, { data: { checked: e.target.checked } }, { at: path });
-    },
-    [editor, checked],
-  );
+export const ActionItemElement: React.FunctionComponent<ActionItemProps> = (props) => {
+  const { attributes, children, element, onChange } = props;
+  const readOnly = useReadOnly();
+  const {
+    data: { checked },
+  } = element;
 
   return (
     <Wrapper {...attributes} data-slate-type={ACTION_ITEM}>
       <CheckboxWrapper contentEditable={false}>
-        <Checkbox type="checkbox" checked={checked} onChange={handlerChangeChecked} />
+        <Checkbox type="checkbox" checked={checked} onChange={onChange} />
       </CheckboxWrapper>
       <Text contentEditable={!readOnly} checked={checked} suppressContentEditableWarning>
         {children}
