@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import { addElement } from '@rocket-slate/core';
+// import { addElement } from '@rocket-slate/editor';
 
 // addElement('tables', 'table', ({ attributes, children }) => (
 //   <table {...attributes}>

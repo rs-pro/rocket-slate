@@ -5,7 +5,7 @@ import { faTable } from "@fortawesome/free-solid-svg-icons/faTable";
 import { faColumns } from "@fortawesome/free-solid-svg-icons/faColumns";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faMinus } from "@fortawesome/free-solid-svg-icons/faMinus";
-import { RocketTooltip } from '@rocket-slate/core';
+import { RocketTooltip } from '@rocket-slate/editor';
 import { useSlate } from 'slate-react';
 
 function TableToolbar() {
