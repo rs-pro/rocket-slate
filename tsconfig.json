@@ -25,8 +25,8 @@
     ],
     "paths": {
       "~/*": ["./src/*"],
-      "@rocket-slate/core": ["./packages/rocket-slate/src"],
-      "@rocket-slate/core/*": ["./packages/rocket-slate/src/*"],
+      "@rocket-slate/editor": ["./packages/rocket-slate/src"],
+      "@rocket-slate/editor/*": ["./packages/rocket-slate/src/*"],
       "@rocket-slate/checklist": ["./packages/rocket-slate-checklist/src"],
       "@rocket-slate/checklist/*": ["./packages/rocket-slate-checklist/src/*"],
       "@rocket-slate/code": ["./packages/rocket-slate-code/src"],

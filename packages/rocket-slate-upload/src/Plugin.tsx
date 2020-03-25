@@ -1,5 +1,5 @@
 import React from 'react';
-import { IRocketSlatePlugin } from '@rocket-slate/core';
+import { IRocketSlatePlugin } from '@rocket-slate/editor';
 import { Editor, Range, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 import { insertImage } from '@rocket-slate/image';

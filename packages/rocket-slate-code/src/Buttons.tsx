@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Editor, Transforms, Range } from 'slate';
 import { useSlate } from 'slate-react';
 import { MARK_CODE, CODE, PARAGRAPH, isBlockActive } from 'slate-plugins-next';
-import { RocketButtonMark, RocketButtonBlock, RocketTooltip } from '@rocket-slate/core';
+import { RocketButtonMark, RocketButtonBlock, RocketTooltip } from '@rocket-slate/editor';
 import { IconCodeBlock, IconCodeInline } from '@rocket-slate/icons';
 
 export const RocketSlateCodeButton = () => {

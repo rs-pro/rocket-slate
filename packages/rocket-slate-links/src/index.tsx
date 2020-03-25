@@ -3,7 +3,7 @@ import isUrl from 'is-url';
 import { Range, Transforms } from 'slate';
 import { RenderElementProps, useSlate } from 'slate-react';
 import { LinkPlugin, RenderElementOptions, isLinkActive, LINK, unwrapLink } from 'slate-plugins-next';
-import { RocketTooltip, RocketButtonBlock, IRocketSlatePlugin } from '@rocket-slate/core';
+import { RocketTooltip, RocketButtonBlock, IRocketSlatePlugin } from '@rocket-slate/editor';
 import { IconLink } from '@rocket-slate/icons';
 
 export { unwrapLink };

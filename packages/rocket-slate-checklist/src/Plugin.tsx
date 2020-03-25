@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
 import { getRenderElement, SlatePlugin, withBreakEmptyReset, withDeleteStartReset } from 'slate-plugins-next';
 import { RenderElementOptions } from 'slate-plugins-next/dist/elements/types';
-import { IRocketSlatePlugin } from '@rocket-slate/core/Editor';
+import { IRocketSlatePlugin } from '@rocket-slate/editor';
 import { ActionItemElement, ActionItemProps } from './Element';
 import { Transforms } from 'slate';
 

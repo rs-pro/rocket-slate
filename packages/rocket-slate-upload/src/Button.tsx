@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 import { useSlate, ReactEditor } from 'slate-react';
-import { RocketTooltip, RocketButton, withBaseStyleButton } from '@rocket-slate/core';
+import { RocketTooltip, RocketButton, withBaseStyleButton } from '@rocket-slate/editor';
 import { insertFiles } from './Plugin';
 
 const UploadButton = styled(withBaseStyleButton('label'))`

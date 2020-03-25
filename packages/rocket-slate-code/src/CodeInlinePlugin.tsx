@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { InlineCodePlugin, MARK_CODE } from 'slate-plugins-next';
-import { IRocketSlatePlugin } from '@rocket-slate/core/Editor';
+import { IRocketSlatePlugin } from '@rocket-slate/editor/Editor';
 import { InlineCodePluginOptions } from 'slate-plugins-next/dist/marks/inline-code/types';
 
 const CodeInline = styled.code`

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { MentionPlugin, withMention, MENTION } from 'slate-plugins-next';
-import { IRocketSlatePlugin } from '@rocket-slate/core/Editor';
+import { IRocketSlatePlugin } from '@rocket-slate/editor';
 import { RenderElementProps, useFocused, useSelected } from 'slate-react';
 import { MENTION_ON_CHANGE, MENTION_ON_KEYDOWN } from './events';
 

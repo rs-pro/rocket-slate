@@ -14,7 +14,7 @@
     "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments"
   },
   "dependencies": {
-    "@rocket-slate/core": "^0.1.0",
+    "@rocket-slate/editor": "^0.1.0",
     "@types/styled-components": "^4.4.3",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",

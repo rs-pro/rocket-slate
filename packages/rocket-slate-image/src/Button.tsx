@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useEditor } from 'slate-react';
-import { RocketButton, RocketTooltip } from '@rocket-slate/core';
+import { RocketButton, RocketTooltip } from '@rocket-slate/editor';
 import { IconImage } from '@rocket-slate/icons';
 import { insertImage } from './Plugin';
 

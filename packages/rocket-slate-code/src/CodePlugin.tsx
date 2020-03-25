@@ -1,7 +1,7 @@
 import React from 'react';
 import { RenderElementProps } from 'slate-react';
 import { CODE, CodePlugin } from 'slate-plugins-next';
-import { IRocketSlatePlugin } from '@rocket-slate/core/Editor';
+import { IRocketSlatePlugin } from '@rocket-slate/editor';
 import { IHighlights, RocketSlateCodeBlock } from './RocketSlateCodeBlock';
 
 export const RocketSlateCodePlugin = (options: IHighlights): IRocketSlatePlugin => {

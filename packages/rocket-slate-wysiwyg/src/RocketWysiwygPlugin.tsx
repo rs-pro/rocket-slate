@@ -1,6 +1,6 @@
 import React from 'react';
 import { Range } from 'slate';
-import { IResetOption, IRocketSlatePlugin} from '@rocket-slate/core/Editor';
+import { IResetOption, IRocketSlatePlugin} from '@rocket-slate/editor';
 import {
   ParagraphPlugin,
   BlockquotePlugin,

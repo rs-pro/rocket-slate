@@ -15,7 +15,7 @@ import 'prismjs/components/prism-go';
 import 'prismjs/components/prism-sql';
 import 'prismjs/themes/prism.css';
 
-import { RocketSlate, RocketToolbar, RocketToolbarGroup, initialValue } from '@rocket-slate/core';
+import { RocketSlate, RocketToolbar, RocketToolbarGroup, initialValue } from '@rocket-slate/editor';
 import { RocketToolbarButtons, RocketWysiwygButton, RocketWysiwygPlugin } from '@rocket-slate/wysiwyg';
 import { RocketSlateChecklistPlugin, RocketSlateChecklistButton } from '@rocket-slate/checklist';
 import { RocketSlateMentionPlugin, RocketSlateMentionSelect, IMention } from '@rocket-slate/mentions';

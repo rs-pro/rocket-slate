@@ -1,7 +1,7 @@
 import React from 'react';
 import { Editor, Transforms } from 'slate';
 import { IMAGE, ImagePlugin, isImageUrl, PARAGRAPH } from 'slate-plugins-next';
-import { IRocketSlatePlugin } from '@rocket-slate/core';
+import { IRocketSlatePlugin } from '@rocket-slate/editor';
 import { RenderElementOptions } from 'slate-plugins-next/dist/elements/types';
 import { RocketImageElement, IImageData } from './Image';
 

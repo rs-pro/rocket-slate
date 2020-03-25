@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Transforms } from 'slate';
 import { useSlate } from 'slate-react';
 import { isBlockActive, PARAGRAPH } from 'slate-plugins-next';
-import { RocketButtonBlock, RocketTooltip } from '@rocket-slate/core';
+import { RocketButtonBlock, RocketTooltip } from '@rocket-slate/editor';
 import { IconCheckList } from '@rocket-slate/icons';
 import { ACTION_ITEM } from './Plugin';
 

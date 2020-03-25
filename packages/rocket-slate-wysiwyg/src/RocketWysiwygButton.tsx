@@ -19,7 +19,7 @@ import {
   withButtonRef,
   RocketButtonBlock,
   RocketButtonMark
-} from '@rocket-slate/core';
+} from '@rocket-slate/editor';
 
 import { ToolbarFormatProps } from 'slate-plugins-next/dist/common/types';
 import {
