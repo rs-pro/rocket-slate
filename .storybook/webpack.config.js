@@ -10,7 +10,10 @@ module.exports = async ({ config, mode }) => {
 
   config.module.rules.push({
     test: /\.tsx?$/,
-    loader: "ts-loader"
+    loader: "ts-loader",
+    options: {
+      onlyCompileBundledFiles: true,
+    },
   });
   config.resolve.extensions.push('.ts', '.tsx');
 
