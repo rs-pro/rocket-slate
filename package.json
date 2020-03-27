@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "license": "MIT",
+  "version": "0.0.1",
   "scripts": {
     "prebuild--disabled": "run-p -c lint:*",
     "build": "lerna exec 'BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --config-file ../../babel.config.js --delete-dir-on-start --no-comments'",
