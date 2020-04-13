@@ -29,6 +29,7 @@ import {
   escapeHTML,
 } from '@rocket-slate/code';
 import { RocketSlateUploadPlugin, RocketSlateUploadButton, RocketSlateUploadProgress } from '@rocket-slate/upload';
+import { RocketSlateTablePlugin, RocketSlateTableButton } from '@rocket-slate/table'
 
 import editorStateNew from '../converter/editorStateNew.json';
 import editorStateOld from '../converter/editorStateOld.json';
@@ -90,6 +91,7 @@ storiesOf('Editor', module).add('default', () => {
       RocketSlateLinksPlugin(),
       RocketSlateImagePlugin(),
       RocketSlateCodeInlinePlugin(),
+      RocketSlateTablePlugin(),
       RocketSlateCodePlugin({
         highlight: (code, lang) => {
           if (lang !== undefined && languages[lang] !== undefined) {
@@ -177,6 +179,9 @@ storiesOf('Editor', module).add('default', () => {
             <RocketSlateLinksButton />
             <RocketSlateButtonImage />
             <RocketSlateUploadButton />
+          </RocketToolbarGroup>
+          <RocketToolbarGroup>
+            <RocketSlateTableButton />
           </RocketToolbarGroup>
         </RocketToolbar>
       }

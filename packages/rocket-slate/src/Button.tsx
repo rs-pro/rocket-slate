@@ -8,10 +8,12 @@ const baseStyleButton = css`
   display: inline-block;
   padding: 5px;
   min-width: 30px;
+  max-height: 30px;
   text-align: center;
   border: 1px solid currentColor;
   border-radius: 2px;
   box-sizing: border-box;
+  vertical-align: middle;
   > svg {
     display: inline-block;
     fill: currentColor;
