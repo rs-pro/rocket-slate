@@ -15,18 +15,18 @@
       },
       {
         "type": "mention",
-        "data": {
-          "id": 1,
-          "type": "user"
-        },
         "children": [
           {
-            "text": "User 1"
+            "text": "Святослав Пожидаев"
           }
-        ]
+        ],
+        "data": {
+          "id": 85,
+          "type": "user"
+        }
       },
       {
-        "text": ""
+        "text": " "
       }
     ]
   },
@@ -37,12 +37,7 @@
         "type": "list-item",
         "children": [
           {
-            "type": "paragraph",
-            "children": [
-              {
-                "text": "test"
-              }
-            ]
+            "text": "test"
           }
         ]
       },
@@ -50,12 +45,7 @@
         "type": "list-item",
         "children": [
           {
-            "type": "paragraph",
-            "children": [
-              {
-                "text": "test"
-              }
-            ]
+            "text": "test"
           }
         ]
       },
@@ -63,12 +53,7 @@
         "type": "list-item",
         "children": [
           {
-            "type": "paragraph",
-            "children": [
-              {
-                "text": "test"
-              }
-            ]
+            "text": "test"
           }
         ]
       }
@@ -81,12 +66,7 @@
         "type": "list-item",
         "children": [
           {
-            "type": "paragraph",
-            "children": [
-              {
-                "text": "test"
-              }
-            ]
+            "text": "test"
           }
         ]
       },
@@ -94,12 +74,7 @@
         "type": "list-item",
         "children": [
           {
-            "type": "paragraph",
-            "children": [
-              {
-                "text": "test"
-              }
-            ]
+            "text": "test"
           }
         ]
       },
@@ -107,12 +82,7 @@
         "type": "list-item",
         "children": [
           {
-            "type": "paragraph",
-            "children": [
-              {
-                "text": "sest"
-              }
-            ]
+            "text": "asdfasdfasd"
           }
         ]
       }
@@ -120,47 +90,47 @@
   },
   {
     "type": "check-list-item",
+    "children": [
+      {
+        "text": "test"
+      }
+    ],
     "data": {
       "checked": true
-    },
-    "children": [
-      {
-        "text": "test"
-      }
-    ]
+    }
   },
   {
     "type": "check-list-item",
-    "data": {
-      "checked": false
-    },
     "children": [
       {
         "text": "test"
       }
-    ]
+    ],
+    "data": {
+      "checked": true
+    }
   },
   {
     "type": "check-list-item",
-    "data": {
-      "checked": false
-    },
     "children": [
       {
         "text": "test"
       }
-    ]
+    ],
+    "data": {
+      "checked": true
+    }
   },
   {
     "type": "check-list-item",
-    "data": {
-      "checked": false
-    },
     "children": [
       {
         "text": "test"
       }
-    ]
+    ],
+    "data": {
+      "checked": true
+    }
   },
   {
     "type": "paragraph",
@@ -193,8 +163,8 @@
         "text": "text "
       },
       {
-        "text": "underline",
-        "underline": true
+        "text": "underline ",
+        "underlined": true
       }
     ]
   },
@@ -217,11 +187,8 @@
         "text": "text "
       },
       {
-        "text": "mix",
-        "bold": true,
-        "italic": true,
-        "underline": true,
-        "strikethrough": true
+        "text": "color",
+        "fg_color": "#e60000"
       }
     ]
   },
@@ -229,7 +196,28 @@
     "type": "paragraph",
     "children": [
       {
-        "text": ""
+        "text": "text "
+      },
+      {
+        "text": "bg color",
+        "bg_color": "#e60000"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "text "
+      },
+      {
+        "text": "mix",
+        "bold": true,
+        "italic": true,
+        "underlined": true,
+        "strikethrough": true,
+        "fg_color": "#ffff00",
+        "bg_color": "#e60000"
       }
     ]
   },
@@ -239,14 +227,6 @@
       {
         "text": "code inline",
         "code": true
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "children": [
-      {
-        "text": ""
       }
     ]
   },
@@ -298,14 +278,14 @@
       },
       {
         "type": "link",
-        "data": {
-          "url": "https://rtrack.ru/projects/zadachi-biez-proiekta/issues/678"
-        },
         "children": [
           {
             "text": "text link"
           }
-        ]
+        ],
+        "data": {
+          "url": "https://rtrack.ru/projects/zadachi-biez-proiekta/issues/678"
+        }
       },
       {
         "text": ""
@@ -322,15 +302,17 @@
   },
   {
     "type": "image",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
     "data": {
       "id": 8021,
-      "src": "https://rtrack.ru/files/8021/%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B2%D1%81%D1%82%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%BE%20%D0%B2%202020-1-22%2012-04%20(6).png"
-    },
-    "children": [
-      {
-        "text": ""
-      }
-    ]
+      "src": "/files/8021/Изображение вставлено в 2020-1-22 12-04 (6).png",
+      "name": "Изображение вставлено в 2020-1-22 12-04 (6).png",
+      "size": 292469
+    }
   },
   {
     "type": "paragraph",
@@ -343,34 +325,20 @@
   {
     "type": "paragraph",
     "children": [
-      {
-        "text": ""
-      },
       {
         "type": "link",
         "data": {
           "file": {
-            "id": 1,
+            "id": 8022,
             "size": 2547145
           },
-          "url": "blob:http://localhost:9009/9d2d125c-3aa5-4303-9d70-c2d935f90c19"
+          "url": "/files/8022/Новый интерфейс ЕЦОР. Спецификация Backend API_12я очередь (Прогнозы, формы запуска и результатов прогнозов) (1).docx"
         },
         "children": [
           {
             "text": "Новый интерфейс ЕЦОР. Спецификация Backend API_12я очередь (Прогнозы, формы запуска и результатов прогнозов) (1).docx"
           }
         ]
-      },
-      {
-        "text": ""
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "children": [
-      {
-        "text": ""
       }
     ]
   },
@@ -382,15 +350,106 @@
       },
       {
         "type": "link",
-        "data": {
-          "url": "https://rtrack.ru/projects/zadachi-biez-proiekta/issues/678"
-        },
         "children": [
           {
             "text": "https://rtrack.ru/projects/zadachi-biez-proiekta/issues/678"
           }
+        ],
+        "data": {
+          "url": "https://rtrack.ru/projects/zadachi-biez-proiekta/issues/678"
+        }
+      },
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "table",
+    "children": [
+      {
+        "type": "table-row",
+        "children": [
+          {
+            "type": "table-cell",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "head1"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "table-cell",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "head2"
+                  }
+                ]
+              }
+            ]
+          }
         ]
       },
+      {
+        "type": "table-row",
+        "children": [
+          {
+            "type": "table-cell",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "cell1"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "table-cell",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "cell2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
       {
         "text": ""
       }
