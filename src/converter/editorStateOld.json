@@ -144,7 +144,7 @@
   },
   {
     "data": {
-      "checked": false
+      "checked": true
     },
     "type": "check-list-item",
     "nodes": [
@@ -158,7 +158,7 @@
   },
   {
     "data": {
-      "checked": false
+      "checked": true
     },
     "type": "check-list-item",
     "nodes": [
@@ -172,7 +172,7 @@
   },
   {
     "data": {
-      "checked": false
+      "checked": true
     },
     "type": "check-list-item",
     "nodes": [
@@ -296,6 +296,60 @@
         "object": "text"
       },
       {
+        "text": "color",
+        "marks": [
+          {
+            "data": {
+              "color": "#e60000"
+            },
+            "type": "fg_color",
+            "object": "mark"
+          }
+        ],
+        "object": "text"
+      }
+    ],
+    "object": "block"
+  },
+  {
+    "data": {
+      "checked": false
+    },
+    "type": "paragraph",
+    "nodes": [
+      {
+        "text": "text ",
+        "marks": [],
+        "object": "text"
+      },
+      {
+        "text": "bg color",
+        "marks": [
+          {
+            "data": {
+              "color": "#e60000"
+            },
+            "type": "bg_color",
+            "object": "mark"
+          }
+        ],
+        "object": "text"
+      }
+    ],
+    "object": "block"
+  },
+  {
+    "data": {
+      "checked": false
+    },
+    "type": "paragraph",
+    "nodes": [
+      {
+        "text": "text ",
+        "marks": [],
+        "object": "text"
+      },
+      {
         "text": "mix",
         "marks": [
           {
@@ -316,6 +370,20 @@
           {
             "data": {},
             "type": "strikethrough",
+            "object": "mark"
+          },
+          {
+            "data": {
+              "color": "#ffff00"
+            },
+            "type": "fg_color",
+            "object": "mark"
+          },
+          {
+            "data": {
+              "color": "#e60000"
+            },
+            "type": "bg_color",
             "object": "mark"
           }
         ],
@@ -638,7 +706,7 @@
   {
     "data": {
       "id": 8022,
-      "url": "/files/8022/Новый интерфейс ЕЦОР. Спецификация Backend API_12я очередь (Прогнозы, формы запуска и результатов прогнозов) (1).docx",
+      "url": "https://rtrack.ru/files/8022/Новый интерфейс ЕЦОР. Спецификация Backend API_12я очередь (Прогнозы, формы запуска и результатов прогнозов) (1).docx",
       "name": "Новый интерфейс ЕЦОР. Спецификация Backend API_12я очередь (Прогнозы, формы запуска и результатов прогнозов) (1).docx",
       "size": 2547145
     },
@@ -651,17 +719,6 @@
       }
     ],
     "object": "block"
-  },
-  {
-    "data": {},
-    "type": "paragraph",
-    "nodes": [
-      {
-        "text": "",
-        "marks": [],
-        "object": "text"
-      }
-    ]
   },
   {
     "data": {},
@@ -686,18 +743,6 @@
         ],
         "object": "inline"
       },
-      {
-        "text": "",
-        "marks": [],
-        "object": "text"
-      }
-    ],
-    "object": "block"
-  },
-  {
-    "data": {},
-    "type": "paragraph",
-    "nodes": [
       {
         "text": "",
         "marks": [],

@@ -29,7 +29,8 @@ import {
   escapeHTML,
 } from '@rocket-slate/code';
 import { RocketSlateUploadPlugin, RocketSlateUploadButton, RocketSlateUploadProgress } from '@rocket-slate/upload';
-import { RocketSlateTablePlugin, RocketSlateTableButton } from '@rocket-slate/table'
+import { RocketSlateTablePlugin, RocketSlateTableButton } from '@rocket-slate/table';
+import { RocketSlateColorsPlugin, RocketSlateColorsButton } from '@rocket-slate/colors';
 
 import editorStateNew from '../converter/editorStateNew.json';
 import editorStateOld from '../converter/editorStateOld.json';
@@ -90,8 +91,9 @@ storiesOf('Editor', module).add('default', () => {
       RocketSlateMentionPlugin(),
       RocketSlateLinksPlugin(),
       RocketSlateImagePlugin(),
-      RocketSlateCodeInlinePlugin(),
       RocketSlateTablePlugin(),
+      RocketSlateColorsPlugin(),
+      RocketSlateCodeInlinePlugin(),
       RocketSlateCodePlugin({
         highlight: (code, lang) => {
           if (lang !== undefined && languages[lang] !== undefined) {
@@ -142,7 +144,7 @@ storiesOf('Editor', module).add('default', () => {
     }
   }, []);
 
-  const handlerChangeValue = useCallback((value) => {
+  const handlerChangeValue = useCallback(value => {
     // console.log('value', JSON.stringify(value));
     setValue(value);
   }, []);
@@ -165,6 +167,10 @@ storiesOf('Editor', module).add('default', () => {
             <RocketWysiwygButton format={RocketToolbarButtons.UNDERLINE} />
             <RocketWysiwygButton format={RocketToolbarButtons.STRIKETHROUGH} />
             <RocketWysiwygButton format={RocketToolbarButtons.BLOCKQUOTE} />
+          </RocketToolbarGroup>
+          <RocketToolbarGroup>
+            <RocketSlateColorsButton type="fg_color" />
+            <RocketSlateColorsButton type="bg_color" />
           </RocketToolbarGroup>
           <RocketToolbarGroup>
             <RocketWysiwygButton format={RocketToolbarButtons.UL} />

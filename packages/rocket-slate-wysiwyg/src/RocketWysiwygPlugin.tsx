@@ -1,6 +1,5 @@
-import React from 'react';
 import { Range } from 'slate';
-import { IResetOption, IRocketSlatePlugin} from '@rocket-slate/editor';
+import { IResetOption, IRocketSlatePlugin } from '@rocket-slate/editor';
 import {
   ParagraphPlugin,
   BlockquotePlugin,
@@ -18,7 +17,7 @@ import {
   StrikethroughPluginOptions,
   UnderlinePluginOptions,
   withList,
-  BLOCKQUOTE,
+  BLOCKQUOTE as BQ,
   withBreakEmptyReset,
   withDeleteStartReset,
 } from 'slate-plugins-next';
@@ -54,7 +53,7 @@ type WysiwygPluginsWithParams =
   | [WysiwygPluginTypes.UNDERLINE, UnderlinePluginOptions];
 
 const resetOptions: IResetOption = {
-  types: [BLOCKQUOTE],
+  types: [BQ],
 };
 
 const RocketWysiwygPlugin = (
@@ -113,12 +112,16 @@ const RocketWysiwygPlugin = (
         return undefined;
       },
       renderLeaf: (props) => {
-        pluginsInitialized.forEach(({ renderLeaf }) => {
+        const newProps = pluginsInitialized.reduce((accProps, { renderLeaf }) => {
           if (renderLeaf) {
-            props.children = renderLeaf(props);
+            return {
+              ...accProps,
+              children: renderLeaf(accProps),
+            };
           }
-        });
-        return props.children;
+          return accProps;
+        }, props);
+        return newProps.children;
       },
       onKeyDown: (event, editor) => {
         pluginsInitialized.forEach(({ onKeyDown }) => {
@@ -133,34 +136,33 @@ const RocketWysiwygPlugin = (
             (plugin.deserialize &&
               plugin.deserialize.element &&
               Object.entries(plugin.deserialize.element).reduce((elements, [elName, elFn]: [any, any]) => {
-                if (elements[elName]) {
-                  elements[elName] = (el) => ({
-                    ...elements[elName](el),
-                    ...elFn(el),
-                  });
-                } else {
-                  elements[elName] = elFn;
-                }
-                return elements;
+                return {
+                  ...elements,
+                  [elName]: elements[elName]
+                    ? (el) => ({
+                        ...elements[elName](el),
+                        ...elFn(el),
+                      })
+                    : elFn,
+                };
               }, deserializeAll.element || {})) ||
             deserializeAll.element,
           leaf:
             (plugin.deserialize &&
               plugin.deserialize.leaf &&
               Object.entries(plugin.deserialize.leaf).reduce((leaf, [elName, elFn]: [any, any]) => {
-                if (leaf[elName]) {
-                  leaf[elName] = (el) => ({
-                    ...leaf[elName](el),
-                    ...elFn(el),
-                  });
-                } else {
-                  leaf[elName] = elFn;
-                }
-                return leaf;
+                return {
+                  ...leaf,
+                  [elName]: leaf[elName]
+                    ? (el) => ({
+                        ...leaf[elName](el),
+                        ...elFn(el),
+                      })
+                    : elFn,
+                };
               }, deserializeAll.leaf || {})) ||
             deserializeAll.leaf,
         };
-        // tslint:disable-next-line:no-object-literal-type-assertion
       }, {} as DeserializeHtml),
     },
   };

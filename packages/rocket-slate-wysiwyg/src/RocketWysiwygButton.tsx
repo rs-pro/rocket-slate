@@ -9,8 +9,6 @@ import {
   BLOCKQUOTE as BQ,
   HeadingType,
   ListType,
-  ToolbarBlock,
-  ToolbarMark,
 } from 'slate-plugins-next';
 import {
   RocketTooltip,
@@ -18,7 +16,7 @@ import {
   withBaseStyleButton,
   withButtonRef,
   RocketButtonBlock,
-  RocketButtonMark
+  RocketButtonMark,
 } from '@rocket-slate/editor';
 
 import { ToolbarFormatProps } from 'slate-plugins-next/dist/common/types';

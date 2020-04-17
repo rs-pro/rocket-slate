@@ -57,7 +57,7 @@
       "@rocket-slate/icons/*": ["./packages/rocket-slate-icons/src/*"]
     }
   },
-  "exclude": ["node_modules", "**/dist/", "**/*.spec.ts", "**/*.stories.tsx"],
+  "exclude": ["node_modules", "**/dist/"],
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,
     "babelCore": "@babel/core"
