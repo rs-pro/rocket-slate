@@ -23,6 +23,8 @@ function covertData(node) {
 }
 
 function convertType(node) {
+  if (node.type === 'table_row') return 'table-row';
+  if (node.type === 'table_cell') return 'table-cell';
   if (node.type === 'file') {
     return 'paragraph';
   }

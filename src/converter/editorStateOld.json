@@ -677,7 +677,7 @@
   {
     "data": {
       "id": 8021,
-      "src": "https://rtrack.ru/files/8021/Изображение вставлено в 2020-1-22 12-04 (6).png",
+      "src": "/files/8021/Изображение вставлено в 2020-1-22 12-04 (6).png",
       "name": "Изображение вставлено в 2020-1-22 12-04 (6).png",
       "size": 292469
     },
@@ -706,7 +706,7 @@
   {
     "data": {
       "id": 8022,
-      "url": "https://rtrack.ru/files/8022/Новый интерфейс ЕЦОР. Спецификация Backend API_12я очередь (Прогнозы, формы запуска и результатов прогнозов) (1).docx",
+      "url": "/files/8022/Новый интерфейс ЕЦОР. Спецификация Backend API_12я очередь (Прогнозы, формы запуска и результатов прогнозов) (1).docx",
       "name": "Новый интерфейс ЕЦОР. Спецификация Backend API_12я очередь (Прогнозы, формы запуска и результатов прогнозов) (1).docx",
       "size": 2547145
     },
@@ -747,6 +747,127 @@
         "text": "",
         "marks": [],
         "object": "text"
+      }
+    ],
+    "object": "block"
+  },
+  {
+    "data": {},
+    "type": "paragraph",
+    "nodes": [
+      {
+        "text": "",
+        "marks": [],
+        "object": "text"
+      }
+    ],
+    "object": "block"
+  },
+  {
+    "data": {},
+    "type": "paragraph",
+    "nodes": [
+      {
+        "text": "",
+        "marks": [],
+        "object": "text"
+      }
+    ],
+    "object": "block"
+  },
+  {
+    "data": {},
+    "type": "table",
+    "nodes": [
+      {
+        "data": {},
+        "type": "table_row",
+        "nodes": [
+          {
+            "data": {},
+            "type": "table_cell",
+            "nodes": [
+              {
+                "data": {},
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "text": "head1",
+                    "marks": [],
+                    "object": "text"
+                  }
+                ],
+                "object": "block"
+              }
+            ],
+            "object": "block"
+          },
+          {
+            "data": {},
+            "type": "table_cell",
+            "nodes": [
+              {
+                "data": {},
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "text": "head2",
+                    "marks": [],
+                    "object": "text"
+                  }
+                ],
+                "object": "block"
+              }
+            ],
+            "object": "block"
+          }
+        ],
+        "object": "block"
+      },
+      {
+        "data": {},
+        "type": "table_row",
+        "nodes": [
+          {
+            "data": {},
+            "type": "table_cell",
+            "nodes": [
+              {
+                "data": {},
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "text": "cell1",
+                    "marks": [],
+                    "object": "text"
+                  }
+                ],
+                "object": "block"
+              }
+            ],
+            "object": "block"
+          },
+          {
+            "data": {},
+            "type": "table_cell",
+            "nodes": [
+              {
+                "data": {},
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "text": "cell2",
+                    "marks": [],
+                    "object": "text"
+                  }
+                ],
+                "object": "block"
+              }
+            ],
+            "object": "block"
+          }
+        ],
+        "object": "block"
       }
     ],
     "object": "block"
