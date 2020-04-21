@@ -7,18 +7,20 @@ import { SlatePlugin, EditablePlugins, ToggleBlockEditor } from 'slate-plugins-n
 
 import { useEditorWithPlugin, useHandlers } from './hooks';
 
+type eventList = Required<
+  Omit<React.DOMAttributes<HTMLDivElement>, 'children' | 'dangerouslySetInnerHTML' | 'onKeyDown'>
+>;
+
 export interface IRocketSlatePlugin {
   plugin?: SlatePlugin;
   withPlugin?: <T extends Editor & ReactEditor & HistoryEditor & ToggleBlockEditor>(editor: T) => T;
   handlers?: {
-    [eventName in keyof Omit<
-      React.DOMAttributes<HTMLDivElement>,
-      'children' | 'dangerouslySetInnerHTML' | 'onKeyDown'
-    >]: (
-      // @ts-ignore
-      event: Parameters<React.DOMAttributes<HTMLDivElement>[eventName]>[0],
+    [eventName in keyof eventList]: (
+      event: Required<React.DOMAttributes<HTMLDivElement>>[eventName] extends (...args: any) => any
+        ? Parameters<Required<React.DOMAttributes<HTMLDivElement>>[eventName]>[0]
+        : never,
       editor: Editor,
-    ) => void;
+    ) => void | undefined;
   };
 }
 

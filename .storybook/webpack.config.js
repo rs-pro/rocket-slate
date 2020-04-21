@@ -1,8 +1,8 @@
 const path = require('path');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-const tsConfig = require('../tsconfig');
+const configFilePath = path.resolve(__dirname, '..', 'tsconfig.json');
 
-// Export a function. Accept the base config as the only param.
 module.exports = async ({ config, mode }) => {
   // `mode` has a value of 'DEVELOPMENT' or 'PRODUCTION'
   // You can change the configuration based on that.
@@ -12,19 +12,14 @@ module.exports = async ({ config, mode }) => {
     test: /\.tsx?$/,
     loader: "ts-loader",
     options: {
+      configFile: configFilePath,
       onlyCompileBundledFiles: true,
     },
   });
-  config.resolve.extensions.push('.ts', '.tsx');
 
-  config.resolve.alias = {
-    ...config.resolve.alias,
-    '~': path.resolve(__dirname, '../src'),
-    ...Object
-      .entries(tsConfig.compilerOptions.paths)
-      .filter(([key, value]) => !key.includes('*') )
-      .reduce((aliases, [ alias, paths ]) => ({ ...aliases, [alias]: path.resolve(__dirname, '..', paths[0]) }), {})
-  }
+  config.resolve.extensions.push('.ts', '.tsx');
+  config.resolve.plugins = config.resolve.plugins || [];
+  config.resolve.plugins.push( new TsconfigPathsPlugin({ configFile: configFilePath }) );
 
   // Return the altered config
   return config;

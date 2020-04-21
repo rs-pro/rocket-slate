@@ -204,13 +204,13 @@ const RocketSlateMentionSelect = (props: RocketMentionSelect) => {
   const [target, setTarget] = useState();
   const [index, setIndex] = useState(0);
   const [search, setSearch] = useState('');
-  const [searchPrefix, setSearchPrefix] = useState();
+  const [searchPrefix, setSearchPrefix] = useState<string>();
 
   const beforeRegex = useMemo(() => new RegExp(`([${[prefix.join('|')]}])(\\w+$|$)`), prefix);
 
   useEffect(() => {
     if (target) {
-      if (onChangeSearch) {
+      if (onChangeSearch && searchPrefix) {
         onChangeSearch(search, searchPrefix);
       }
     }
