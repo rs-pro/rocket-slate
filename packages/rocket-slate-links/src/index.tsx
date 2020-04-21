@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import isUrl from 'is-url';
 import { Range, Transforms } from 'slate';
 import { RenderElementProps, useSlate } from 'slate-react';
-import { LinkPlugin, RenderElementOptions, isLinkActive, LINK, unwrapLink } from 'slate-plugins-next';
+import { getRenderElement, RenderElementOptions, isLinkActive, LINK, unwrapLink } from 'slate-plugins-next';
 import { RocketTooltip, RocketButtonBlock, IRocketSlatePlugin } from '@rocket-slate/editor';
 import { IconLink } from '@rocket-slate/icons';
 
@@ -62,18 +62,32 @@ const RocketSlateLinkElement = (props: RenderElementProps) => {
 
 const RocketSlateLinksPlugin = (options?: RenderElementOptions): IRocketSlatePlugin => {
   return {
-    plugin: LinkPlugin({
-      component: RocketSlateLinkElement,
-      ...options,
-    }),
-    withPlugin: (editor) => {
+    plugin: {
+      renderElement: getRenderElement({
+        type: LINK,
+        component: RocketSlateLinkElement,
+      })({
+        ...options,
+      }),
+      deserialize: {
+        element: {
+          A: el => ({
+            type: LINK,
+            data: {
+              url: el.getAttribute('href'),
+            },
+          }),
+        },
+      },
+    },
+    withPlugin: editor => {
       const { insertData, insertText, isInline } = editor;
 
-      editor.isInline = (element) => {
+      editor.isInline = element => {
         return element.type === LINK ? true : isInline(element);
       };
 
-      editor.insertText = (text) => {
+      editor.insertText = text => {
         if (text && isUrl(text)) {
           wrapLink(editor, { url: text });
         } else {
@@ -81,7 +95,7 @@ const RocketSlateLinksPlugin = (options?: RenderElementOptions): IRocketSlatePlu
         }
       };
 
-      editor.insertData = (data) => {
+      editor.insertData = data => {
         const text = data.getData('text/plain');
 
         if (text && isUrl(text)) {

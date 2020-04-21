@@ -19,7 +19,7 @@
     "@types/styled-components": "^4.4.3",
     "classnames": "^2.2.6",
     "re-resizable": "^6.1.1",
-    "slate-plugins-next": "^0.57.11",
+    "slate-plugins-next": "^0.57.12",
     "styled-components": "^5.0.1"
   },
   "peerDependencies": {

@@ -31,6 +31,7 @@ import {
 import { RocketSlateUploadPlugin, RocketSlateUploadButton, RocketSlateUploadProgress } from '@rocket-slate/upload';
 import { RocketSlateTablePlugin, RocketSlateTableButton } from '@rocket-slate/table';
 import { RocketSlateColorsPlugin, RocketSlateColorsButton } from '@rocket-slate/colors';
+import { RocketSlatePastHtmlPlugin } from '@rocket-slate/paste-html';
 
 import editorStateNew from '../converter/editorStateNew.json';
 import editorStateOld from '../converter/editorStateOld.json';
@@ -84,15 +85,12 @@ const fakeProgress = (duration, onProgress, onComplete) => {
 };
 
 storiesOf('Editor', module).add('default', () => {
-  const plugins = useMemo(
-    () => [
+  const plugins = useMemo(() => {
+    const pluginWithDeserialize = [
       RocketWysiwygPlugin(),
-      RocketSlateChecklistPlugin(),
-      RocketSlateMentionPlugin(),
-      RocketSlateLinksPlugin(),
       RocketSlateImagePlugin(),
       RocketSlateTablePlugin(),
-      RocketSlateColorsPlugin(),
+      RocketSlateLinksPlugin(),
       RocketSlateCodeInlinePlugin(),
       RocketSlateCodePlugin({
         highlight: (code, lang) => {
@@ -103,6 +101,14 @@ storiesOf('Editor', module).add('default', () => {
         },
         languages: languagesList,
       }),
+    ];
+
+    return [
+      RocketSlatePastHtmlPlugin(pluginWithDeserialize),
+      ...pluginWithDeserialize,
+      RocketSlateChecklistPlugin(),
+      RocketSlateMentionPlugin(),
+      RocketSlateColorsPlugin(),
       RocketSlateUploadPlugin({
         onInsertFile: (file, onComplete, onError, onProgress) => {
           fakeProgress(1000 + Math.random() * (5000 - 1000), onProgress, () => {
@@ -111,9 +117,8 @@ storiesOf('Editor', module).add('default', () => {
           });
         },
       }),
-    ],
-    [],
-  );
+    ];
+  }, []);
 
   const initialState = useMemo(() => {
     return convertSlateState47toRocketSlate(editorStateOld) || editorStateNew || initialValue;
