@@ -1,5 +1,5 @@
 {
-  "name": "@rocket-slate/markdown-shortcuts",
+  "name": "@rocket-slate/markdown",
   "version": "0.1.0",
   "description": "RocketSlate - markdown shortcuts",
   "main": "dist/index.js",
@@ -14,12 +14,14 @@
     "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments"
   },
   "dependencies": {
+    "@rocket-slate/editor": "^0.1.0",
     "@types/styled-components": "^4.4.3",
     "classnames": "^2.2.6",
     "is-url": "^1.2.2",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "slate": "0.57.1",
+    "slate-plugins-next": "^0.57.12",
     "styled-components": "^5.0.1"
   },
   "peerDependencies": {

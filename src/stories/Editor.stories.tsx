@@ -32,6 +32,7 @@ import { RocketSlateUploadPlugin, RocketSlateUploadButton, RocketSlateUploadProg
 import { RocketSlateTablePlugin, RocketSlateTableButton } from '@rocket-slate/table';
 import { RocketSlateColorsPlugin, RocketSlateColorsButton } from '@rocket-slate/colors';
 import { RocketSlatePastHtmlPlugin } from '@rocket-slate/paste-html';
+import { RocketSlateMarkdownShortcutsPlugin, RocketSlateMarkdownPastePlugin } from '@rocket-slate/markdown';
 
 import editorStateNew from '../converter/editorStateNew.json';
 import editorStateOld from '../converter/editorStateOld.json';
@@ -105,7 +106,9 @@ storiesOf('Editor', module).add('default', () => {
 
     return [
       RocketSlatePastHtmlPlugin(pluginWithDeserialize),
+      RocketSlateMarkdownPastePlugin(pluginWithDeserialize),
       ...pluginWithDeserialize,
+      RocketSlateMarkdownShortcutsPlugin(),
       RocketSlateChecklistPlugin(),
       RocketSlateMentionPlugin(),
       RocketSlateColorsPlugin(),
