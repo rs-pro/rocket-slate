@@ -53,6 +53,7 @@ module.exports = {
   "rules": {
     "react/jsx-wrap-multilines": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts",".tsx"] }],
+    "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "error",
     // https://stackoverflow.com/questions/59265981/typescript-eslint-missing-file-extension-ts-import-extensions#answer-59268871

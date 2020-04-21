@@ -33,6 +33,7 @@ import { RocketSlateTablePlugin, RocketSlateTableButton } from '@rocket-slate/ta
 import { RocketSlateColorsPlugin, RocketSlateColorsButton } from '@rocket-slate/colors';
 import { RocketSlatePastHtmlPlugin } from '@rocket-slate/paste-html';
 import { RocketSlateMarkdownShortcutsPlugin, RocketSlateMarkdownPastePlugin } from '@rocket-slate/markdown';
+import { RocketSlateAlignmentPlugin, RocketSlateAlignmentButton } from '@rocket-slate/alignment';
 
 import editorStateNew from '../converter/editorStateNew.json';
 import editorStateOld from '../converter/editorStateOld.json';
@@ -93,6 +94,7 @@ storiesOf('Editor', module).add('default', () => {
       RocketSlateTablePlugin(),
       RocketSlateLinksPlugin(),
       RocketSlateCodeInlinePlugin(),
+      RocketSlateAlignmentPlugin(),
       RocketSlateCodePlugin({
         highlight: (code, lang) => {
           if (lang !== undefined && languages[lang] !== undefined) {
@@ -175,6 +177,11 @@ storiesOf('Editor', module).add('default', () => {
             <RocketWysiwygButton format={RocketToolbarButtons.UNDERLINE} />
             <RocketWysiwygButton format={RocketToolbarButtons.STRIKETHROUGH} />
             <RocketWysiwygButton format={RocketToolbarButtons.BLOCKQUOTE} />
+          </RocketToolbarGroup>
+          <RocketToolbarGroup>
+            <RocketSlateAlignmentButton type="left" />
+            <RocketSlateAlignmentButton type="center" />
+            <RocketSlateAlignmentButton type="right" />
           </RocketToolbarGroup>
           <RocketToolbarGroup>
             <RocketSlateColorsButton type="fg_color" />

@@ -1,0 +1,34 @@
+{
+  "name": "@rocket-slate/alignment",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "",
+  "homepage": "https://github.com/rs-pro/rocket-slate#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "src": "src"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rs-pro/rocket-slate.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/rs-pro/rocket-slate/issues"
+  },
+  "dependencies": {
+    "@rocket-slate/editor": "^0.1.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "slate-plugins-next": "^0.57.12"
+  }
+}

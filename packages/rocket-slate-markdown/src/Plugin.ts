@@ -3,7 +3,10 @@ import { IRocketSlatePlugin } from '@rocket-slate/editor';
 
 export const RocketSlateMarkdownShortcutsPlugin = (): IRocketSlatePlugin => {
   return {
-    withPlugin: editor => withShortcuts(editor),
+    withPlugin: editor => {
+      const editorWithMd = withShortcuts(editor);
+      return withShortcuts(editor);
+    },
   };
 };
 
