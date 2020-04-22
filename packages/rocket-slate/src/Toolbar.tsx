@@ -1,11 +1,11 @@
-import React from 'react';
 import { Toolbar } from 'slate-plugins-next';
 import styled from 'styled-components';
 
 const RocketToolbar = styled(Toolbar)`
   padding: 10px;
   height: auto;
-  border-bottom: 2px solid #ccc;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
   > * + * {
     margin-left: 0;
   }

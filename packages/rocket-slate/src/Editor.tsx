@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import classNames from 'classnames';
+import { StickyContainer, Sticky } from 'react-sticky';
 import { Editor, Node } from 'slate';
 import { ReactEditor, Slate } from 'slate-react';
 import { HistoryEditor } from 'slate-history';
@@ -38,10 +40,11 @@ export interface IRocketSlateEditorProps {
   onChange?: (value: Node[]) => void;
   before?: React.ReactNode;
   after?: React.ReactNode;
+  toolbar?: React.ReactNode;
 }
 
-const RocketSlateWrapper = styled.div`
-  border: 1px solid #ccc;
+const RocketSlateWrapper = styled.div<{ readOnly?: boolean }>`
+  border: ${props => (props.readOnly ? 'none' : '1px solid #ccc')};
   border-radius: 2px;
 `;
 
@@ -49,7 +52,7 @@ type EditablePluginsProps = React.ComponentProps<typeof EditablePlugins>;
 const RocketSlateEditable: React.FunctionComponent<EditablePluginsProps> = styled(EditablePlugins)<
   EditablePluginsProps
 >`
-  padding: 10px;
+  padding: ${props => (props.readOnly ? '0' : '10px')};
 `;
 
 export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
@@ -61,6 +64,7 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
   onChange,
   before,
   after,
+  toolbar,
 }) => {
   const [editorValue, setValue] = useState(value);
   useEffect(() => {
@@ -71,7 +75,7 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
   const handlers = useHandlers(plugins, editor);
   const slatePlugins = useMemo(() => plugins.filter(({ plugin }) => plugin).map(({ plugin }) => plugin), plugins);
 
-  const handlerChangeValueEditor = useCallback((value) => {
+  const handlerChangeValueEditor = useCallback(value => {
     setValue(value);
     if (onChange) {
       onChange(value);
@@ -79,17 +83,33 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
   }, []);
 
   return (
-    <RocketSlateWrapper className={`RocketSlate ${className || ''}`}>
+    <RocketSlateWrapper
+      className={classNames('RocketSlate', className, { 'RocketSlate--Readonly': readOnly })}
+      readOnly={readOnly}
+    >
       <Slate editor={editor} value={editorValue} onChange={handlerChangeValueEditor}>
-        {before}
-        <RocketSlateEditable
-          className="RocketSlate__Editor"
-          plugins={slatePlugins}
-          placeholder={placeholder}
-          readOnly={readOnly}
-          {...handlers}
-        />
-        {after}
+        <StickyContainer className="RocketSlate__Container">
+          {!readOnly && (
+            <>
+              <Sticky className="RocketSlate__StickyToolbar">
+                {({ style }) => (
+                  <div style={{ ...style, zIndex: 1 }} className="RocketSlate__Toolbar">
+                    {toolbar}
+                  </div>
+                )}
+              </Sticky>
+              {before && <div className="RocketSlate__EditorBefore">{before}</div>}
+            </>
+          )}
+          <RocketSlateEditable
+            className="RocketSlate__Editor"
+            plugins={slatePlugins}
+            placeholder={placeholder}
+            readOnly={readOnly}
+            {...handlers}
+          />
+          {!readOnly && before && <div className="RocketSlate__EditorAfter">{after}</div>}
+        </StickyContainer>
       </Slate>
     </RocketSlateWrapper>
   );
