@@ -1,18 +1,71 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { Editor, Transforms } from 'slate';
 import { useSlate } from 'slate-react';
+import { isBlockActive } from 'slate-plugins-next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
 import { RocketTooltip, RocketButton } from '@rocket-slate/editor';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ALIGNMENT } from './Plugin';
 
-export const RocketSlateAlignmentButton: React.FC<{ type: 'left' | 'center' | 'right' }> = () => {
-  const editor = useSlate();
-  const handlerMouseDownLinkButton = useCallback((event: React.MouseEvent<any>) => {
+type AlignType = 'justify' | 'left' | 'center' | 'right';
 
-  }, [editor]);
+const getIcon = (type: AlignType) => {
+  if (type === 'center') return <FontAwesomeIcon icon={faAlignCenter} />;
+  if (type === 'right') return <FontAwesomeIcon icon={faAlignRight} />;
+  if (type === 'left') return <FontAwesomeIcon icon={faAlignLeft} />;
+  if (type === 'justify') return <FontAwesomeIcon icon={faAlignJustify} />;
+  return null;
+};
+
+const isAlignActive = (editor, align: AlignType) => {
+  const [match] = Editor.nodes(editor, {
+    match: node => {
+      return node.type === ALIGNMENT && node.data.align === align;
+    },
+    mode: 'all',
+  });
+  return !!match;
+};
+
+const unwrapAlignment = (editor: Editor) => {
+  Transforms.unwrapNodes(editor, {
+    match: node => node.type === ALIGNMENT,
+  });
+};
+
+const toggleAlign = (editor: Editor, align: AlignType) => {
+  if (isAlignActive(editor, align)) {
+    unwrapAlignment(editor);
+  } else {
+    if (isBlockActive(editor, ALIGNMENT)) {
+      unwrapAlignment(editor);
+    }
+    Transforms.wrapNodes(editor, {
+      type: ALIGNMENT,
+      data: { align },
+      children: [],
+    });
+  }
+};
+
+const getTitle = (type: AlignType) => {
+  if (type === 'center') return 'Выравнивание по центру';
+  if (type === 'right') return 'Выравнивание по правому краю';
+  if (type === 'left') return 'Выравнивание по левому краю';
+  if (type === 'justify') return 'Выравнивание по ширине';
+  return 'title';
+};
+
+export const RocketSlateAlignmentButton: React.FC<{ type: 'justify' | 'left' | 'center' | 'right' }> = ({ type }) => {
+  const editor = useSlate();
+  const handlerMouseDownLinkButton = () => toggleAlign(editor, type);
   return (
-    <RocketTooltip title="Выравнивание текста">
-      <RocketButton icon={<div />} onMouseDown={handlerMouseDownLinkButton} />
+    <RocketTooltip title={getTitle(type)}>
+      <RocketButton
+        icon={getIcon(type)}
+        active={isAlignActive(editor, type)}
+        onMouseDown={handlerMouseDownLinkButton}
+      />
     </RocketTooltip>
   );
 };

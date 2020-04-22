@@ -155,7 +155,6 @@ storiesOf('Editor', module).add('default', () => {
   }, []);
 
   const handlerChangeValue = useCallback(value => {
-    // console.log('value', JSON.stringify(value));
     setValue(value);
   }, []);
 
@@ -182,6 +181,7 @@ storiesOf('Editor', module).add('default', () => {
             <RocketSlateAlignmentButton type="left" />
             <RocketSlateAlignmentButton type="center" />
             <RocketSlateAlignmentButton type="right" />
+            <RocketSlateAlignmentButton type="justify" />
           </RocketToolbarGroup>
           <RocketToolbarGroup>
             <RocketSlateColorsButton type="fg_color" />

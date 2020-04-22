@@ -26,9 +26,12 @@
     "url": "https://github.com/rs-pro/rocket-slate/issues"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/react-fontawesome": "^0.1.9",
     "@rocket-slate/editor": "^0.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "slate": "0.57.1",
     "slate-plugins-next": "^0.57.12"
   }
 }
