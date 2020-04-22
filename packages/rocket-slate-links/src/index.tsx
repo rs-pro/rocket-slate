@@ -6,6 +6,8 @@ import { getRenderElement, RenderElementOptions, isLinkActive, LINK, unwrapLink 
 import { RocketTooltip, RocketButtonBlock, IRocketSlatePlugin } from '@rocket-slate/editor';
 import { IconLink } from '@rocket-slate/icons';
 
+import locale from './locales';
+
 export { unwrapLink };
 
 export const wrapLink = (editor, { url, file }: { url: string; file?: any }) => {
@@ -83,6 +85,8 @@ const RocketSlateLinksPlugin = (options?: RenderElementOptions): IRocketSlatePlu
     withPlugin: editor => {
       const { insertData, insertText, isInline } = editor;
 
+      editor.addLocale(locale);
+
       editor.isInline = element => {
         return element.type === LINK ? true : isInline(element);
       };
@@ -115,7 +119,7 @@ const RocketSlateLinksButton = () => {
   const handlerMouseDownLinkButton = useCallback(
     (event: React.MouseEvent<any>) => {
       event.preventDefault();
-      const url = window.prompt('Enter the URL of the link:');
+      const url = window.prompt(editor.getLocale('links.msg.add_url'));
       if (!url) {
         return;
       }
@@ -124,7 +128,7 @@ const RocketSlateLinksButton = () => {
     [editor],
   );
   return (
-    <RocketTooltip title="Добавить ссылку">
+    <RocketTooltip title={editor.getLocale('links.btns.links_add')}>
       <RocketButtonBlock icon={<IconLink />} format={LINK} onMouseDown={handlerMouseDownLinkButton} />
     </RocketTooltip>
   );

@@ -48,19 +48,12 @@ const toggleAlign = (editor: Editor, align: AlignType) => {
   }
 };
 
-const getTitle = (type: AlignType) => {
-  if (type === 'center') return 'Выравнивание по центру';
-  if (type === 'right') return 'Выравнивание по правому краю';
-  if (type === 'left') return 'Выравнивание по левому краю';
-  if (type === 'justify') return 'Выравнивание по ширине';
-  return 'title';
-};
 
 export const RocketSlateAlignmentButton: React.FC<{ type: 'justify' | 'left' | 'center' | 'right' }> = ({ type }) => {
   const editor = useSlate();
   const handlerMouseDownLinkButton = () => toggleAlign(editor, type);
   return (
-    <RocketTooltip title={getTitle(type)}>
+    <RocketTooltip title={editor.getLocale(`alignment.btns.${type}`)}>
       <RocketButton
         icon={getIcon(type)}
         active={isAlignActive(editor, type)}

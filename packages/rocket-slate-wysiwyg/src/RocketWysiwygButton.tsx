@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-
+import { useSlate } from 'slate-react';
 import {
   ToolbarList,
   MARK_BOLD,
@@ -53,34 +53,36 @@ export enum RocketToolbarButtons {
 }
 
 const RocketButtonIcons = {
-  [RocketToolbarButtons.BOLD]: { icon: IconBold, title: 'Полужирный' },
-  [RocketToolbarButtons.ITALIC]: { icon: IconItalic, title: 'Курсив' },
-  [RocketToolbarButtons.STRIKETHROUGH]: { icon: IconStrike, title: 'Перечеркнутый' },
-  [RocketToolbarButtons.UNDERLINE]: { icon: IconUnderline, title: 'Подчеркнутый' },
-  [RocketToolbarButtons.BLOCKQUOTE]: { icon: IconQuote, title: 'Цитата' },
-  [RocketToolbarButtons.UL]: { icon: IconListBulleted, title: 'Не нумерованый список' },
-  [RocketToolbarButtons.OL]: { icon: IconListNumbered, title: 'Нумерованый список' },
-  [RocketToolbarButtons.H1]: { icon: IconH1, title: 'Заголовок 1' },
-  [RocketToolbarButtons.H2]: { icon: IconH2, title: 'Заголовок 2' },
-  [RocketToolbarButtons.H3]: { icon: IconH3, title: 'Заголовок 3' },
-  [RocketToolbarButtons.H4]: { icon: IconH4, title: 'Заголовок 4' },
-  [RocketToolbarButtons.H5]: { icon: IconH5, title: 'Заголовок 5' },
-  [RocketToolbarButtons.H6]: { icon: IconH6, title: 'Заголовок 6' },
+  [RocketToolbarButtons.BOLD]: { icon: IconBold, locale: 'wysiwyg.btns.bold' },
+  [RocketToolbarButtons.ITALIC]: { icon: IconItalic, locale: 'wysiwyg.btns.italic' },
+  [RocketToolbarButtons.STRIKETHROUGH]: { icon: IconStrike, locale: 'wysiwyg.btns.strikethrough' },
+  [RocketToolbarButtons.UNDERLINE]: { icon: IconUnderline, locale: 'wysiwyg.btns.underline' },
+  [RocketToolbarButtons.BLOCKQUOTE]: { icon: IconQuote, locale: 'wysiwyg.btns.blockquote' },
+  [RocketToolbarButtons.UL]: { icon: IconListBulleted, locale: 'wysiwyg.btns.ul' },
+  [RocketToolbarButtons.OL]: { icon: IconListNumbered, locale: 'wysiwyg.btns.ol' },
+  [RocketToolbarButtons.H1]: { icon: IconH1, locale: 'wysiwyg.btns.h1' },
+  [RocketToolbarButtons.H2]: { icon: IconH2, locale: 'wysiwyg.btns.h2' },
+  [RocketToolbarButtons.H3]: { icon: IconH3, locale: 'wysiwyg.btns.h3' },
+  [RocketToolbarButtons.H4]: { icon: IconH4, locale: 'wysiwyg.btns.h4' },
+  [RocketToolbarButtons.H5]: { icon: IconH5, locale: 'wysiwyg.btns.h5' },
+  [RocketToolbarButtons.H6]: { icon: IconH6, locale: 'wysiwyg.btns.h6' },
 };
 
 interface IRocketToolbarButtonProps {
   format: RocketToolbarButtons | string;
   icon?: ReactNode;
-  title?: string;
 }
 
 const RocketWysiwygButtonList: React.FC<ToolbarFormatProps> = withButtonRef(
   withBaseStyleButton<ToolbarFormatProps>(ToolbarList),
 );
 
-const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = (props) => {
-  const { format, icon, title, ...restProps } = props;
-  const { icon: Icon, title: defaultTitle } = RocketButtonIcons[format];
+const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = props => {
+  const editor = useSlate();
+  const { format, icon, ...restProps } = props;
+  const { icon: Icon, locale } = RocketButtonIcons[format];
+  const title = editor.getLocale(locale);
+
   switch (format) {
     case RocketToolbarButtons.H1:
     case RocketToolbarButtons.H2:
@@ -90,7 +92,7 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.H6:
     case RocketToolbarButtons.BLOCKQUOTE: {
       return (
-        <RocketTooltip title={title || defaultTitle}>
+        <RocketTooltip title={title}>
           <RocketButtonBlock format={(format as unknown) as string} icon={<Icon />} {...restProps} />
         </RocketTooltip>
       );
@@ -100,7 +102,7 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.UNDERLINE:
     case RocketToolbarButtons.STRIKETHROUGH: {
       return (
-        <RocketTooltip title={title || defaultTitle}>
+        <RocketTooltip title={title}>
           <RocketButtonMark format={(format as unknown) as string} icon={<Icon />} {...restProps} />
         </RocketTooltip>
       );
@@ -108,14 +110,14 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.OL:
     case RocketToolbarButtons.UL: {
       return (
-        <RocketTooltip title={title || defaultTitle}>
+        <RocketTooltip title={title}>
           <RocketWysiwygButtonList format={(format as unknown) as string} icon={<Icon />} {...restProps} />
         </RocketTooltip>
       );
     }
     default:
       return (
-        <RocketTooltip title={title || ''}>
+        <RocketTooltip title="">
           <RocketButton format={(format as unknown) as string} icon={icon} {...restProps} />
         </RocketTooltip>
       );

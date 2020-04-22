@@ -3,6 +3,8 @@ import { RenderElementProps } from 'slate-react';
 import { getRenderElement, RenderElementOptions } from 'slate-plugins-next';
 import { IRocketSlatePlugin } from '@rocket-slate/editor';
 
+import locale from './locales';
+
 export const ALIGNMENT = 'alignment';
 
 const ReactSlateAlignmentElement = (props: RenderElementProps) => {
@@ -19,6 +21,10 @@ const ReactSlateAlignmentElement = (props: RenderElementProps) => {
 
 export const RocketSlateAlignmentPlugin = (options?: RenderElementOptions): IRocketSlatePlugin => {
   return {
+    withPlugin: editor => {
+      editor.addLocale(locale);
+      return editor;
+    },
     plugin: {
       renderElement: getRenderElement({
         type: ALIGNMENT,

@@ -22,6 +22,7 @@ import {
   withDeleteStartReset,
 } from 'slate-plugins-next';
 import { DeserializeHtml } from 'slate-plugins-next/dist/paste-html/types';
+import locals from './locales';
 
 enum WysiwygPluginTypes {
   BLOCKQUOTE = 'blockquote',
@@ -69,7 +70,7 @@ const RocketWysiwygPlugin = (
 ): IRocketSlatePlugin => {
   const pluginsInitialized = [
     ParagraphPlugin(),
-    ...plugins.map((option) => {
+    ...plugins.map(option => {
       if (Array.isArray(option)) {
         return WysiwygPlugins[option[0]](option[1]);
       }
@@ -77,7 +78,8 @@ const RocketWysiwygPlugin = (
     }),
   ];
   return {
-    withPlugin: (editor) => {
+    withPlugin: editor => {
+      editor.addLocale(locals);
       return withList(withBreakEmptyReset(resetOptions)(withDeleteStartReset(resetOptions)(editor)));
     },
     plugin: {
@@ -88,7 +90,7 @@ const RocketWysiwygPlugin = (
           }
         });
       },
-      decorate: (entry) => {
+      decorate: entry => {
         let ranges: Range[] = [];
         pluginsInitialized.forEach(({ decorate }) => {
           if (decorate) {
@@ -100,7 +102,7 @@ const RocketWysiwygPlugin = (
         });
         return ranges;
       },
-      renderElement: (props) => {
+      renderElement: props => {
         let element;
         pluginsInitialized.some(({ renderElement }) => {
           element = renderElement && renderElement(props);
@@ -111,7 +113,7 @@ const RocketWysiwygPlugin = (
         }
         return undefined;
       },
-      renderLeaf: (props) => {
+      renderLeaf: props => {
         const newProps = pluginsInitialized.reduce((accProps, { renderLeaf }) => {
           if (renderLeaf) {
             return {
@@ -139,7 +141,7 @@ const RocketWysiwygPlugin = (
                 return {
                   ...elements,
                   [elName]: elements[elName]
-                    ? (el) => ({
+                    ? el => ({
                         ...elements[elName](el),
                         ...elFn(el),
                       })
@@ -154,7 +156,7 @@ const RocketWysiwygPlugin = (
                 return {
                   ...leaf,
                   [elName]: leaf[elName]
-                    ? (el) => ({
+                    ? el => ({
                         ...leaf[elName](el),
                         ...elFn(el),
                       })

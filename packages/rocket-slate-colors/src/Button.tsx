@@ -77,12 +77,6 @@ const ColorIcon: React.FC<{ type: ColorType }> = ({ type }) => {
   return null;
 };
 
-const getTitle = (type: ColorType) => {
-  if (type === 'bg_color') return 'Цвет фона';
-  if (type === 'fg_color') return 'Цвет текста';
-  return 'color';
-};
-
 export const RocketSlateColorsButton: React.FC<{ type: ColorType }> = ({ type }) => {
   const editor = useSlate();
   const [isShow, setShow] = useState(false);
@@ -93,7 +87,7 @@ export const RocketSlateColorsButton: React.FC<{ type: ColorType }> = ({ type })
   useOutsideAlerter(wrapperRef, () => setShow(false));
   return (
     <ButtonWrap className="RocketSlateColorButton" ref={wrapperRef}>
-      <RocketTooltip title={getTitle(type)}>
+      <RocketTooltip title={editor.getLocale(`colors.btns.${type}`)}>
         <RocketButton
           className="RocketSlateColorButton__Mark"
           icon={<ColorIcon type={type} />}

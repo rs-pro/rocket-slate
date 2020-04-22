@@ -1,10 +1,12 @@
 import React, { useCallback } from 'react';
+import { Transforms } from 'slate';
 import { ReactEditor, RenderElementProps, useSlate } from 'slate-react';
 import { getRenderElement, SlatePlugin, withBreakEmptyReset, withDeleteStartReset } from 'slate-plugins-next';
 import { RenderElementOptions } from 'slate-plugins-next/dist/elements/types';
 import { IRocketSlatePlugin } from '@rocket-slate/editor';
 import { ActionItemElement, ActionItemProps } from './Element';
-import { Transforms } from 'slate';
+
+import locale from './locales';
 
 const ACTION_ITEM = 'check-list-item';
 
@@ -22,7 +24,7 @@ const ActionItemPlugin = (options: { component?: React.ComponentType<ActionItemP
         const { element } = props;
         const editor = useSlate();
         const handlerChangeChecked: React.EventHandler<React.ChangeEvent<any>> = useCallback(
-          (e) => {
+          e => {
             const path = ReactEditor.findPath(editor, element);
             Transforms.setNodes(editor, { data: { checked: e.target.checked } }, { at: path });
           },
@@ -34,9 +36,10 @@ const ActionItemPlugin = (options: { component?: React.ComponentType<ActionItemP
   };
 };
 
-const RocketSlateChecklistPlugin: (options?: RenderElementOptions) => IRocketSlatePlugin = (options) => ({
+const RocketSlateChecklistPlugin: (options?: RenderElementOptions) => IRocketSlatePlugin = options => ({
   plugin: ActionItemPlugin(options),
-  withPlugin: (editor) => {
+  withPlugin: editor => {
+    editor.addLocale(locale);
     return withBreakEmptyReset(resetOptions)(withDeleteStartReset(resetOptions)(editor));
   },
 });

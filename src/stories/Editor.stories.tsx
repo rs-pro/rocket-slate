@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-markup';
@@ -38,6 +38,8 @@ import { RocketSlateAlignmentPlugin, RocketSlateAlignmentButton } from '@rocket-
 import editorStateNew from '../converter/editorStateNew.json';
 import editorStateOld from '../converter/editorStateOld.json';
 import { convertSlateState47toRocketSlate } from '../converter';
+
+import locales from './locales';
 
 const fakeUser: IMention[] = [
   { id: 1, text: 'User 1', type: 'user' },
@@ -169,6 +171,8 @@ export const Example = () => {
       value={editorValue}
       onChange={handlerChangeValue}
       readOnly={boolean('readOnly', false)}
+      locale={select('Language', { ru: 'ru', en: 'en', other: 'other' }, 'ru')}
+      i18n={locales}
       toolbar={
         <RocketToolbar>
           <RocketToolbarGroup>

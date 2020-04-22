@@ -28,7 +28,7 @@ const SelectWrap = styled.div`
 
 const escapeEl = document.createElement('textarea');
 
-export const escapeHTML = (html) => {
+export const escapeHTML = html => {
   escapeEl.textContent = html;
   return escapeEl.innerHTML;
 };
@@ -56,7 +56,7 @@ export const RocketSlateCodeBlock = (props: RenderElementProps & IHighlights) =>
   }, [text]);
 
   const handlerChangeCode = useCallback(
-    (code) => {
+    code => {
       setCode(code);
       const at = Editor.range(editor, pathElement);
       const { path, offset } = at.anchor;
@@ -80,7 +80,7 @@ export const RocketSlateCodeBlock = (props: RenderElementProps & IHighlights) =>
   const handlerHighlight = useCallback(() => highlitedCode, [highlitedCode]);
 
   const handlerChangeSelect = useCallback(
-    (e) => {
+    e => {
       Transforms.setNodes(editor, { lang: e.target.value }, { at: pathElement });
     },
     [pathElement],
@@ -98,10 +98,10 @@ export const RocketSlateCodeBlock = (props: RenderElementProps & IHighlights) =>
       {languages && !isReadonly && (
         <SelectWrap>
           <select value={lang} defaultValue="" onChange={handlerChangeSelect}>
-            <option disabled={true} value="">
-              Выберите язык
+            <option disabled value="">
+              {editor.getLocale('code.element.select')}
             </option>
-            {languages.map((item) => (
+            {languages.map(item => (
               <option key={item.value} value={item.value}>
                 {item.label}
               </option>

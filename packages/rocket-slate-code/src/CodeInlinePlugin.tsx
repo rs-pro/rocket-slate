@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { InlineCodePlugin, MARK_CODE } from 'slate-plugins-next';
-import { IRocketSlatePlugin } from '@rocket-slate/editor/Editor';
+import { IRocketSlatePlugin } from '@rocket-slate/editor';
 import { InlineCodePluginOptions } from 'slate-plugins-next/dist/marks/inline-code/types';
+
+import locale from './locales';
 
 const CodeInline = styled.code`
   font-family: monospace;
@@ -16,6 +18,10 @@ const CodeInline = styled.code`
 
 const RocketSlateCodeInlinePlugin = (options?: InlineCodePluginOptions): IRocketSlatePlugin => {
   return {
+    withPlugin: editor => {
+      editor.addLocale(locale);
+      return editor;
+    },
     plugin: {
       ...InlineCodePlugin(options),
       renderLeaf: ({ leaf, children }) => {

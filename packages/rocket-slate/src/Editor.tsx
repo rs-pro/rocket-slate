@@ -2,46 +2,10 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import classNames from 'classnames';
 import { StickyContainer, Sticky } from 'react-sticky';
-import { Editor, Node } from 'slate';
-import { ReactEditor, Slate } from 'slate-react';
-import { HistoryEditor } from 'slate-history';
-import { SlatePlugin, EditablePlugins, ToggleBlockEditor } from 'slate-plugins-next';
-
+import { Slate } from 'slate-react';
+import { EditablePlugins } from 'slate-plugins-next';
 import { useEditorWithPlugin, useHandlers } from './hooks';
-
-type eventList = Required<
-  Omit<React.DOMAttributes<HTMLDivElement>, 'children' | 'dangerouslySetInnerHTML' | 'onKeyDown'>
->;
-
-export interface IRocketSlatePlugin {
-  plugin?: SlatePlugin;
-  withPlugin?: <T extends Editor & ReactEditor & HistoryEditor & ToggleBlockEditor>(editor: T) => T;
-  handlers?: {
-    [eventName in keyof eventList]: (
-      event: Required<React.DOMAttributes<HTMLDivElement>>[eventName] extends (...args: any) => any
-        ? Parameters<Required<React.DOMAttributes<HTMLDivElement>>[eventName]>[0]
-        : never,
-      editor: Editor,
-    ) => void | undefined;
-  };
-}
-
-export interface IResetOption {
-  types: string[];
-  onUnwrap?: any;
-}
-
-export interface IRocketSlateEditorProps {
-  value: Node[];
-  plugins?: IRocketSlatePlugin[];
-  placeholder?: string;
-  readOnly?: boolean;
-  className?: string;
-  onChange?: (value: Node[]) => void;
-  before?: React.ReactNode;
-  after?: React.ReactNode;
-  toolbar?: React.ReactNode;
-}
+import { IRocketSlateEditorProps } from './types';
 
 const RocketSlateWrapper = styled.div<{ readOnly?: boolean }>`
   border: ${props => (props.readOnly ? 'none' : '1px solid #ccc')};
@@ -65,6 +29,8 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
   before,
   after,
   toolbar,
+  locale = 'ru',
+  i18n,
 }) => {
   const [editorValue, setValue] = useState(value);
   useEffect(() => {
@@ -72,6 +38,13 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
   }, [value]);
 
   const editor = useEditorWithPlugin(plugins);
+
+  editor.setLocale(locale); // TODO: возможно нужно переделать
+
+  useEffect(() => {
+    editor.addLocale(i18n || {});
+  }, [i18n]);
+
   const handlers = useHandlers(plugins, editor);
   const slatePlugins = useMemo(() => plugins.filter(({ plugin }) => plugin).map(({ plugin }) => plugin), plugins);
 

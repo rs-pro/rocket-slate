@@ -27,15 +27,16 @@ export const RocketSlateCodeButton = () => {
     [editor],
   );
   return (
-    <RocketTooltip title="Блок кода">
+    <RocketTooltip title={editor.getLocale('code.btns.block')}>
       <RocketButtonBlock format={CODE} icon={<IconCodeBlock />} onMouseDown={handlerMouseDown} />
     </RocketTooltip>
   );
 };
 
 export const RocketSlateCodeInlineButton = () => {
+  const editor = useSlate();
   return (
-    <RocketTooltip title="Код">
+    <RocketTooltip title={editor.getLocale('code.btns.inline')}>
       <RocketButtonMark format={MARK_CODE} icon={<IconCodeInline />} />
     </RocketTooltip>
   );

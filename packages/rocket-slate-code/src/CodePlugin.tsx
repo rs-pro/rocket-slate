@@ -4,6 +4,8 @@ import { CODE, CodePlugin } from 'slate-plugins-next';
 import { IRocketSlatePlugin } from '@rocket-slate/editor';
 import { IHighlights, RocketSlateCodeBlock } from './RocketSlateCodeBlock';
 
+import locale from './locales';
+
 export const RocketSlateCodePlugin = (options: IHighlights): IRocketSlatePlugin => {
   return {
     plugin: {
@@ -11,9 +13,10 @@ export const RocketSlateCodePlugin = (options: IHighlights): IRocketSlatePlugin 
         component: (props: RenderElementProps) => <RocketSlateCodeBlock {...props} {...options} />,
       }),
     },
-    withPlugin: (editor) => {
+    withPlugin: editor => {
       const { isVoid } = editor;
-      editor.isVoid = (element) => {
+      editor.addLocale(locale);
+      editor.isVoid = element => {
         return element.type === CODE ? true : isVoid(element);
       };
       return editor;

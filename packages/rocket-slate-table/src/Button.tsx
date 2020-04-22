@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 
 import { useSlate } from 'slate-react';
 import {
-  ToolbarTable,
   insertTable,
   deleteTable,
   addRow,
@@ -19,13 +18,7 @@ import { faTable } from '@fortawesome/free-solid-svg-icons/faTable';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { faMinus } from '@fortawesome/free-solid-svg-icons/faMinus';
 
-import {
-  IconTableColAdd,
-  IconTableColDel,
-  IconTableRowAdd,
-  IconTableRowDel
-} from '@rocket-slate/icons'
-
+import { IconTableColAdd, IconTableColDel, IconTableRowAdd, IconTableRowDel } from '@rocket-slate/icons';
 
 const ButtonTableWrap = styled.div`
   position: relative;
@@ -66,7 +59,7 @@ const ListWrap = styled.div`
 
 const useCallbackButtonTable = (editor, callback) => {
   return useCallback(
-    (event) => {
+    event => {
       event.preventDefault();
       callback(editor);
     },
@@ -92,7 +85,7 @@ export const RocketSlateTableButton = () => {
 
   return (
     <ButtonTableWrap className="rocket-slate-table-menu">
-      <RocketTooltip title="Управление таблицей">
+      <RocketTooltip title={editor.getLocale('table.btns.table_control')}>
         <RocketButton
           active={isShowList}
           className="rocket-slate-table-menu__btn"
@@ -103,7 +96,7 @@ export const RocketSlateTableButton = () => {
       {isShowList && (
         <ListWrap className="rocket-slate-table-menu__lst">
           <div>
-            <RocketTooltip title="Создать таблицу">
+            <RocketTooltip title={editor.getLocale('table.btns.table_create')}>
               <RocketButton
                 active
                 icon={
@@ -117,15 +110,15 @@ export const RocketSlateTableButton = () => {
                 onMouseDown={handlerTableInsert}
               />
             </RocketTooltip>
-            <RocketTooltip title="Добавить ряд">
+            <RocketTooltip title={editor.getLocale('table.btns.table_row_add')}>
               <RocketButton active={isTableActive} icon={<IconTableRowAdd />} onMouseDown={handlerTableRowAdd} />
             </RocketTooltip>
-            <RocketTooltip title="Удалить ряд">
+            <RocketTooltip title={editor.getLocale('table.btns.table_row_delete')}>
               <RocketButton active={isTableActive} icon={<IconTableRowDel />} onMouseDown={handlerTableRowDelete} />
             </RocketTooltip>
           </div>
           <div>
-            <RocketTooltip title="Удалить таблицу">
+            <RocketTooltip title={editor.getLocale('table.btns.table_delete')}>
               <RocketButton
                 active={isTableActive}
                 icon={
@@ -139,65 +132,15 @@ export const RocketSlateTableButton = () => {
                 onMouseDown={handlerTableDelete}
               />
             </RocketTooltip>
-            <RocketTooltip title="Добавить столбец">
+            <RocketTooltip title={editor.getLocale('table.btns.table_col_add')}>
               <RocketButton active={isTableActive} icon={<IconTableColAdd />} onMouseDown={handlerTableColumnAdd} />
             </RocketTooltip>
-            <RocketTooltip title="Удалить столбец">
+            <RocketTooltip title={editor.getLocale('table.btns.table_col_delete')}>
               <RocketButton active={isTableActive} icon={<IconTableColDel />} onMouseDown={handlerTableColumnDelete} />
             </RocketTooltip>
           </div>
         </ListWrap>
       )}
-      {/*<RocketTooltip title="table.column.add">
-        <a className="rocket-slate__button" onClick={() => editor.insertColumn()}>
-          <FontAwesomeIcon icon={faColumns} />
-          <span className="rocket-slate__button-mark">
-            <FontAwesomeIcon icon={faPlus} />
-          </span>
-        </a>
-      </RocketTooltip>
-
-      <RocketTooltip title="table.row.add">
-        <a className="rocket-slate__button" onClick={() => editor.insertRow()}>
-          <FontAwesomeIcon icon={faColumns} rotation={90} />
-          <span className="rocket-slate__button-mark">
-            <FontAwesomeIcon icon={faPlus} />
-          </span>
-        </a>
-      </RocketTooltip>
-
-      <RocketTooltip title="table.column.remove">
-        <a className="rocket-slate__button" onClick={editor.removeColumn()}>
-          <FontAwesomeIcon icon={faColumns} />
-          <span className="rocket-slate__button-mark">
-            <FontAwesomeIcon icon={faMinus} />
-          </span>
-        </a>
-      </RocketTooltip>
-
-      <RocketTooltip title="table.row.remove">
-        <a className="rocket-slate__button" onClick={() => editor.toggleHeaders()}>
-          <FontAwesomeIcon icon={faColumns} rotation={90} />
-          <span className="rocket-slate__button-mark">
-            <FontAwesomeIcon icon={faMinus} />
-          </span>
-        </a>
-      </RocketTooltip>
-
-      <RocketTooltip title="table.remove">
-        <a className="rocket-slate__button" onClick={() => editor.removeTable()}>
-          <FontAwesomeIcon icon={faTable} />
-          <span className="rocket-slate__button-mark">
-            <FontAwesomeIcon icon={faMinus} />
-          </span>
-        </a>
-      </RocketTooltip>
-
-      <RocketTooltip title="table.toggle_headers">
-        <a className="rocket-slate__button" onClick={() => editor.toggleHeaders()}>
-          <FontAwesomeIcon icon={faTable} />
-        </a>
-      </RocketTooltip>*/}
     </ButtonTableWrap>
   );
 };

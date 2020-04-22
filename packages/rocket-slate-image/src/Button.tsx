@@ -6,16 +6,16 @@ import { insertImage } from './Plugin';
 
 const RocketSlateButtonImage = () => {
   const editor = useEditor();
-  const handlerMouseDown = useCallback((event) => {
+  const handlerMouseDown = useCallback(event => {
     event.preventDefault();
-    const url = window.prompt('Enter the URL of the image:');
+    const url = window.prompt(editor.getLocale('image.msg.add_url'));
     if (!url) {
       return;
     }
     insertImage(editor, { src: url });
   }, []);
   return (
-    <RocketTooltip title="Добавить изображение">
+    <RocketTooltip title={editor.getLocale('image.btns.add')}>
       <RocketButton icon={<IconImage />} onMouseDown={handlerMouseDown} />
     </RocketTooltip>
   );

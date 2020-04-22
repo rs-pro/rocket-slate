@@ -9,7 +9,7 @@ import { ACTION_ITEM } from './Plugin';
 const RocketSlateChecklistButton = () => {
   const editor = useSlate();
   const handlerMouseDown = useCallback(
-    (event) => {
+    event => {
       event.preventDefault();
       const isActive = isBlockActive(editor, ACTION_ITEM);
       Transforms.setNodes(editor, {
@@ -22,7 +22,7 @@ const RocketSlateChecklistButton = () => {
     [editor],
   );
   return (
-    <RocketTooltip title="Чек-лист">
+    <RocketTooltip title={editor.getLocale('checklist.btns.add')}>
       <RocketButtonBlock format={ACTION_ITEM} icon={<IconCheckList />} onMouseDown={handlerMouseDown} />
     </RocketTooltip>
   );
