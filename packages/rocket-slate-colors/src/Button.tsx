@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFill } from '@fortawesome/free-solid-svg-icons/faFill';
 import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
 import { useSlate } from 'slate-react';
-import { RocketButton } from '@rocket-slate/editor';
+import { RocketButton, RocketTooltip } from '@rocket-slate/editor';
 
 import { Editor } from 'slate';
 import colorList from './colorList';
@@ -77,6 +77,12 @@ const ColorIcon: React.FC<{ type: ColorType }> = ({ type }) => {
   return null;
 };
 
+const getTitle = (type: ColorType) => {
+  if (type === 'bg_color') return 'Цвет фона';
+  if (type === 'fg_color') return 'Цвет текста';
+  return 'color';
+};
+
 export const RocketSlateColorsButton: React.FC<{ type: ColorType }> = ({ type }) => {
   const editor = useSlate();
   const [isShow, setShow] = useState(false);
@@ -87,11 +93,13 @@ export const RocketSlateColorsButton: React.FC<{ type: ColorType }> = ({ type })
   useOutsideAlerter(wrapperRef, () => setShow(false));
   return (
     <ButtonWrap className="RocketSlateColorButton" ref={wrapperRef}>
-      <RocketButton
-        className="RocketSlateColorButton__Mark"
-        icon={<ColorIcon type={type} />}
-        onMouseDown={handlerClickToggleShow}
-      />
+      <RocketTooltip title={getTitle(type)}>
+        <RocketButton
+          className="RocketSlateColorButton__Mark"
+          icon={<ColorIcon type={type} />}
+          onMouseDown={handlerClickToggleShow}
+        />
+      </RocketTooltip>
       {isShow && (
         <ColorList className="RocketSlateColorButton__List">
           <div className="RocketSlateColorButton__ListItems">
