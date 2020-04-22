@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { storiesOf } from '@storybook/react';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-markup';
@@ -86,7 +86,12 @@ const fakeProgress = (duration, onProgress, onComplete) => {
   });
 };
 
-storiesOf('Editor', module).add('default', () => {
+export default {
+  title: 'RocketEditor',
+  decorators: [withKnobs],
+};
+
+export const Example = () => {
   const plugins = useMemo(() => {
     const pluginWithDeserialize = [
       RocketWysiwygPlugin(),
@@ -163,7 +168,8 @@ storiesOf('Editor', module).add('default', () => {
       plugins={plugins}
       value={editorValue}
       onChange={handlerChangeValue}
-      before={
+      readOnly={boolean('readOnly', false)}
+      toolbar={
         <RocketToolbar>
           <RocketToolbarGroup>
             <RocketWysiwygButton format={RocketToolbarButtons.H1} />
@@ -219,4 +225,4 @@ storiesOf('Editor', module).add('default', () => {
       }
     />
   );
-});
+};
