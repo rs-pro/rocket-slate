@@ -12,15 +12,14 @@
   "files": [
     "src"
   ],
-  "publishConfig": {
-    "registry": "https://registry.yarnpkg.com"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rs-pro/rocket-slate.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "npm run build:babel && npm run build:tsc",
+    "build:babel": "cross-env BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments",
+    "build:tsc": "tsc --declaration --outDir dist/ --emitDeclarationOnly --declarationMap"
   },
   "bugs": {
     "url": "https://github.com/rs-pro/rocket-slate/issues"
@@ -33,5 +32,8 @@
     "react-dom": "^16.12.0",
     "slate": "0.57.1",
     "slate-plugins-next": "^0.57.12"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
   }
 }

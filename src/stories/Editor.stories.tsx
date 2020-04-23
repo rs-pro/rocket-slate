@@ -15,7 +15,7 @@ import 'prismjs/components/prism-go';
 import 'prismjs/components/prism-sql';
 import 'prismjs/themes/prism.css';
 
-import { RocketSlate, RocketToolbar, RocketToolbarGroup, initialValue } from '@rocket-slate/editor';
+import { RocketSlate, RocketToolbar, RocketToolbarGroup, initialValue, convertSlateState47toRocketSlate } from '@rocket-slate/editor';
 import { RocketToolbarButtons, RocketWysiwygButton, RocketWysiwygPlugin } from '@rocket-slate/wysiwyg';
 import { RocketSlateChecklistPlugin, RocketSlateChecklistButton } from '@rocket-slate/checklist';
 import { RocketSlateMentionPlugin, RocketSlateMentionSelect, IMention } from '@rocket-slate/mentions';
@@ -35,9 +35,8 @@ import { RocketSlatePastHtmlPlugin } from '@rocket-slate/paste-html';
 import { RocketSlateMarkdownShortcutsPlugin, RocketSlateMarkdownPastePlugin } from '@rocket-slate/markdown';
 import { RocketSlateAlignmentPlugin, RocketSlateAlignmentButton } from '@rocket-slate/alignment';
 
-import editorStateNew from '../converter/editorStateNew.json';
-import editorStateOld from '../converter/editorStateOld.json';
-import { convertSlateState47toRocketSlate } from '../converter';
+import editorStateNew from './editorStateNew.json';
+import editorStateOld from './editorStateOld.json';
 
 import locales from './locales';
 

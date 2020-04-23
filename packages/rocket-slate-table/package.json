@@ -11,8 +11,9 @@
   "author": "Glebtv <glebtv@gmail.com> (http://github.com/glebtv)",
   "license": "MIT",
   "scripts": {
-    "build": "BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments",
-    "test": "./node_modules/.bin/mocha ./tests/*.js --require babel-register --reporter=list"
+    "build": "npm run build:babel && npm run build:tsc",
+    "build:babel": "cross-env BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments",
+    "build:tsc": "tsc --declaration --outDir dist/ --emitDeclarationOnly --declarationMap"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
@@ -29,8 +30,8 @@
     "slate-react": "^0.57.1",
     "styled-components": "^5.0.1"
   },
-  "peerDependencies": {
-    "slate": "0.57.1"
+  "devDependencies": {
+    "cross-env": "^7.0.2"
   },
   "files": [
     "LICENSE",

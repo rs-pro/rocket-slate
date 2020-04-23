@@ -4,7 +4,11 @@ import { ReactEditor } from 'slate-react';
 import { HistoryEditor } from 'slate-history';
 import { SlatePlugin, ToggleBlockEditor } from 'slate-plugins-next';
 
-import { LocaleEditor } from './withLocale';
+export type LocaleEditor = Editor & {
+  addLocale: (locals: I18n) => void;
+  setLocale: (local: string) => void;
+  getLocale: (keyPath: string) => string;
+};
 
 export type eventList = Required<
   Omit<React.DOMAttributes<HTMLDivElement>, 'children' | 'dangerouslySetInnerHTML' | 'onKeyDown'>

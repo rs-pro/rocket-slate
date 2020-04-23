@@ -20,6 +20,9 @@
     "url": "git+https://github.com/rs-pro/rocket-slate.git"
   },
   "scripts": {
+    "build": "npm run build:babel && npm run build:tsc",
+    "build:babel": "cross-env BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments",
+    "build:tsc": "tsc --declaration --outDir dist/ --emitDeclarationOnly --declarationMap",
     "generate:icons": "svgr --ext tsx --icon src/svg_icons/*.svg --out-dir src/icons/",
     "generate:index": "node create_index.js",
     "generate": "yarn generate:icons && yarn generate:index"
@@ -28,8 +31,12 @@
     "url": "https://github.com/rs-pro/rocket-slate/issues"
   },
   "dependencies": {
-    "@svgr/cli": "^5.1.0",
     "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "slate-plugins-next": "^0.57.12"
+  },
+  "devDependencies": {
+    "@svgr/cli": "^5.1.0",
+    "cross-env": "^7.0.2"
   }
 }

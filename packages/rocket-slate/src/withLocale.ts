@@ -2,13 +2,7 @@ import { Editor } from 'slate';
 import merge from 'lodash/merge';
 import get from 'lodash/get';
 import has from 'lodash/has';
-import { I18n } from './types';
-
-export type LocaleEditor = Editor & {
-  addLocale: (locals: I18n) => void;
-  setLocale: (local: string) => void;
-  getLocale: (keyPath: string) => string;
-};
+import { I18n, LocaleEditor } from './types';
 
 export const withLocale = <T extends Editor>(editor: T): T & LocaleEditor => {
   let locale = 'en';
