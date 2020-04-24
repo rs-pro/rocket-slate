@@ -399,6 +399,11 @@
     "type": "paragraph",
     "nodes": [
       {
+        "text": "testtest ",
+        "marks": [],
+        "object": "text"
+      },
+      {
         "text": "code inline",
         "marks": [
           {
@@ -407,6 +412,11 @@
             "object": "mark"
           }
         ],
+        "object": "text"
+      },
+      {
+        "text": " testsetsetset",
+        "marks": [],
         "object": "text"
       }
     ],

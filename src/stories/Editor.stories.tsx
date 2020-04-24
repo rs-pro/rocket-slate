@@ -134,6 +134,7 @@ export const Example = () => {
   const initialState = useMemo(() => {
     return convertSlateState47toRocketSlate(editorStateOld) || editorStateNew || initialValue;
   }, []);
+
   const [editorValue, setValue] = useState(initialState);
   const [isLoading, setLoading] = useState(false);
   const [mentions, setMention] = useState<IMention[]>([]);

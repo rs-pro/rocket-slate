@@ -40,7 +40,12 @@ function covertSlateNode47toRocketSlate(node) {
       ...covertData(node),
     };
   }
-  const { text, marks } = node;
+  const { text, marks, leaves } = node;
+  if (leaves) {
+    return {
+      children: leaves.map(covertSlateNode47toRocketSlate),
+    }
+  }
   if (marks && marks.length > 0) {
     return {
       text,
@@ -90,7 +95,10 @@ function convertChildren(node) {
       },
     ];
   }
-  return node.nodes.map(covertSlateNode47toRocketSlate);
+  if (node.nodes) {
+    return node.nodes.map(covertSlateNode47toRocketSlate);
+  }
+  return [{ text: '' }];
 }
 
 export function convertSlateState47toRocketSlate(state47) {
