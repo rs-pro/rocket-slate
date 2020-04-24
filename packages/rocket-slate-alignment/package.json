@@ -6,11 +6,11 @@
   "homepage": "https://github.com/rs-pro/rocket-slate#readme",
   "license": "MIT",
   "main": "dist/index.js",
-  "directories": {
-    "src": "src"
-  },
   "files": [
-    "src"
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   "scripts": {
     "build": "npm run build:babel && npm run build:tsc",
     "build:babel": "cross-env BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments",
-    "build:tsc": "tsc --declaration --outDir dist/ --emitDeclarationOnly --declarationMap"
+    "build:tsc": "tsc --project ./tsconfig.build.json --declaration --outDir dist/ --emitDeclarationOnly"
   },
   "bugs": {
     "url": "https://github.com/rs-pro/rocket-slate/issues"
@@ -29,7 +29,6 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@rocket-slate/editor": "^0.1.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0",
     "slate": "0.57.1",
     "slate-plugins-next": "^0.57.12"
   },

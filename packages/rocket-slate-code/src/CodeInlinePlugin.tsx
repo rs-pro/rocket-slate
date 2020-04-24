@@ -11,7 +11,6 @@ const CodeInline = styled.code`
   background-color: #f7f7f7;
   font-size: 1em;
   padding: 0.25em 0.4em;
-  margin: 0 0.3em;
   border-radius: 2px;
   border: 1px solid #acacac;
 `;

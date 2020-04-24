@@ -6,9 +6,6 @@
   "homepage": "https://github.com/rs-pro/rocket-slate#readme",
   "license": "MIT",
   "main": "dist/index.js",
-  "directories": {
-    "lib": "src"
-  },
   "files": [
     "src"
   ],
@@ -20,7 +17,7 @@
     "url": "git+https://github.com/rs-pro/rocket-slate.git"
   },
   "scripts": {
-    "build": "npm run build:babel && npm run build:tsc",
+    "build": "npm run generate && npm run build:babel && npm run build:tsc",
     "build:babel": "cross-env BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments",
     "build:tsc": "tsc --declaration --outDir dist/ --emitDeclarationOnly --declarationMap",
     "generate:icons": "svgr --ext tsx --icon src/svg_icons/*.svg --out-dir src/icons/",
@@ -31,9 +28,7 @@
     "url": "https://github.com/rs-pro/rocket-slate/issues"
   },
   "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "slate-plugins-next": "^0.57.12"
+    "react": "^16.12.0"
   },
   "devDependencies": {
     "@svgr/cli": "^5.1.0",

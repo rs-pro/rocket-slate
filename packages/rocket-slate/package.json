@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "A rich text editor based on SlateJS framework",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/rs-pro/rocket-slate.git"
@@ -13,19 +14,19 @@
   "scripts": {
     "build": "npm run build:babel && npm run build:tsc",
     "build:babel": "cross-env BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments",
-    "build:tsc": "tsc --declaration --outDir dist/ --emitDeclarationOnly --declarationMap"
+    "build:tsc": "tsc --declaration --outDir dist/ --emitDeclarationOnly"
   },
   "dependencies": {
     "@tippy.js/react": "^3.1.1",
     "@types/react-sticky": "^6.0.3",
     "@types/styled-components": "^4.4.3",
     "classnames": "^2.2.6",
-    "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-sticky": "^6.0.3",
     "slate": "0.57.1",
     "slate-history": "0.57.1",
+    "slate-hyperscript": "^0.57.1",
     "slate-plugins-next": "^0.57.12",
     "styled-components": "^5.0.1"
   },

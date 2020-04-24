@@ -13,18 +13,14 @@
   "scripts": {
     "build": "npm run build:babel && npm run build:tsc",
     "build:babel": "cross-env BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --delete-dir-on-start --config-file ../../babel.config.js --no-comments",
-    "build:tsc": "tsc --declaration --outDir dist/ --emitDeclarationOnly --declarationMap"
+    "build:tsc": "tsc --project ./tsconfig.build.json --declaration --outDir dist/ --emitDeclarationOnly"
   },
   "dependencies": {
     "@rocket-slate/editor": "^0.1.0",
     "@rocket-slate/icons": "^0.1.0",
-    "@types/styled-components": "^4.4.3",
-    "classnames": "^2.2.6",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0",
     "re-resizable": "^6.1.1",
-    "slate-plugins-next": "^0.57.12",
-    "styled-components": "^5.0.1"
+    "slate-plugins-next": "^0.57.12"
   },
   "devDependencies": {
     "cross-env": "^7.0.2"

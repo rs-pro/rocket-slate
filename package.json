@@ -2,20 +2,39 @@
   "name": "root",
   "private": true,
   "license": "MIT",
-  "scripts": {
-    "prebuild--disabled": "run-p -c lint:*",
-    "build": "lerna exec 'BABEL_ENV=build babel src --out-dir dist --source-maps --extensions .ts,.tsx --config-file ../../babel.config.js --delete-dir-on-start --no-comments'",
-    "lint:css": "stylelint 'packages/**/*.ts{,x}'",
-    "lint": "run-p -c lint:*",
-    "test": "jest",
-    "tsc": "tsc",
-    "storybook": "yarn start-storybook -p 9009",
-    "build-storybook": "build-storybook"
-  },
   "workspaces": [
     "packages/*",
     "src/*"
   ],
+  "scripts": {
+    "build": "yarn clean && yarn build:editor && yarn build:icons && yarn build:plugins",
+    "build-storybook": "build-storybook",
+    "build:editor": "lerna exec --scope @rocket-slate/editor -- yarn build",
+    "build:icons": "lerna exec --scope @rocket-slate/icons -- yarn build",
+    "build:plugins": "lerna exec --ignore @rocket-slate/icons --ignore @rocket-slate/editor -- yarn build",
+    "clean": "lerna exec rimraf dist",
+    "lint": "run-p -c lint:*",
+    "lint:css": "stylelint 'packages/**/*.ts{,x}'",
+    "prebuild--disabled": "run-p -c lint:*",
+    "storybook": "yarn start-storybook -p 9009",
+    "test": "jest",
+    "tsc": "tsc"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "resolutions": {
+    "babel-core": "^7.0.0-bridge.0"
+  },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
@@ -26,8 +45,8 @@
     "@storybook/addon-knobs": "^5.2.8",
     "@storybook/addon-links": "^5.3.0-rc.1",
     "@storybook/addons": "^5.3.0-rc.1",
-    "@storybook/preset-create-react-app": "^1.5.0",
-    "@storybook/react": "^5.3.9",
+    "@storybook/preset-create-react-app": "1.5.0",
+    "@storybook/react": "5.3.9",
     "@types/enzyme": "^3.10.4",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.24",
@@ -52,8 +71,14 @@
     "lerna": "^3.20.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
+    "prismjs": "^1.19.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "react-scripts": "^3.3.0",
     "rimraf": "^2.6.2",
+    "slate": "0.57.1",
+    "slate-react": "https://gitpkg.now.sh/SvyatoslavPozhydaev/slate/packages/slate-react?master",
     "stylelint": "^12.0.0",
     "stylelint-config-standard": "^19.0.0",
     "stylelint-config-styled-components": "^0.1.1",
@@ -62,28 +87,5 @@
     "ts-loader": "^6.2.1",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typescript": "^3.7.4"
-  },
-  "dependencies": {
-    "prismjs": "^1.19.0",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "slate": "0.57.1",
-    "slate-react": "https://gitpkg.now.sh/SvyatoslavPozhydaev/slate/packages/slate-react?master"
-  },
-  "resolutions": {
-    "babel-core": "^7.0.0-bridge.0"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   }
 }
