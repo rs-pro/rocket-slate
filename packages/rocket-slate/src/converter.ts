@@ -32,7 +32,7 @@ function convertType(node) {
 }
 
 function convertMarks(mark) {
-  if (mark === 'del') return 'strike';
+  if (mark === 'del') return 'strikethrough';
   return mark;
 }
 
@@ -63,7 +63,7 @@ function covertSlateNode47toRocketSlate(node) {
         }
         return {
           ...marksFlag,
-          [mark.type]: true,
+          [convertMarks(mark.type)]: true,
         };
       }, {}),
     };
