@@ -14737,19 +14737,6 @@ slate-plugins-next@^0.57.12:
     marked "^0.8.0"
     prismjs "^1.17.1"
 
-slate-react@^0.57.1:
-  version "0.57.3"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.57.3.tgz#c20662359c55e6cc1e117036e18e818c68a6bb51"
-  integrity sha512-UOodnOD5P3XnTB3iztTyum3PVLwhpiwqc3So6PlHVr2pIm5Pjf4IfHCNAuP+/xMB2tOunSQR3bBXNPz34k6pWg==
-  dependencies:
-    "@types/is-hotkey" "^0.1.1"
-    "@types/lodash" "^4.14.149"
-    direction "^1.0.3"
-    is-hotkey "^0.1.6"
-    is-plain-object "^3.0.0"
-    lodash "^4.17.4"
-    scroll-into-view-if-needed "^2.2.20"
-
 "slate-react@https://gitpkg.now.sh/SvyatoslavPozhydaev/slate/packages/slate-react?master":
   version "0.57.1"
   resolved "https://gitpkg.now.sh/SvyatoslavPozhydaev/slate/packages/slate-react?master#d546793c8aaa4b1d1cc80f6e3346cea1ec6c16e5"
