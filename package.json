@@ -1,10 +1,10 @@
 {
-  "name": "root",
+  "name": "rocket-slate",
   "private": true,
   "license": "MIT",
   "workspaces": [
-    "packages/*",
-    "src/*"
+    "packages",
+    "src"
   ],
   "scripts": {
     "build": "yarn clean && yarn build:editor && yarn build:icons && yarn build:plugins",
