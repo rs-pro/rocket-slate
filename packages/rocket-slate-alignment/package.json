@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/alignment",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "> TODO: description",
   "author": "",
   "homepage": "https://github.com/rs-pro/rocket-slate#readme",
@@ -27,7 +27,7 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
-    "@rocket-slate/editor": "^0.1.0",
+    "@rocket-slate/editor": "^0.2.0",
     "react": "^16.12.0",
     "slate": "0.57.1",
     "slate-plugins-next": "^0.57.12"
