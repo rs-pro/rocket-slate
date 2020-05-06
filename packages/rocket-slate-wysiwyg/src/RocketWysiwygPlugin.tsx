@@ -21,7 +21,7 @@ import {
   withBreakEmptyReset,
   withDeleteStartReset,
 } from 'slate-plugins-next';
-import { DeserializeHtml } from 'slate-plugins-next/dist/paste-html/types';
+import { DeserializeHtml } from 'slate-plugins-next/dist/deserializers/types';
 import locals from './locales';
 
 enum WysiwygPluginTypes {
