@@ -31,6 +31,11 @@ function convertType(node) {
   return node.type;
 }
 
+function convertMarks(mark) {
+  if (mark === 'del') return 'strike';
+  return mark;
+}
+
 function covertSlateNode47toRocketSlate(node) {
   const { type } = node;
   if (type) {
