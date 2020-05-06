@@ -1,7 +1,7 @@
 {
   "name": "@rocket-slate/alignment",
   "version": "0.2.2",
-  "description": "> TODO: description",
+  "description": "Text alignment plugin for Rocket Slate editor",
   "author": "",
   "homepage": "https://github.com/rs-pro/rocket-slate#readme",
   "license": "MIT",
@@ -35,5 +35,5 @@
   "devDependencies": {
     "cross-env": "^7.0.2"
   },
-  "gitHead": "be152e482b5a4e9aae4653b3628e30cc84547eea"
+  "gitHead": "190ef106a993574d5836fd7aba072928cbda0054"
 }
