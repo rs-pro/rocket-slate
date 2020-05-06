@@ -100,7 +100,6 @@ export const Example = () => {
       RocketSlateTablePlugin(),
       RocketSlateLinksPlugin(),
       RocketSlateCodeInlinePlugin(),
-      RocketSlateAlignmentPlugin(),
       RocketSlateCodePlugin({
         highlight: (code, lang) => {
           if (lang !== undefined && languages[lang] !== undefined) {
@@ -116,6 +115,7 @@ export const Example = () => {
       RocketSlatePastHtmlPlugin(pluginWithDeserialize),
       RocketSlateMarkdownPastePlugin(pluginWithDeserialize),
       ...pluginWithDeserialize,
+      RocketSlateAlignmentPlugin(),
       RocketSlateMarkdownShortcutsPlugin(),
       RocketSlateChecklistPlugin(),
       RocketSlateMentionPlugin(),
