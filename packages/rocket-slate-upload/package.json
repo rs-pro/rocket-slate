@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/upload",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A rich text editor based on SlateJS framework",
   "main": "dist/index.js",
   "repository": {
@@ -19,8 +19,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
-    "@rocket-slate/editor": "^0.2.0",
-    "@rocket-slate/image": "^0.2.0",
+    "@rocket-slate/editor": "^0.2.1",
+    "@rocket-slate/image": "^0.2.1",
     "@types/styled-components": "^4.4.3",
     "slate-plugins-next": "^0.57.12",
     "styled-components": "^5.0.1"

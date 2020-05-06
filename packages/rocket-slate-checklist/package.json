@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/checklist",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A rich text editor based on SlateJS framework",
   "main": "dist/index.js",
   "repository": {
@@ -16,8 +16,8 @@
     "build:tsc": "tsc --project ./tsconfig.build.json --declaration --outDir dist/ --emitDeclarationOnly"
   },
   "dependencies": {
-    "@rocket-slate/editor": "^0.2.0",
-    "@rocket-slate/icons": "^0.2.0",
+    "@rocket-slate/editor": "^0.2.1",
+    "@rocket-slate/icons": "^0.2.1",
     "@types/styled-components": "^4.4.3",
     "react": "^16.12.0",
     "slate": "0.57.1",
