@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/markdown",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "RocketSlate - markdown shortcuts",
   "main": "dist/index.js",
   "repository": {
@@ -16,7 +16,7 @@
     "build:tsc": "tsc --project ./tsconfig.build.json --declaration --outDir dist/ --emitDeclarationOnly"
   },
   "dependencies": {
-    "@rocket-slate/editor": "^0.2.1",
+    "@rocket-slate/editor": "^0.2.2",
     "slate-plugins-next": "^0.57.12"
   },
   "devDependencies": {
@@ -38,5 +38,5 @@
   "bugs": {
     "url": "https://github.com/nossas/rocket-slate/issues"
   },
-  "gitHead": "e0d3515cf0fb43726080c3abef9a3142eb096db2"
+  "gitHead": "be152e482b5a4e9aae4653b3628e30cc84547eea"
 }

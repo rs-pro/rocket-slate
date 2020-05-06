@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/colors",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A rich text editor based on SlateJS framework",
   "main": "dist/index.js",
   "repository": {
@@ -18,7 +18,7 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
-    "@rocket-slate/editor": "^0.2.1",
+    "@rocket-slate/editor": "^0.2.2",
     "@types/styled-components": "^4.4.3",
     "react": "^16.12.0",
     "slate": "0.57.1",
@@ -44,5 +44,5 @@
   "bugs": {
     "url": "https://github.com/nossas/rocket-slate/issues"
   },
-  "gitHead": "e0d3515cf0fb43726080c3abef9a3142eb096db2"
+  "gitHead": "be152e482b5a4e9aae4653b3628e30cc84547eea"
 }
