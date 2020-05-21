@@ -6,9 +6,10 @@ import { PortalBody } from 'slate-plugins-next';
 import { MENTION_ON_CHANGE, MENTION_ON_KEYDOWN } from './events';
 
 interface IMention {
+  [kye: string]: any;
   id: string | number;
   text: string;
-  [kye: string]: any;
+  type: string;
 }
 
 const RocketSlateMentionListItem = styled.div<{ isActive?: boolean; isLoading?: boolean; isEmpty?: boolean }>`

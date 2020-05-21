@@ -44,6 +44,37 @@
   },
   {
     "data": {},
+    "type": "paragraph",
+    "nodes": [
+      {
+        "text": "",
+        "marks": [],
+        "object": "text"
+      },
+      {
+        "data": {
+          "issue": 27033
+        },
+        "type": "issue",
+        "nodes": [
+          {
+            "text": "#1 Установка ПО на Ubuntu, настройка системы (accepted)",
+            "marks": [],
+            "object": "text"
+          }
+        ],
+        "object": "inline"
+      },
+      {
+        "text": " ",
+        "marks": [],
+        "object": "text"
+      }
+    ],
+    "object": "block"
+  },
+  {
+    "data": {},
     "type": "numbered-list",
     "nodes": [
       {

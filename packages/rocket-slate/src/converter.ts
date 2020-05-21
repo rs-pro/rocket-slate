@@ -7,6 +7,14 @@ function covertData(node) {
       },
     };
   }
+  if (node.type === 'issue') {
+    return {
+      data: {
+        id: node.data.issue,
+        type: 'issue',
+      },
+    };
+  }
   if (node.type === 'image' || node.type === 'check-list-item') {
     return {
       data: node.data,
@@ -25,9 +33,8 @@ function covertData(node) {
 function convertType(node) {
   if (node.type === 'table_row') return 'table-row';
   if (node.type === 'table_cell') return 'table-cell';
-  if (node.type === 'file') {
-    return 'paragraph';
-  }
+  if (node.type === 'file') return 'paragraph';
+  if (node.type === 'issue') return 'mention';
   return node.type;
 }
 

@@ -81,7 +81,7 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
             readOnly={readOnly}
             {...handlers}
           />
-          {!readOnly && before && <div className="RocketSlate__EditorAfter">{after}</div>}
+          {!readOnly && after && <div className="RocketSlate__EditorAfter">{after}</div>}
         </StickyContainer>
       </Slate>
     </RocketSlateWrapper>

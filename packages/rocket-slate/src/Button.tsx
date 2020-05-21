@@ -14,6 +14,7 @@ const baseStyleButton = css`
   border-radius: 2px;
   box-sizing: border-box;
   vertical-align: middle;
+  line-height: 1;
   > svg {
     display: inline-block;
     fill: currentColor;
