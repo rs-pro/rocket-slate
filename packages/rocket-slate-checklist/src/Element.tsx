@@ -1,8 +1,6 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Transforms } from 'slate';
-import { ReactEditor, RenderElementProps, useEditor, useReadOnly } from 'slate-react';
-import { ACTION_ITEM } from './Plugin';
+import { RenderElementProps, useReadOnly } from 'slate-react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,6 +32,8 @@ const Text = styled.span<{ checked: boolean }>`
   }
 `;
 
+export const ACTION_ITEM = 'check-list-item';
+
 export type ActionItemProps = RenderElementProps & {
   onChange: React.EventHandler<React.ChangeEvent<any>>;
 };
@@ -46,11 +46,16 @@ export const ActionItemElement: React.FunctionComponent<ActionItemProps> = (prop
   } = element;
 
   return (
-    <Wrapper {...attributes} data-slate-type={ACTION_ITEM}>
-      <CheckboxWrapper contentEditable={false}>
-        <Checkbox type="checkbox" checked={checked} onChange={onChange} />
+    <Wrapper className="RocketSlateActionItem" {...attributes} data-slate-type={ACTION_ITEM}>
+      <CheckboxWrapper className="RocketSlateActionItem__CheckBoxWrap" contentEditable={false}>
+        <Checkbox className="RocketSlateActionItem__CheckBox" type="checkbox" checked={checked} onChange={onChange} />
       </CheckboxWrapper>
-      <Text contentEditable={!readOnly} checked={checked} suppressContentEditableWarning>
+      <Text
+        className="RocketSlateActionItem__Text"
+        contentEditable={!readOnly}
+        checked={checked}
+        suppressContentEditableWarning
+      >
         {children}
       </Text>
     </Wrapper>

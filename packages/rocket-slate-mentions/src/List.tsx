@@ -189,6 +189,8 @@ const onKeyDownMention = (options: {
         e.preventDefault();
         setTarget(null);
         break;
+      default:
+        break;
     }
   }
 };

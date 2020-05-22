@@ -4,7 +4,7 @@ import { useSlate } from 'slate-react';
 import { isBlockActive, PARAGRAPH } from 'slate-plugins-next';
 import { RocketButtonBlock, RocketTooltip } from '@rocket-slate/editor';
 import { IconCheckList } from '@rocket-slate/icons';
-import { ACTION_ITEM } from './Plugin';
+import { ACTION_ITEM } from './Element';
 
 const RocketSlateChecklistButton = () => {
   const editor = useSlate();
