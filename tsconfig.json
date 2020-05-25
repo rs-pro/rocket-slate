@@ -63,8 +63,7 @@
   "exclude": [
     "node_modules",
     "build",
-    "dist",
-    "**/*.js"
+    "dist"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true,
