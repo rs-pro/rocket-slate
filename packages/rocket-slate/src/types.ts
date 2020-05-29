@@ -43,9 +43,9 @@ export interface IRocketSlateEditorProps {
   readOnly?: boolean;
   className?: string;
   onChange?: (value: Node[]) => void;
-  before?: React.ReactNode;
-  after?: React.ReactNode;
-  toolbar?: React.ReactNode;
+  renderBefore?: () => React.ReactNode;
+  renderAfter?: () => React.ReactNode;
+  renderToolbar?: () => React.ReactNode;
   locale?: string;
   i18n?: I18n;
 }

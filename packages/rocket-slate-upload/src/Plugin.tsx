@@ -10,6 +10,14 @@ import locale from './locales';
 
 let globalProgressArray: any[] = [];
 
+const completeProgress = editor => {
+  const onUploadComplete = ON_UPLOAD_COMPLETE.get(editor);
+  if (onUploadComplete) {
+    onUploadComplete();
+  }
+  globalProgressArray = [];
+}
+
 const updateProgress = editor => {
   const progressArray = globalProgressArray.reduce((acc, values) => [...acc, ...values], []);
   const progressPerLocalTotal = 100 / progressArray.length;
@@ -18,14 +26,6 @@ const updateProgress = editor => {
   const onUploadProgress = ON_UPLOAD_PROGRESS.get(editor);
   if (onUploadProgress) {
     onUploadProgress(progress <= 100 ? progress : 100);
-  }
-
-  if (progress >= 100) {
-    const onUploadComplete = ON_UPLOAD_COMPLETE.get(editor);
-    if (onUploadComplete) {
-      onUploadComplete(progress);
-    }
-    globalProgressArray = [];
   }
 };
 
@@ -75,6 +75,7 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
                 if (window.URL && window.URL.revokeObjectURL && objectURL) {
                   window.URL.revokeObjectURL(objectURL);
                 }
+                onProgress(100);
                 resolve();
               },
               onError,
@@ -99,7 +100,9 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
                 Transforms.setSelection(editor, range);
                 wrapLink(editor, { url, file: { id, size } });
                 editor.insertBreak();
+                onProgress(100);
               }
+              resolve();
             },
             onError,
             onProgress,
@@ -109,6 +112,7 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
     });
     Promise.all(uploadedFiles).then(() => {
       updateProgress(editor);
+      completeProgress(editor);
     });
   }
 };

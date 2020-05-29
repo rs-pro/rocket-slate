@@ -28,7 +28,7 @@ import {
   RocketSlateCodeInlineButton,
   escapeHTML,
 } from '@rocket-slate/code';
-import { RocketSlateUploadPlugin, RocketSlateUploadButton, RocketSlateUploadProgress } from '@rocket-slate/upload';
+import { RocketSlateUploadPlugin, RocketSlateUploadButton, withProgres } from '@rocket-slate/upload';
 import { RocketSlateTablePlugin, RocketSlateTableButton } from '@rocket-slate/table';
 import { RocketSlateColorsPlugin, RocketSlateColorsButton } from '@rocket-slate/colors';
 import { RocketSlatePastHtmlPlugin } from '@rocket-slate/paste-html';
@@ -91,6 +91,8 @@ export default {
   title: 'RocketEditor',
   decorators: [withKnobs],
 };
+
+const Progress = withProgres(({ progress }) => <div>{progress}</div>);
 
 export const Example = () => {
   const plugins = useMemo(() => {
@@ -173,7 +175,7 @@ export const Example = () => {
       readOnly={boolean('readOnly', false)}
       locale={select('Language', { ru: 'ru', en: 'en', other: 'other' }, 'ru')}
       i18n={locales}
-      toolbar={
+      renderToolbar={() => (
         <RocketToolbar>
           <RocketToolbarGroup>
             <RocketWysiwygButton format={RocketToolbarButtons.H1} />
@@ -215,8 +217,8 @@ export const Example = () => {
             <RocketSlateTableButton />
           </RocketToolbarGroup>
         </RocketToolbar>
-      }
-      after={
+      )}
+      renderAfter={() => (
         <>
           <RocketSlateMentionSelect
             mentions={mentions}
@@ -224,9 +226,9 @@ export const Example = () => {
             onChangeSearch={handlerChangeSearchMention}
             isLoading={isLoading}
           />
-          <RocketSlateUploadProgress />
+          <Progress />
         </>
-      }
+      )}
     />
   );
 };

@@ -23,7 +23,6 @@
     "classnames": "^2.2.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-sticky": "^6.0.3",
     "slate": "0.57.1",
     "slate-history": "0.57.1",
     "slate-hyperscript": "^0.57.1",

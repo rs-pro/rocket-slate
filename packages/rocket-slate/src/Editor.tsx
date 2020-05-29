@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import classNames from 'classnames';
-import { StickyContainer, Sticky } from 'react-sticky';
 import { Slate } from 'slate-react';
 import { EditablePlugins } from 'slate-plugins-next';
 import { useEditorWithPlugin, useHandlers } from './hooks';
@@ -26,9 +25,9 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
   readOnly,
   className,
   onChange,
-  before,
-  after,
-  toolbar,
+  renderBefore,
+  renderAfter,
+  renderToolbar,
   locale = 'ru',
   i18n,
 }) => {
@@ -61,17 +60,11 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
       readOnly={readOnly}
     >
       <Slate editor={editor} value={editorValue} onChange={handlerChangeValueEditor}>
-        <StickyContainer className="RocketSlate__Container">
+        <div className="RocketSlate__Container">
           {!readOnly && (
             <>
-              <Sticky className="RocketSlate__StickyToolbar">
-                {({ style }) => (
-                  <div style={{ ...style, zIndex: 1 }} className="RocketSlate__Toolbar">
-                    {toolbar}
-                  </div>
-                )}
-              </Sticky>
-              {before && <div className="RocketSlate__EditorBefore">{before}</div>}
+              {renderToolbar && <div className="RocketSlate__Toolbar">{renderToolbar()}</div>}
+              {renderBefore && <div className="RocketSlate__EditorBefore">{renderBefore()}</div>}
             </>
           )}
           <RocketSlateEditable
@@ -81,8 +74,8 @@ export const RocketSlate: React.FunctionComponent<IRocketSlateEditorProps> = ({
             readOnly={readOnly}
             {...handlers}
           />
-          {!readOnly && after && <div className="RocketSlate__EditorAfter">{after}</div>}
-        </StickyContainer>
+          {!readOnly && renderAfter && <div className="RocketSlate__EditorAfter">{renderAfter()}</div>}
+        </div>
       </Slate>
     </RocketSlateWrapper>
   );
