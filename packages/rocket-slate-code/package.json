@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/code",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Code plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@rocket-slate/editor": "^0.2.4",
-    "@rocket-slate/icons": "^0.2.5",
+    "@rocket-slate/icons": "^0.2.6",
     "@types/styled-components": "^4.4.3",
     "react": "^16.12.0",
     "react-simple-code-editor": "^0.11.0",

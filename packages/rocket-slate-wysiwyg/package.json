@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/wysiwyg",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "WYSIWYG buttons plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@rocket-slate/editor": "^0.2.4",
-    "@rocket-slate/icons": "^0.2.5",
+    "@rocket-slate/icons": "^0.2.6",
     "react": "^16.12.0",
     "slate": "0.57.3",
     "slate-plugins-next": "^0.57.12",

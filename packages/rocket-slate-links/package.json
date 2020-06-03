@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/links",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Links plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@rocket-slate/editor": "^0.2.4",
-    "@rocket-slate/icons": "^0.2.5",
+    "@rocket-slate/icons": "^0.2.6",
     "is-url": "^1.2.2",
     "react": "^16.12.0",
     "slate": "0.57.3",
