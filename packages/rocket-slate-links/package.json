@@ -20,7 +20,8 @@
     "@rocket-slate/icons": "^0.2.3",
     "is-url": "^1.2.2",
     "react": "^16.12.0",
-    "slate": "0.57.1",
+    "slate": "0.57.3",
+    "slate-react":  "0.57.3",
     "slate-plugins-next": "^0.57.12"
   },
   "devDependencies": {
