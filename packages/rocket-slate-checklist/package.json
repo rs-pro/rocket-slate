@@ -3,6 +3,7 @@
   "version": "0.2.4",
   "description": "Checklist plugin for Rocket Slate editor",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/rs-pro/rocket-slate.git"

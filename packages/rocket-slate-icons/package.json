@@ -6,6 +6,7 @@
   "homepage": "https://github.com/rs-pro/rocket-slate#readme",
   "license": "MIT",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "src"
   ],
