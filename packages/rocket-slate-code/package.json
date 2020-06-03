@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/code",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Code plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "repository": {
@@ -16,14 +16,14 @@
     "build:tsc": "tsc --project ./tsconfig.build.json --declaration --outDir dist/ --emitDeclarationOnly"
   },
   "dependencies": {
-    "@rocket-slate/editor": "^0.2.3",
+    "@rocket-slate/editor": "^0.2.4",
     "@rocket-slate/icons": "^0.2.3",
     "@types/styled-components": "^4.4.3",
     "react": "^16.12.0",
     "react-simple-code-editor": "^0.11.0",
     "slate": "0.57.3",
-    "slate-react":  "0.57.3",
     "slate-plugins-next": "^0.57.12",
+    "slate-react": "0.57.3",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {

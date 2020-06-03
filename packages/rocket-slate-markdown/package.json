@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/markdown",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Markdown shortcuts plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "repository": {
@@ -16,7 +16,7 @@
     "build:tsc": "tsc --project ./tsconfig.build.json --declaration --outDir dist/ --emitDeclarationOnly"
   },
   "dependencies": {
-    "@rocket-slate/editor": "^0.2.3",
+    "@rocket-slate/editor": "^0.2.4",
     "slate-plugins-next": "^0.57.12"
   },
   "devDependencies": {
