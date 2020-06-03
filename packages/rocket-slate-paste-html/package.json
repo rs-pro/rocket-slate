@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/paste-html",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "HTML Paste plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
