@@ -12,7 +12,7 @@ const RocketSlateButtonImage = () => {
     if (!url) {
       return;
     }
-    insertImage(editor, { src: url });
+    insertImage(editor, { src: url, title: url });
   }, []);
   return (
     <RocketTooltip title={editor.getLocale('image.btns.add')}>

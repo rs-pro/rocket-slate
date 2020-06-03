@@ -30,7 +30,7 @@ export const RocketSlateImagePlugin = (options?: RenderElementOptions): IRocketS
       editor.insertData = (data: DataTransfer) => {
         const text = data.getData('text/plain');
         if (text && isImageUrl(text)) {
-          insertImage(editor, { src: text });
+          insertImage(editor, { src: text, title: text });
         } else {
           insertData(data);
         }

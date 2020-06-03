@@ -2,7 +2,7 @@ import React from 'react';
 import { IRocketSlatePlugin } from '@rocket-slate/editor';
 import { Editor, Range, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
-import { insertImage } from '@rocket-slate/image';
+import { insertImage, IImageData } from '@rocket-slate/image';
 import { wrapLink } from '@rocket-slate/links';
 import { ON_INSERT_FILE, ON_UPLOAD_START, ON_UPLOAD_PROGRESS, ON_UPLOAD_COMPLETE } from './events';
 import { HandlerInsertFile } from './types';
@@ -55,13 +55,12 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
         };
         const [mime] = file.type.split('/');
         if (mime === 'image') {
-          let objectURL;
-          if (window.URL && window.URL.createObjectURL) {
-            objectURL = window.URL.createObjectURL(file);
-            insertImage(editor, { src: objectURL, isLoading: true });
-          } else {
-            insertImage(editor, { src: '', isLoading: true });
-          }
+          const imgData: IImageData = {
+            src: window.URL && window.URL.createObjectURL ? window.URL.createObjectURL(file) : '',
+            title: file.name,
+            isLoading: true,
+          };
+          insertImage(editor, imgData);
           if (editor.selection) {
             const [start] = Range.edges(editor.selection);
             const beforeBlock = Editor.before(editor, start, {
@@ -71,9 +70,9 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
             onInsertFile(
               file,
               ({ id, url }) => {
-                Transforms.setNodes(editor, { data: { id, src: url } }, { at: range });
-                if (window.URL && window.URL.revokeObjectURL && objectURL) {
-                  window.URL.revokeObjectURL(objectURL);
+                Transforms.setNodes(editor, { data: { ...imgData, id, src: url } }, { at: range });
+                if (window.URL && window.URL.revokeObjectURL && imgData.src) {
+                  window.URL.revokeObjectURL(imgData.src);
                 }
                 onProgress(100);
                 resolve();

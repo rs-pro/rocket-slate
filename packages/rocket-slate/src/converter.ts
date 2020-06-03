@@ -52,17 +52,18 @@ function covertSlateNode47toRocketSlate(node) {
       ...covertData(node),
     };
   }
-  const { text, marks, leaves } = node;
+  const { text, marks, leaves, object } = node;
+  if (object && leaves && object === 'text') {
+    return [...leaves.map(covertSlateNode47toRocketSlate)];
+  }
   if (leaves) {
-    return {
-      children: leaves.map(covertSlateNode47toRocketSlate),
-    }
+    return [...leaves.map(covertSlateNode47toRocketSlate)];
   }
   if (marks && marks.length > 0) {
     return {
       text,
       ...marks.reduce((marksFlag, mark) => {
-        if (['bg_color', 'fg_color'].includes(mark.type)){
+        if (['bg_color', 'fg_color'].includes(mark.type)) {
           return {
             ...marksFlag,
             [mark.type]: mark.data.color,
@@ -98,7 +99,19 @@ function convertChildren(node) {
     ];
   }
   if (node.type === 'code') {
-    return [{ text: node.nodes.map((node) => node.nodes[0].text).join('\n') }];
+    return [
+      {
+        text: node.nodes
+          .map(codeLine =>
+            codeLine.nodes.map(codeLineNode => {
+              if (codeLineNode.leaves) return codeLineNode.leaves.map(leaf => leaf.text).join('');
+              if (codeLineNode.text) return codeLineNode.text;
+              return '';
+            }),
+          )
+          .join('\n'),
+      },
+    ];
   }
   if (node.type === 'mention') {
     return [
@@ -108,7 +121,13 @@ function convertChildren(node) {
     ];
   }
   if (node.nodes) {
-    return node.nodes.map(covertSlateNode47toRocketSlate);
+    return node.nodes.reduce((nodesAcc, nodeParagraph) => {
+      const nodes = covertSlateNode47toRocketSlate(nodeParagraph);
+      if (Array.isArray(nodes)) {
+        return [...nodesAcc, ...nodes];
+      }
+      return [...nodesAcc, nodes];
+    }, []);
   }
   return [{ text: '' }];
 }
