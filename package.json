@@ -13,6 +13,7 @@
     "build:icons": "lerna exec --scope @rocket-slate/icons -- yarn build",
     "build:plugins": "lerna exec --ignore @rocket-slate/icons --ignore @rocket-slate/editor -- yarn build",
     "clean": "lerna exec rimraf dist",
+    "release": "yarn build && lerna publish",
     "lint": "run-p -c lint:*",
     "lint:css": "stylelint 'packages/**/*.ts{,x}'",
     "prebuild--disabled": "run-p -c lint:*",
