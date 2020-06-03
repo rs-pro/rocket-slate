@@ -49,7 +49,7 @@ export const RocketSlateChecklistItem: React.FunctionComponent<RocketSlateCheckl
   const handlerChange = useCallback(
     e => {
       if (onChange) {
-        onChange(e.target.check);
+        onChange(e.target.checked);
       }
     },
     [onChange],
