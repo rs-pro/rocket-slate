@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/image",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Image plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
