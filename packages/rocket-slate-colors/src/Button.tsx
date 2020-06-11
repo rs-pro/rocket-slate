@@ -77,7 +77,11 @@ const ColorIcon: React.FC<{ type: ColorType }> = ({ type }) => {
   return null;
 };
 
-export const RocketSlateColorsButton: React.FC<{ type: ColorType }> = ({ type }) => {
+export const RocketSlateColorsButton: React.FC<{ className?: string; icon: React.ReactNode; type: ColorType }> = ({
+  className,
+  icon,
+  type,
+}) => {
   const editor = useSlate();
   const [isShow, setShow] = useState(false);
   const handlerClickToggleShow = () => {
@@ -89,8 +93,8 @@ export const RocketSlateColorsButton: React.FC<{ type: ColorType }> = ({ type })
     <ButtonWrap className="RocketSlateColorButton" ref={wrapperRef}>
       <RocketTooltip title={editor.getLocale(`colors.btns.${type}`)}>
         <RocketButton
-          className="RocketSlateColorButton__Mark"
-          icon={<ColorIcon type={type} />}
+          className={`RocketSlateColorButton__Mark${className ? ` ${className}` : ''}`}
+          icon={icon || <ColorIcon type={type} />}
           onMouseDown={handlerClickToggleShow}
         />
       </RocketTooltip>

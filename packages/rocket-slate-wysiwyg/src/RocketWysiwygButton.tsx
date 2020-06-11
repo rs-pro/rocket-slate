@@ -69,6 +69,7 @@ const RocketButtonIcons = {
 };
 
 interface IRocketToolbarButtonProps {
+  className?: string;
   format: RocketToolbarButtons | string;
   icon?: ReactNode;
 }
@@ -83,6 +84,8 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
   const { icon: Icon, locale } = RocketButtonIcons[format];
   const title = editor.getLocale(locale);
 
+  const btnIcon = icon || <Icon />;
+
   switch (format) {
     case RocketToolbarButtons.H1:
     case RocketToolbarButtons.H2:
@@ -93,7 +96,7 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.BLOCKQUOTE: {
       return (
         <RocketTooltip title={title}>
-          <RocketButtonBlock format={(format as unknown) as string} icon={<Icon />} {...restProps} />
+          <RocketButtonBlock format={(format as unknown) as string} icon={btnIcon} {...restProps} />
         </RocketTooltip>
       );
     }
@@ -103,7 +106,7 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.STRIKETHROUGH: {
       return (
         <RocketTooltip title={title}>
-          <RocketButtonMark format={(format as unknown) as string} icon={<Icon />} {...restProps} />
+          <RocketButtonMark format={(format as unknown) as string} icon={btnIcon} {...restProps} />
         </RocketTooltip>
       );
     }
@@ -111,14 +114,14 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.UL: {
       return (
         <RocketTooltip title={title}>
-          <RocketWysiwygButtonList format={(format as unknown) as string} icon={<Icon />} {...restProps} />
+          <RocketWysiwygButtonList format={(format as unknown) as string} icon={btnIcon} {...restProps} />
         </RocketTooltip>
       );
     }
     default:
       return (
-        <RocketTooltip title="">
-          <RocketButton format={(format as unknown) as string} icon={icon} {...restProps} />
+        <RocketTooltip title={title}>
+          <RocketButton format={(format as unknown) as string} icon={btnIcon} {...restProps} />
         </RocketTooltip>
       );
   }

@@ -114,7 +114,7 @@ const RocketSlateLinksPlugin = (options?: RenderElementOptions): IRocketSlatePlu
   };
 };
 
-const RocketSlateLinksButton = () => {
+const RocketSlateLinksButton: React.FC<{ className?: string; icon?: React.ReactNode }> = ({ className, icon }) => {
   const editor = useSlate();
   const handlerMouseDownLinkButton = useCallback(
     (event: React.MouseEvent<any>) => {
@@ -129,7 +129,12 @@ const RocketSlateLinksButton = () => {
   );
   return (
     <RocketTooltip title={editor.getLocale('links.btns.links_add')}>
-      <RocketButtonBlock icon={<IconLink />} format={LINK} onMouseDown={handlerMouseDownLinkButton} />
+      <RocketButtonBlock
+        className={className}
+        icon={icon || <IconLink />}
+        format={LINK}
+        onMouseDown={handlerMouseDownLinkButton}
+      />
     </RocketTooltip>
   );
 };

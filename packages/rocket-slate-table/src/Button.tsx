@@ -67,7 +67,7 @@ const useCallbackButtonTable = (editor, callback) => {
   );
 };
 
-export const RocketSlateTableButton = () => {
+export const RocketSlateTableButton: React.FC<{ className?: string }> = ({ className }) => {
   const editor = useSlate();
   const isTableActive = isSelectionInTable(editor);
 
@@ -88,7 +88,7 @@ export const RocketSlateTableButton = () => {
       <RocketTooltip title={editor.getLocale('table.btns.table_control')}>
         <RocketButton
           active={isShowList}
-          className="rocket-slate-table-menu__btn"
+          className={`rocket-slate-table-menu__btn${className ? ` ${className}` : ''}`}
           icon={<FontAwesomeIcon icon={faTable} />}
           onMouseDown={handlerClickBtnTable}
         />

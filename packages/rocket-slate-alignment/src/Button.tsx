@@ -48,14 +48,18 @@ const toggleAlign = (editor: Editor, align: AlignType) => {
   }
 };
 
-
-export const RocketSlateAlignmentButton: React.FC<{ type: 'justify' | 'left' | 'center' | 'right' }> = ({ type }) => {
+export const RocketSlateAlignmentButton: React.FC<{
+  className?: string;
+  icon?: React.ReactNode;
+  type: 'justify' | 'left' | 'center' | 'right';
+}> = ({ className, icon, type }) => {
   const editor = useSlate();
   const handlerMouseDownLinkButton = () => toggleAlign(editor, type);
   return (
     <RocketTooltip title={editor.getLocale(`alignment.btns.${type}`)}>
       <RocketButton
-        icon={getIcon(type)}
+        className={className}
+        icon={icon || getIcon(type)}
         active={isAlignActive(editor, type)}
         onMouseDown={handlerMouseDownLinkButton}
       />

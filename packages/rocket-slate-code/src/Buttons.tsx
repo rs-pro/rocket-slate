@@ -5,10 +5,13 @@ import { MARK_CODE, CODE, PARAGRAPH, isBlockActive } from 'slate-plugins-next';
 import { RocketButtonMark, RocketButtonBlock, RocketTooltip } from '@rocket-slate/editor';
 import { IconCodeBlock, IconCodeInline } from '@rocket-slate/icons';
 
-export const RocketSlateCodeButton = () => {
+export const RocketSlateCodeButton: React.FC<{ className?: string; icon?: React.ReactNode }> = ({
+  className,
+  icon,
+}) => {
   const editor = useSlate();
   const handlerMouseDown = useCallback(
-    (event) => {
+    event => {
       event.preventDefault();
       if (isBlockActive(editor, CODE)) {
         Transforms.setNodes(editor, { type: PARAGRAPH });
@@ -28,16 +31,24 @@ export const RocketSlateCodeButton = () => {
   );
   return (
     <RocketTooltip title={editor.getLocale('code.btns.block')}>
-      <RocketButtonBlock format={CODE} icon={<IconCodeBlock />} onMouseDown={handlerMouseDown} />
+      <RocketButtonBlock
+        className={className}
+        format={CODE}
+        icon={icon || <IconCodeBlock />}
+        onMouseDown={handlerMouseDown}
+      />
     </RocketTooltip>
   );
 };
 
-export const RocketSlateCodeInlineButton = () => {
+export const RocketSlateCodeInlineButton: React.FC<{ className?: string; icon?: React.ReactNode }> = ({
+  className,
+  icon,
+}) => {
   const editor = useSlate();
   return (
     <RocketTooltip title={editor.getLocale('code.btns.inline')}>
-      <RocketButtonMark format={MARK_CODE} icon={<IconCodeInline />} />
+      <RocketButtonMark className={className} format={MARK_CODE} icon={icon || <IconCodeInline />} />
     </RocketTooltip>
   );
 };

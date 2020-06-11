@@ -20,10 +20,13 @@ const UploadButton = styled(withBaseStyleButton('label'))`
   }
 `;
 
-export const RocketSlateUploadButton = () => {
+export const RocketSlateUploadButton: React.FC<{ className?: string; icon?: React.ReactNode }> = ({
+  className,
+  icon,
+}) => {
   const editor = useSlate();
   const handlerChangeFile = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
+    const { files } = event.target;
     ReactEditor.focus(editor);
     if (files && files.length > 0) {
       insertFiles(editor, files);
@@ -31,8 +34,8 @@ export const RocketSlateUploadButton = () => {
   }, []);
   return (
     <RocketTooltip title={editor.getLocale('upload.btns.upload_file')}>
-      <UploadButton>
-        <FontAwesomeIcon icon={faUpload} />
+      <UploadButton className={className}>
+        {icon || <FontAwesomeIcon icon={faUpload} />}
         <input type="file" onChange={handlerChangeFile} />
       </UploadButton>
     </RocketTooltip>

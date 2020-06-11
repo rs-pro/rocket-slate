@@ -4,7 +4,7 @@ import { RocketButton, RocketTooltip } from '@rocket-slate/editor';
 import { IconImage } from '@rocket-slate/icons';
 import { insertImage } from './Plugin';
 
-const RocketSlateButtonImage = () => {
+const RocketSlateButtonImage: React.FC<{ className?: string; icon?: React.ReactNode }> = ({ className, icon }) => {
   const editor = useEditor();
   const handlerMouseDown = useCallback(event => {
     event.preventDefault();
@@ -16,7 +16,7 @@ const RocketSlateButtonImage = () => {
   }, []);
   return (
     <RocketTooltip title={editor.getLocale('image.btns.add')}>
-      <RocketButton icon={<IconImage />} onMouseDown={handlerMouseDown} />
+      <RocketButton className={className} icon={icon || <IconImage />} onMouseDown={handlerMouseDown} />
     </RocketTooltip>
   );
 };

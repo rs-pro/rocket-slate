@@ -6,7 +6,7 @@ import { RocketButtonBlock, RocketTooltip } from '@rocket-slate/editor';
 import { IconCheckList } from '@rocket-slate/icons';
 import { ACTION_ITEM } from './Element';
 
-const RocketSlateChecklistButton = () => {
+const RocketSlateChecklistButton: React.FC<{ className?: string; icon?: React.ReactNode }> = ({ className, icon }) => {
   const editor = useSlate();
   const handlerMouseDown = useCallback(
     event => {
@@ -23,7 +23,12 @@ const RocketSlateChecklistButton = () => {
   );
   return (
     <RocketTooltip title={editor.getLocale('checklist.btns.add')}>
-      <RocketButtonBlock format={ACTION_ITEM} icon={<IconCheckList />} onMouseDown={handlerMouseDown} />
+      <RocketButtonBlock
+        className={className}
+        format={ACTION_ITEM}
+        icon={icon || <IconCheckList />}
+        onMouseDown={handlerMouseDown}
+      />
     </RocketTooltip>
   );
 };
