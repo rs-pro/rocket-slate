@@ -2,7 +2,7 @@
 
 ## Project state: pre alpha (not working)
 
-A rich text editor based on [SlateJS](https://github.com/ianstormtaylor/slate) framework
+A rich text editor based on [SlateJS](https://github.com/ianstormtaylor/slate) framework and [slate-plugin-next](https://slate-plugins-next.netlify.app/)
 
 Supports slate 0.57 only
 
