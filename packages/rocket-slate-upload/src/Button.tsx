@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
-import { useSlate, ReactEditor } from 'slate-react';
+import { useSlate, ReactEditor, useEditor } from 'slate-react';
 import { RocketTooltip, withBaseStyleButton } from '@rocket-slate/editor';
 import { insertFiles } from './Plugin';
 
@@ -20,10 +20,12 @@ const UploadButton = styled(withBaseStyleButton('label'))`
   }
 `;
 
-export const RocketSlateUploadButton: React.FC<{ className?: string; icon?: React.ReactNode }> = ({
-  className,
-  icon,
-}) => {
+export const RocketSlateUploadButton: React.FC<{
+  className?: string;
+  title: string;
+  icon?: React.ReactNode;
+  accept?: string;
+}> = ({ className, icon, title, accept }) => {
   const editor = useSlate();
   const handlerChangeFile = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
@@ -33,11 +35,42 @@ export const RocketSlateUploadButton: React.FC<{ className?: string; icon?: Reac
     }
   }, []);
   return (
-    <RocketTooltip title={editor.getLocale('upload.btns.upload_file')}>
+    <RocketTooltip title={title}>
       <UploadButton className={className}>
         {icon || <FontAwesomeIcon icon={faUpload} />}
-        <input type="file" onChange={handlerChangeFile} />
+        <input type="file" onChange={handlerChangeFile} accept={accept} />
       </UploadButton>
     </RocketTooltip>
+  );
+};
+
+export const RocketSlateUploadFilesButton: React.FC<{
+  className?: string;
+  icon?: React.ReactNode;
+  accept?: string;
+}> = ({ className, icon, accept }) => {
+  const editor = useEditor();
+  return (
+    <RocketSlateUploadButton
+      className={className}
+      icon={icon}
+      accept={accept}
+      title={editor.getLocale('upload.btns.upload_file')}
+    />
+  );
+};
+
+export const RocketSlateUploadImageButton: React.FC<{
+  className?: string;
+  icon?: React.ReactNode;
+}> = ({ className, icon }) => {
+  const editor = useEditor();
+  return (
+    <RocketSlateUploadButton
+      className={className}
+      icon={icon}
+      title={editor.getLocale('upload.btns.upload_image')}
+      accept="image/*"
+    />
   );
 };
