@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 import { useSlate, ReactEditor, useEditor } from 'slate-react';
-import { RocketTooltip, withBaseStyleButton } from '@rocket-slate/editor';
+import { withBaseStyleButton, withButtonTooltip } from '@rocket-slate/editor';
 import { insertFiles } from './Plugin';
 
-const UploadButton = styled(withBaseStyleButton('label'))`
+const UploadButton = withButtonTooltip(styled(withBaseStyleButton('label'))`
   user-select: none;
   cursor: pointer;
   color: #ccc;
@@ -18,7 +18,7 @@ const UploadButton = styled(withBaseStyleButton('label'))`
     overflow: hidden;
     opacity: 0.1;
   }
-`;
+`);
 
 export const RocketSlateUploadButton: React.FC<{
   className?: string;
@@ -35,12 +35,10 @@ export const RocketSlateUploadButton: React.FC<{
     }
   }, []);
   return (
-    <RocketTooltip title={title}>
-      <UploadButton className={className}>
-        {icon || <FontAwesomeIcon icon={faUpload} />}
-        <input type="file" onChange={handlerChangeFile} accept={accept} />
-      </UploadButton>
-    </RocketTooltip>
+    <UploadButton title={title} className={className}>
+      {icon || <FontAwesomeIcon icon={faUpload} />}
+      <input type="file" onChange={handlerChangeFile} accept={accept} />
+    </UploadButton>
   );
 };
 

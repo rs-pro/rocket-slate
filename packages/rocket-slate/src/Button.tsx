@@ -12,6 +12,7 @@ import {
   isMarkActive,
 } from 'slate-plugins-next';
 import { ToolbarFormatProps } from 'slate-plugins-next/dist/common/types';
+import { RocketTooltip } from './Tooltip';
 
 export { isBlockActive, isMarkActive };
 
@@ -88,14 +89,25 @@ export const withActiveMark = WrappedComponent => {
   });
 };
 
-export const RocketButton: React.FC<ToolbarButtonProps> = withActiveClass(
-  withButtonRef(withBaseStyleButton(ToolbarButton)),
+export const withButtonTooltip = WrappedComponent => {
+  return function withButtonTooltipHOC(props) {
+    const { title, titleHotkey, ...restProps } = props;
+    return (
+      <RocketTooltip title={title + (titleHotkey ? ` (${titleHotkey})` : '')}>
+        <WrappedComponent {...restProps} />
+      </RocketTooltip>
+    );
+  };
+};
+
+export const RocketButton: React.FC<ToolbarButtonProps> = withButtonTooltip(
+  withActiveClass(withButtonRef(withBaseStyleButton(ToolbarButton))),
 );
 
-export const RocketButtonBlock: React.FC<ToolbarFormatProps> = withActiveBlock(
-  withActiveClass(withButtonRef(withBaseStyleButton(ToolbarBlock))),
+export const RocketButtonBlock: React.FC<ToolbarFormatProps> = withButtonTooltip(
+  withActiveBlock(withActiveClass(withButtonRef(withBaseStyleButton(ToolbarBlock)))),
 );
 
-export const RocketButtonMark: React.FC<ToolbarFormatProps> = withActiveMark(
-  withActiveClass(withButtonRef(withBaseStyleButton(ToolbarMark))),
+export const RocketButtonMark: React.FC<ToolbarFormatProps> = withButtonTooltip(
+  withActiveMark(withActiveClass(withButtonRef(withBaseStyleButton(ToolbarMark)))),
 );

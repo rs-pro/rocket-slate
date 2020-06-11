@@ -11,7 +11,6 @@ import {
   ListType,
 } from 'slate-plugins-next';
 import {
-  RocketTooltip,
   RocketButton,
   withBaseStyleButton,
   withButtonRef,
@@ -72,6 +71,7 @@ const RocketButtonIcons = {
 
 interface IRocketToolbarButtonProps {
   className?: string;
+  titleHotkey?: string;
   format: RocketToolbarButtons | string;
   icon?: ReactNode;
 }
@@ -96,36 +96,22 @@ const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = 
     case RocketToolbarButtons.H5:
     case RocketToolbarButtons.H6:
     case RocketToolbarButtons.BLOCKQUOTE: {
-      return (
-        <RocketTooltip title={title}>
-          <RocketButtonBlock format={(format as unknown) as string} icon={btnIcon} {...restProps} />
-        </RocketTooltip>
-      );
+      return <RocketButtonBlock title={title} format={(format as unknown) as string} icon={btnIcon} {...restProps} />;
     }
     case RocketToolbarButtons.BOLD:
     case RocketToolbarButtons.ITALIC:
     case RocketToolbarButtons.UNDERLINE:
     case RocketToolbarButtons.STRIKETHROUGH: {
-      return (
-        <RocketTooltip title={title}>
-          <RocketButtonMark format={(format as unknown) as string} icon={btnIcon} {...restProps} />
-        </RocketTooltip>
-      );
+      return <RocketButtonMark title={title} format={(format as unknown) as string} icon={btnIcon} {...restProps} />;
     }
     case RocketToolbarButtons.OL:
     case RocketToolbarButtons.UL: {
       return (
-        <RocketTooltip title={title}>
-          <RocketWysiwygButtonList format={(format as unknown) as string} icon={btnIcon} {...restProps} />
-        </RocketTooltip>
+        <RocketWysiwygButtonList title={title} format={(format as unknown) as string} icon={btnIcon} {...restProps} />
       );
     }
     default:
-      return (
-        <RocketTooltip title={title}>
-          <RocketButton format={(format as unknown) as string} icon={btnIcon} {...restProps} />
-        </RocketTooltip>
-      );
+      return <RocketButton title={title} format={(format as unknown) as string} icon={btnIcon} {...restProps} />;
   }
 };
 

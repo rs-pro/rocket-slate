@@ -15,7 +15,13 @@ import 'prismjs/components/prism-go';
 import 'prismjs/components/prism-sql';
 import 'prismjs/themes/prism.css';
 
-import { RocketSlate, RocketToolbar, RocketToolbarGroup, initialValue, convertSlateState47toRocketSlate } from '@rocket-slate/editor';
+import {
+  RocketSlate,
+  RocketToolbar,
+  RocketToolbarGroup,
+  initialValue,
+  convertSlateState47toRocketSlate,
+} from '@rocket-slate/editor';
 import { RocketToolbarButtons, RocketWysiwygButton, RocketWysiwygPlugin } from '@rocket-slate/wysiwyg';
 import { RocketSlateChecklistPlugin, RocketSlateChecklistButton } from '@rocket-slate/checklist';
 import { RocketSlateMentionPlugin, RocketSlateMentionSelect, IMention } from '@rocket-slate/mentions';
@@ -183,7 +189,7 @@ export const Example = () => {
             <RocketWysiwygButton format={RocketToolbarButtons.H3} />
           </RocketToolbarGroup>
           <RocketToolbarGroup>
-            <RocketWysiwygButton format={RocketToolbarButtons.BOLD} />
+            <RocketWysiwygButton format={RocketToolbarButtons.BOLD} titleHotkey="ctrl+b" />
             <RocketWysiwygButton format={RocketToolbarButtons.ITALIC} />
             <RocketWysiwygButton format={RocketToolbarButtons.UNDERLINE} />
             <RocketWysiwygButton format={RocketToolbarButtons.STRIKETHROUGH} />

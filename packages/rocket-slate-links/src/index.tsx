@@ -3,7 +3,7 @@ import isUrl from 'is-url';
 import { Range, Transforms } from 'slate';
 import { RenderElementProps, useSlate } from 'slate-react';
 import { getRenderElement, RenderElementOptions, isLinkActive, LINK, unwrapLink } from 'slate-plugins-next';
-import { RocketTooltip, RocketButtonBlock, IRocketSlatePlugin } from '@rocket-slate/editor';
+import { RocketButtonBlock, IRocketSlatePlugin } from '@rocket-slate/editor';
 import { IconLink } from '@rocket-slate/icons';
 
 import locale from './locales';
@@ -128,14 +128,13 @@ const RocketSlateLinksButton: React.FC<{ className?: string; icon?: React.ReactN
     [editor],
   );
   return (
-    <RocketTooltip title={editor.getLocale('links.btns.links_add')}>
-      <RocketButtonBlock
-        className={className}
-        icon={icon || <IconLink />}
-        format={LINK}
-        onMouseDown={handlerMouseDownLinkButton}
-      />
-    </RocketTooltip>
+    <RocketButtonBlock
+      title={editor.getLocale('links.btns.links_add')}
+      className={className}
+      icon={icon || <IconLink />}
+      format={LINK}
+      onMouseDown={handlerMouseDownLinkButton}
+    />
   );
 };
 

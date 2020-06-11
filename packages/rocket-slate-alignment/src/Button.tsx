@@ -4,7 +4,7 @@ import { useSlate } from 'slate-react';
 import { isBlockActive } from 'slate-plugins-next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
-import { RocketTooltip, RocketButton } from '@rocket-slate/editor';
+import { RocketButton } from '@rocket-slate/editor';
 import { ALIGNMENT } from './Plugin';
 
 type AlignType = 'justify' | 'left' | 'center' | 'right';
@@ -56,13 +56,12 @@ export const RocketSlateAlignmentButton: React.FC<{
   const editor = useSlate();
   const handlerMouseDownLinkButton = () => toggleAlign(editor, type);
   return (
-    <RocketTooltip title={editor.getLocale(`alignment.btns.${type}`)}>
-      <RocketButton
-        className={className}
-        icon={icon || getIcon(type)}
-        active={isAlignActive(editor, type)}
-        onMouseDown={handlerMouseDownLinkButton}
-      />
-    </RocketTooltip>
+    <RocketButton
+      className={className}
+      title={editor.getLocale(`alignment.btns.${type}`)}
+      icon={icon || getIcon(type)}
+      active={isAlignActive(editor, type)}
+      onMouseDown={handlerMouseDownLinkButton}
+    />
   );
 };

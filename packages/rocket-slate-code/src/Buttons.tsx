@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Editor, Transforms, Range } from 'slate';
 import { useSlate } from 'slate-react';
 import { MARK_CODE, CODE, PARAGRAPH, isBlockActive } from 'slate-plugins-next';
-import { RocketButtonMark, RocketButtonBlock, RocketTooltip } from '@rocket-slate/editor';
+import { RocketButtonMark, RocketButtonBlock } from '@rocket-slate/editor';
 import { IconCodeBlock, IconCodeInline } from '@rocket-slate/icons';
 
 export const RocketSlateCodeButton: React.FC<{ className?: string; icon?: React.ReactNode }> = ({
@@ -30,25 +30,29 @@ export const RocketSlateCodeButton: React.FC<{ className?: string; icon?: React.
     [editor],
   );
   return (
-    <RocketTooltip title={editor.getLocale('code.btns.block')}>
-      <RocketButtonBlock
-        className={className}
-        format={CODE}
-        icon={icon || <IconCodeBlock />}
-        onMouseDown={handlerMouseDown}
-      />
-    </RocketTooltip>
+    <RocketButtonBlock
+      title={editor.getLocale('code.btns.block')}
+      className={className}
+      format={CODE}
+      icon={icon || <IconCodeBlock />}
+      onMouseDown={handlerMouseDown}
+    />
   );
 };
 
-export const RocketSlateCodeInlineButton: React.FC<{ className?: string; icon?: React.ReactNode }> = ({
+export const RocketSlateCodeInlineButton: React.FC<{ className?: string; icon?: React.ReactNode; titleHotkey?: string }> = ({
   className,
   icon,
+  titleHotkey,
 }) => {
   const editor = useSlate();
   return (
-    <RocketTooltip title={editor.getLocale('code.btns.inline')}>
-      <RocketButtonMark className={className} format={MARK_CODE} icon={icon || <IconCodeInline />} />
-    </RocketTooltip>
+    <RocketButtonMark
+      title={editor.getLocale('code.btns.inline')}
+      titleHotkey={titleHotkey}
+      className={className}
+      format={MARK_CODE}
+      icon={icon || <IconCodeInline />}
+    />
   );
 };

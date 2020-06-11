@@ -22,6 +22,7 @@ const RocketSlateCodeInlinePlugin = (options?: InlineCodePluginOptions): IRocket
       return editor;
     },
     plugin: {
+      // hotkey = 'mod+`'
       ...InlineCodePlugin(options),
       renderLeaf: ({ leaf, children }) => {
         if (leaf[MARK_CODE]) {

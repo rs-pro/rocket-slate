@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Transforms } from 'slate';
 import { useSlate } from 'slate-react';
 import { isBlockActive, PARAGRAPH } from 'slate-plugins-next';
-import { RocketButtonBlock, RocketTooltip } from '@rocket-slate/editor';
+import { RocketButtonBlock } from '@rocket-slate/editor';
 import { IconCheckList } from '@rocket-slate/icons';
 import { ACTION_ITEM } from './Element';
 
@@ -22,14 +22,13 @@ const RocketSlateChecklistButton: React.FC<{ className?: string; icon?: React.Re
     [editor],
   );
   return (
-    <RocketTooltip title={editor.getLocale('checklist.btns.add')}>
-      <RocketButtonBlock
-        className={className}
-        format={ACTION_ITEM}
-        icon={icon || <IconCheckList />}
-        onMouseDown={handlerMouseDown}
-      />
-    </RocketTooltip>
+    <RocketButtonBlock
+      className={className}
+      title={editor.getLocale('checklist.btns.add')}
+      format={ACTION_ITEM}
+      icon={icon || <IconCheckList />}
+      onMouseDown={handlerMouseDown}
+    />
   );
 };
 

@@ -60,12 +60,12 @@ const resetOptions: IResetOption = {
 const RocketWysiwygPlugin = (
   plugins: Array<WysiwygPluginTypes | WysiwygPluginsWithParams> = [
     WysiwygPluginTypes.BLOCKQUOTE,
-    WysiwygPluginTypes.BOLD,
+    WysiwygPluginTypes.BOLD, // hotkey = 'mod+b'
     WysiwygPluginTypes.HEADING,
-    WysiwygPluginTypes.ITALIC,
+    WysiwygPluginTypes.ITALIC, // hotkey = 'mod+i'
     WysiwygPluginTypes.LIST,
-    WysiwygPluginTypes.STRIKETHROUGH,
-    WysiwygPluginTypes.UNDERLINE,
+    WysiwygPluginTypes.STRIKETHROUGH, // hotkey = 'mod+shift+k'
+    WysiwygPluginTypes.UNDERLINE, // hotkey = 'mod+u'
   ],
 ): IRocketSlatePlugin => {
   const pluginsInitialized = [
