@@ -18,12 +18,14 @@ export const RocketSlateCodeButton: React.FC<{ className?: string; icon?: React.
       } else {
         const { selection } = editor;
         if (selection) {
-          let text = '';
           if (!Range.isCollapsed(selection)) {
-            text = Editor.string(editor, selection);
+            const text = Editor.string(editor, selection);
+            Transforms.insertNodes(editor, { type: CODE, children: [{ text }] });
+            Transforms.insertNodes(editor, { type: PARAGRAPH, children: [{ text: '' }] });
+          } else {
+            Transforms.setNodes(editor, { type: CODE });
+            Transforms.insertNodes(editor, { type: PARAGRAPH, children: [{ text: '' }] });
           }
-          Transforms.insertNodes(editor, { type: CODE, children: [{ text }] });
-          Transforms.insertNodes(editor, { type: PARAGRAPH, children: [{ text: '' }] });
         }
       }
     },
@@ -40,11 +42,11 @@ export const RocketSlateCodeButton: React.FC<{ className?: string; icon?: React.
   );
 };
 
-export const RocketSlateCodeInlineButton: React.FC<{ className?: string; icon?: React.ReactNode; titleHotkey?: string }> = ({
-  className,
-  icon,
-  titleHotkey,
-}) => {
+export const RocketSlateCodeInlineButton: React.FC<{
+  className?: string;
+  icon?: React.ReactNode;
+  titleHotkey?: string;
+}> = ({ className, icon, titleHotkey }) => {
   const editor = useSlate();
   return (
     <RocketButtonMark
