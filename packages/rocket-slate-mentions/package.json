@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/mentions",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "Mentions plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "build:tsc": "tsc --project ./tsconfig.build.json --declaration --outDir dist/ --emitDeclarationOnly"
   },
   "dependencies": {
-    "@rocket-slate/editor": "^0.2.9",
+    "@rocket-slate/editor": "^0.2.10",
     "@types/styled-components": "^4.4.3",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
