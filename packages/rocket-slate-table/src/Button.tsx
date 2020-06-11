@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-
+import classNames from 'classnames';
 import { useSlate } from 'slate-react';
 import {
   insertTable,
@@ -52,6 +52,15 @@ const ListWrap = styled.div`
   border: 1px solid #ccc;
   border-radius: 2px;
 
+  .rocket-slate-table-menu__sub-btn {
+    color: #000;
+  }
+
+  .rocket-slate-table-menu__sub-btn[disabled] {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+
   > div {
     white-space: nowrap;
   }
@@ -87,8 +96,8 @@ export const RocketSlateTableButton: React.FC<{ className?: string }> = ({ class
     <ButtonTableWrap className="rocket-slate-table-menu">
       <RocketTooltip title={editor.getLocale('table.btns.table_control')}>
         <RocketButton
-          active={isShowList}
-          className={`rocket-slate-table-menu__btn${className ? ` ${className}` : ''}`}
+          active={isShowList || isTableActive}
+          className={classNames('rocket-slate-table-menu__btn', className)}
           icon={<FontAwesomeIcon icon={faTable} />}
           onMouseDown={handlerClickBtnTable}
         />
@@ -98,7 +107,7 @@ export const RocketSlateTableButton: React.FC<{ className?: string }> = ({ class
           <div>
             <RocketTooltip title={editor.getLocale('table.btns.table_create')}>
               <RocketButton
-                active
+                className={classNames('rocket-slate-table-menu__sub-btn', className)}
                 icon={
                   <IconWrap>
                     <FontAwesomeIcon icon={faTable} />
@@ -111,16 +120,26 @@ export const RocketSlateTableButton: React.FC<{ className?: string }> = ({ class
               />
             </RocketTooltip>
             <RocketTooltip title={editor.getLocale('table.btns.table_row_add')}>
-              <RocketButton active={isTableActive} icon={<IconTableRowAdd />} onMouseDown={handlerTableRowAdd} />
+              <RocketButton
+                className={classNames('rocket-slate-table-menu__sub-btn', className)}
+                icon={<IconTableRowAdd />}
+                onMouseDown={handlerTableRowAdd}
+                disabled={!isTableActive}
+              />
             </RocketTooltip>
             <RocketTooltip title={editor.getLocale('table.btns.table_row_delete')}>
-              <RocketButton active={isTableActive} icon={<IconTableRowDel />} onMouseDown={handlerTableRowDelete} />
+              <RocketButton
+                className={classNames('rocket-slate-table-menu__sub-btn', className)}
+                icon={<IconTableRowDel />}
+                onMouseDown={handlerTableRowDelete}
+                disabled={!isTableActive}
+              />
             </RocketTooltip>
           </div>
           <div>
             <RocketTooltip title={editor.getLocale('table.btns.table_delete')}>
               <RocketButton
-                active={isTableActive}
+                className={classNames('rocket-slate-table-menu__sub-btn', className)}
                 icon={
                   <IconWrap>
                     <FontAwesomeIcon icon={faTable} />
@@ -130,13 +149,24 @@ export const RocketSlateTableButton: React.FC<{ className?: string }> = ({ class
                   </IconWrap>
                 }
                 onMouseDown={handlerTableDelete}
+                disabled={!isTableActive}
               />
             </RocketTooltip>
             <RocketTooltip title={editor.getLocale('table.btns.table_col_add')}>
-              <RocketButton active={isTableActive} icon={<IconTableColAdd />} onMouseDown={handlerTableColumnAdd} />
+              <RocketButton
+                className={classNames('rocket-slate-table-menu__sub-btn', className)}
+                icon={<IconTableColAdd />}
+                onMouseDown={handlerTableColumnAdd}
+                disabled={!isTableActive}
+              />
             </RocketTooltip>
             <RocketTooltip title={editor.getLocale('table.btns.table_col_delete')}>
-              <RocketButton active={isTableActive} icon={<IconTableColDel />} onMouseDown={handlerTableColumnDelete} />
+              <RocketButton
+                className={classNames('rocket-slate-table-menu__sub-btn', className)}
+                icon={<IconTableColDel />}
+                onMouseDown={handlerTableColumnDelete}
+                disabled={!isTableActive}
+              />
             </RocketTooltip>
           </div>
         </ListWrap>

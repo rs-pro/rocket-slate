@@ -28,7 +28,7 @@ import {
   RocketSlateCodeInlineButton,
   escapeHTML,
 } from '@rocket-slate/code';
-import { RocketSlateUploadPlugin, RocketSlateUploadButton, withProgres } from '@rocket-slate/upload';
+import { RocketSlateUploadPlugin, RocketSlateUploadFilesButton, withProgres } from '@rocket-slate/upload';
 import { RocketSlateTablePlugin, RocketSlateTableButton } from '@rocket-slate/table';
 import { RocketSlateColorsPlugin, RocketSlateColorsButton } from '@rocket-slate/colors';
 import { RocketSlatePastHtmlPlugin } from '@rocket-slate/paste-html';
@@ -211,7 +211,7 @@ export const Example = () => {
           <RocketToolbarGroup>
             <RocketSlateLinksButton />
             <RocketSlateButtonImage />
-            <RocketSlateUploadButton />
+            <RocketSlateUploadFilesButton />
           </RocketToolbarGroup>
           <RocketToolbarGroup>
             <RocketSlateTableButton />

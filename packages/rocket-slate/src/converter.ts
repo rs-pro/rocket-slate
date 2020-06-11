@@ -40,6 +40,7 @@ function convertType(node) {
 
 function convertMarks(mark) {
   if (mark === 'del') return 'strikethrough';
+  if (mark === 'underlined') return 'underline';
   return mark;
 }
 

@@ -77,7 +77,7 @@ const ColorIcon: React.FC<{ type: ColorType }> = ({ type }) => {
   return null;
 };
 
-export const RocketSlateColorsButton: React.FC<{ className?: string; icon: React.ReactNode; type: ColorType }> = ({
+export const RocketSlateColorsButton: React.FC<{ className?: string; icon?: React.ReactNode; type: ColorType }> = ({
   className,
   icon,
   type,
@@ -93,6 +93,7 @@ export const RocketSlateColorsButton: React.FC<{ className?: string; icon: React
     <ButtonWrap className="RocketSlateColorButton" ref={wrapperRef}>
       <RocketTooltip title={editor.getLocale(`colors.btns.${type}`)}>
         <RocketButton
+          active={isColorActive(editor, type)}
           className={`RocketSlateColorButton__Mark${className ? ` ${className}` : ''}`}
           icon={icon || <ColorIcon type={type} />}
           onMouseDown={handlerClickToggleShow}

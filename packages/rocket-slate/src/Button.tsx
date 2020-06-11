@@ -1,8 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import classNames from 'classnames';
+import { useSlate } from 'slate-react';
 import styled, { css } from 'styled-components';
-import { ToolbarButton, ToolbarMark, ToolbarBlock, ToolbarButtonProps } from 'slate-plugins-next';
+import {
+  ToolbarButton,
+  ToolbarMark,
+  ToolbarBlock,
+  ToolbarButtonProps,
+  isBlockActive,
+  isMarkActive,
+} from 'slate-plugins-next';
 import { ToolbarFormatProps } from 'slate-plugins-next/dist/common/types';
+
+export { isBlockActive, isMarkActive };
 
 const baseStyleButton = css`
   display: inline-block;
@@ -54,6 +65,37 @@ export function withBaseStyleButton<T = any>(
   `;
 }
 
-export const RocketButton: React.FC<ToolbarButtonProps> = withButtonRef(withBaseStyleButton(ToolbarButton));
-export const RocketButtonBlock: React.FC<ToolbarFormatProps> = withButtonRef(withBaseStyleButton(ToolbarBlock));
-export const RocketButtonMark: React.FC<ToolbarFormatProps> = withButtonRef(withBaseStyleButton(ToolbarMark));
+export const withActiveClass = WrappedComponent => {
+  return React.forwardRef(function withActiveClassHOC(props: any, ref) {
+    const { className, active } = props;
+    return <WrappedComponent {...props} ref={ref} className={classNames(className, { 'is-active': active })} />;
+  });
+};
+
+export const withActiveBlock = WrappedComponent => {
+  return React.forwardRef(function withActiveBlockHOC(props: any, ref) {
+    const { format } = props;
+    const editor = useSlate();
+    return <WrappedComponent {...props} ref={ref} active={isBlockActive(editor, format)} />;
+  });
+};
+
+export const withActiveMark = WrappedComponent => {
+  return React.forwardRef(function withActiveMarkHOC(props: any, ref) {
+    const { format } = props;
+    const editor = useSlate();
+    return <WrappedComponent {...props} ref={ref} active={isMarkActive(editor, format)} />;
+  });
+};
+
+export const RocketButton: React.FC<ToolbarButtonProps> = withActiveClass(
+  withButtonRef(withBaseStyleButton(ToolbarButton)),
+);
+
+export const RocketButtonBlock: React.FC<ToolbarFormatProps> = withActiveBlock(
+  withActiveClass(withButtonRef(withBaseStyleButton(ToolbarBlock))),
+);
+
+export const RocketButtonMark: React.FC<ToolbarFormatProps> = withActiveMark(
+  withActiveClass(withButtonRef(withBaseStyleButton(ToolbarMark))),
+);

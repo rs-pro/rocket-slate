@@ -15,6 +15,8 @@ import {
   RocketButton,
   withBaseStyleButton,
   withButtonRef,
+  withActiveClass,
+  withActiveBlock,
   RocketButtonBlock,
   RocketButtonMark,
 } from '@rocket-slate/editor';
@@ -74,8 +76,8 @@ interface IRocketToolbarButtonProps {
   icon?: ReactNode;
 }
 
-const RocketWysiwygButtonList: React.FC<ToolbarFormatProps> = withButtonRef(
-  withBaseStyleButton<ToolbarFormatProps>(ToolbarList),
+const RocketWysiwygButtonList: React.FC<ToolbarFormatProps> = withActiveBlock(
+  withActiveClass(withButtonRef(withBaseStyleButton<ToolbarFormatProps>(ToolbarList))),
 );
 
 const RocketWysiwygButton: React.FunctionComponent<IRocketToolbarButtonProps> = props => {
