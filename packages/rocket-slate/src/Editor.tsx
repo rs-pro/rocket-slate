@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import classNames from 'classnames';
+import { Transforms } from 'slate';
 import { Slate, ReactEditor } from 'slate-react';
 import { EditablePlugins } from 'slate-plugins-next';
 import { useEditorWithPlugin, useHandlers } from './hooks';
@@ -118,6 +119,7 @@ export class RocketSlate extends React.Component<IRocketSlateEditorProps> {
 
   blur() {
     if (this.refEditor) {
+      Transforms.select(this.refEditor.editor, [0]);
       ReactEditor.blur(this.refEditor.editor);
     }
   }
