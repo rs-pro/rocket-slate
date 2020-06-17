@@ -15,7 +15,8 @@ interface IMention {
 const RocketSlateMentionListItem = styled.div<{ isActive?: boolean; isLoading?: boolean; isEmpty?: boolean }>`
   padding: 1px 3px;
   border-radius: 3px;
-  background: ${(props) => (props.isActive ? '#B4D5FF' : 'transparent')};
+  background: ${props => (props.isActive ? '#B4D5FF' : 'transparent')};
+  cursor: pointer;
 `;
 
 const RocketSlateMentionListWrap = styled.div`
@@ -31,16 +32,31 @@ const RocketSlateMentionListWrap = styled.div`
 
 interface IRenderMentionList {
   mentions: IMention[];
-  renderMention?: (mention: IMention, isActive: boolean) => React.ReactElement;
+  renderMention?: (
+    mention: IMention,
+    isActive: boolean,
+    onHover: (index) => void,
+    onSelect: (index) => void,
+  ) => React.ReactElement;
   isLoading?: boolean;
 }
 
 type RocketMentionList = {
   target: any;
   index: number;
+  onHover: (index) => void;
+  onSelect: (index) => void;
 } & IRenderMentionList;
 
-const RocketSlateMentionList = ({ target, index, mentions, renderMention, isLoading }: RocketMentionList) => {
+const RocketSlateMentionList = ({
+  target,
+  index,
+  mentions,
+  renderMention,
+  isLoading,
+  onHover,
+  onSelect,
+}: RocketMentionList) => {
   const ref: any = useRef();
   const editor = useSlate();
 
@@ -60,20 +76,30 @@ const RocketSlateMentionList = ({ target, index, mentions, renderMention, isLoad
     <PortalBody>
       <RocketSlateMentionListWrap ref={ref}>
         {isLoading ? (
-          <RocketSlateMentionListItem isLoading={true}>Загрузка...</RocketSlateMentionListItem>
+          <RocketSlateMentionListItem isLoading>Загрузка...</RocketSlateMentionListItem>
         ) : (
           <>
             {mentions.length === 0 && (
-              <RocketSlateMentionListItem isLoading={true}>Ничего не найдено</RocketSlateMentionListItem>
+              <RocketSlateMentionListItem isLoading>Ничего не найдено</RocketSlateMentionListItem>
             )}
             {mentions.length > 0 && (
               <>
                 {renderMention
                   ? mentions.map((mention, i) => (
-                      <React.Fragment key={mention.id}>{renderMention(mention, i === index)}</React.Fragment>
+                      <React.Fragment key={mention.id}>{renderMention(mention, i === index, onHover, onSelect)}</React.Fragment>
                     ))
                   : mentions.map((mention, i) => (
-                      <RocketSlateMentionListItem key={mention.id} isActive={i === index}>
+                      <RocketSlateMentionListItem
+                        key={mention.id}
+                        isActive={i === index}
+                        onMouseOver={() => {
+                          onHover(i);
+                        }}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          onSelect(i);
+                        }}
+                      >
                         {mention.text}
                       </RocketSlateMentionListItem>
                     ))}
@@ -248,6 +274,26 @@ const RocketSlateMentionSelect = (props: RocketMentionSelect) => {
   MENTION_ON_CHANGE.set(editor, handlerChangeValueEditor);
   MENTION_ON_KEYDOWN.set(editor, handlerKeyDown);
 
+  const handleHover = useCallback(
+    // eslint-disable-next-line no-shadow
+    index => {
+      setIndex(index);
+    },
+    [mentions, target, index, setIndex],
+  );
+
+  const handleSelect = useCallback(
+    // eslint-disable-next-line no-shadow
+    index => {
+      if (target) {
+        Transforms.select(editor, target as any);
+        insertMention(editor, mentions[index]);
+        setTarget(null as any);
+      }
+    },
+    [mentions, target, index, setTarget],
+  );
+
   if (target) {
     return (
       <RocketSlateMentionList
@@ -256,6 +302,8 @@ const RocketSlateMentionSelect = (props: RocketMentionSelect) => {
         mentions={mentions}
         renderMention={renderMention}
         isLoading={isLoading}
+        onHover={handleHover}
+        onSelect={handleSelect}
       />
     );
   }
