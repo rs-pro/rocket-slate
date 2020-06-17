@@ -1,5 +1,5 @@
 import { withShortcuts, withPasteMd } from 'slate-plugins-next';
-import { IRocketSlatePlugin } from '@rocket-slate/editor';
+import { IRocketSlatePlugin, withCheckPastSlateFragment } from '@rocket-slate/editor';
 
 export const RocketSlateMarkdownShortcutsPlugin = (): IRocketSlatePlugin => {
   return {
@@ -13,8 +13,9 @@ export const RocketSlateMarkdownShortcutsPlugin = (): IRocketSlatePlugin => {
 export const RocketSlateMarkdownPastePlugin = (plugins: IRocketSlatePlugin[]): IRocketSlatePlugin => {
   return {
     withPlugin: editor => {
+      const { insertData } = editor;
       const filteredPlugins = plugins.filter(pluginItem => pluginItem.plugin).map(pluginItem => pluginItem.plugin);
-      return withPasteMd(filteredPlugins)(editor);
+      return withCheckPastSlateFragment(withPasteMd(filteredPlugins)(editor), insertData);
     },
   };
 };

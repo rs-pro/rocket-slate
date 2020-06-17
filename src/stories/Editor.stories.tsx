@@ -104,6 +104,7 @@ export const Example = () => {
   const plugins = useMemo(() => {
     const pluginWithDeserialize = [
       RocketWysiwygPlugin(),
+      RocketSlateColorsPlugin(),
       RocketSlateImagePlugin(),
       RocketSlateTablePlugin(),
       RocketSlateLinksPlugin(),
@@ -120,14 +121,11 @@ export const Example = () => {
     ];
 
     return [
-      RocketSlatePastHtmlPlugin(pluginWithDeserialize),
-      RocketSlateMarkdownPastePlugin(pluginWithDeserialize),
       ...pluginWithDeserialize,
       RocketSlateAlignmentPlugin(),
       RocketSlateMarkdownShortcutsPlugin(),
       RocketSlateChecklistPlugin(),
       RocketSlateMentionPlugin(),
-      RocketSlateColorsPlugin(),
       RocketSlateUploadPlugin({
         onInsertFile: (file, onComplete, onError, onProgress) => {
           fakeProgress(1000 + Math.random() * (5000 - 1000), onProgress, () => {
@@ -136,6 +134,8 @@ export const Example = () => {
           });
         },
       }),
+      RocketSlateMarkdownPastePlugin(pluginWithDeserialize), // должен быть после upload
+      RocketSlatePastHtmlPlugin(pluginWithDeserialize), // должен быть после markdown и upload
     ];
   }, []);
 

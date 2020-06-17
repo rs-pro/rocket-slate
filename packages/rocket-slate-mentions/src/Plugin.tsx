@@ -6,11 +6,16 @@ import { IRocketSlatePlugin } from '@rocket-slate/editor';
 import { RenderElementProps, useFocused, useSelected } from 'slate-react';
 import { MENTION_ON_CHANGE, MENTION_ON_KEYDOWN } from './events';
 
-const MentionWrap = styled.div<{ selected: boolean; focused: boolean }>`
+const MentionWrap = styled.span`
+  display: inline-block;
+  vertical-align: middle;
+`;
+
+const MentionElement = styled.span<{ selected: boolean; focused: boolean }>`
+  display: inline-block;
   padding: 3px 10px 2px;
   margin: 0 1px;
   vertical-align: middle;
-  display: inline-block;
   border-radius: 4px;
   background-color: #eee;
   box-shadow: ${props => (props.selected && props.focused ? '0 0 0 2px #B4D5FF' : 'none')};
@@ -23,9 +28,9 @@ const Mention = ({
     children: [{ text }],
   },
 }) => (
-  <MentionWrap selected={selected} focused={focused}>
+  <MentionElement selected={selected} focused={focused}>
     {text}
-  </MentionWrap>
+  </MentionElement>
 );
 
 type MentionComponentProps = RenderElementProps & {
@@ -44,10 +49,15 @@ const RocketSlateMentionElement = (props: RenderElementProps & MentionOptionsEle
   const selected = useSelected();
   const focused = useFocused();
   return (
-    <span {...attributes} data-slate-type={MENTION} contentEditable={false} className="RocketSlateMentionElement">
+    <MentionWrap
+      {...attributes}
+      data-slate-type={MENTION}
+      contentEditable={false}
+      className="RocketSlateMentionElement"
+    >
       <ComponentMention {...restProps} attributes={attributes} selected={selected} focused={focused} />
       {children}
-    </span>
+    </MentionWrap>
   );
 };
 

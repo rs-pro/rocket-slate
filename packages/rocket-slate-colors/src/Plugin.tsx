@@ -17,6 +17,20 @@ export const RocketSlateColorsPlugin = (): IRocketSlatePlugin => {
         }
         return children;
       },
+      deserialize: {
+        leaf: {
+          SPAN: el => {
+            const leaf = {
+              [COLOR_FONT]: el.style.color ? el.style.color : undefined,
+              [COLOR_BG]: el.style.backgroundColor ? el.style.backgroundColor : undefined,
+            };
+            return (
+              (leaf[COLOR_FONT] || leaf[COLOR_BG]) &&
+              Object.entries(leaf).reduce((a, [k, v]) => (v == null ? a : ((a[k] = v), a)), {})
+            );
+          },
+        },
+      },
     },
   };
 };

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Range } from 'slate';
 import { IResetOption, IRocketSlatePlugin } from '@rocket-slate/editor';
 import {
@@ -20,6 +21,8 @@ import {
   BLOCKQUOTE as BQ,
   withBreakEmptyReset,
   withDeleteStartReset,
+  MARK_STRIKETHROUGH,
+  getElement,
 } from 'slate-plugins-next';
 import { DeserializeHtml } from 'slate-plugins-next/dist/deserializers/types';
 import locals from './locales';
@@ -34,17 +37,40 @@ enum WysiwygPluginTypes {
   UNDERLINE = 'underline',
 }
 
-const WysiwygPlugins = {
+type StrikePluginOption = {
+  renderLeaf: (any) => React.ReactNode;
+  deserialize: any;
+};
+
+export const WysiwygPlugins = {
   [WysiwygPluginTypes.BLOCKQUOTE]: BlockquotePlugin,
   [WysiwygPluginTypes.BOLD]: BoldPlugin,
   [WysiwygPluginTypes.HEADING]: HeadingPlugin,
   [WysiwygPluginTypes.ITALIC]: ItalicPlugin,
   [WysiwygPluginTypes.LIST]: ListPlugin,
-  [WysiwygPluginTypes.STRIKETHROUGH]: StrikethroughPlugin,
+  [WysiwygPluginTypes.STRIKETHROUGH]: (
+    options?: StrikethroughPluginOptions,
+    overridePluginOptions?: StrikePluginOption,
+  ) => {
+    const strikePlugin = StrikethroughPlugin(options);
+    const overridePlugin = {
+      renderLeaf: ({ children, leaf }) => {
+        if (leaf[MARK_STRIKETHROUGH]) {
+          return <s>{children}</s>;
+        }
+        return children;
+      },
+      ...overridePluginOptions,
+    };
+    return {
+      ...strikePlugin,
+      ...overridePlugin,
+    };
+  },
   [WysiwygPluginTypes.UNDERLINE]: UnderlinePlugin,
 };
 
-type WysiwygPluginsWithParams =
+export type WysiwygPluginsWithParams =
   | [WysiwygPluginTypes.BLOCKQUOTE, RenderElementOptions]
   | [WysiwygPluginTypes.BOLD, BoldPluginOptions]
   | [WysiwygPluginTypes.HEADING, HeadingPluginOptions]
@@ -61,7 +87,7 @@ const RocketWysiwygPlugin = (
   plugins: Array<WysiwygPluginTypes | WysiwygPluginsWithParams> = [
     WysiwygPluginTypes.BLOCKQUOTE,
     WysiwygPluginTypes.BOLD, // hotkey = 'mod+b'
-    WysiwygPluginTypes.HEADING,
+    [WysiwygPluginTypes.HEADING, { levels: 6 }],
     WysiwygPluginTypes.ITALIC, // hotkey = 'mod+i'
     WysiwygPluginTypes.LIST,
     WysiwygPluginTypes.STRIKETHROUGH, // hotkey = 'mod+shift+k'
@@ -69,7 +95,9 @@ const RocketWysiwygPlugin = (
   ],
 ): IRocketSlatePlugin => {
   const pluginsInitialized = [
-    ParagraphPlugin(),
+    ParagraphPlugin({
+      component: getElement('p'),
+    }),
     ...plugins.map(option => {
       if (Array.isArray(option)) {
         return WysiwygPlugins[option[0]](option[1]);

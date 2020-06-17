@@ -5,3 +5,4 @@ export * from './Button';
 export * from './initialValue';
 export * from './types';
 export * from './converter';
+export * from './withCheckPastSlateFragment';
