@@ -126,6 +126,8 @@ export const Example = () => {
       RocketSlateMarkdownShortcutsPlugin(),
       RocketSlateChecklistPlugin(),
       RocketSlateMentionPlugin(),
+      RocketSlateMarkdownPastePlugin(pluginWithDeserialize),
+      RocketSlatePastHtmlPlugin(pluginWithDeserialize), // должен быть после markdown
       RocketSlateUploadPlugin({
         onInsertFile: (file, onComplete, onError, onProgress) => {
           fakeProgress(1000 + Math.random() * (5000 - 1000), onProgress, () => {
@@ -134,8 +136,6 @@ export const Example = () => {
           });
         },
       }),
-      RocketSlateMarkdownPastePlugin(pluginWithDeserialize), // должен быть после upload
-      RocketSlatePastHtmlPlugin(pluginWithDeserialize), // должен быть после markdown и upload
     ];
   }, []);
 
