@@ -54,10 +54,10 @@ const RocketSlateEditor = React.forwardRef<any, IRocketSlateEditorProps>(
     const slatePlugins = useMemo(() => plugins.filter(({ plugin }) => plugin).map(({ plugin }) => plugin), plugins);
 
     const handlerChangeValueEditor = useCallback(
-      value => {
-        setValue(value);
+      newValue => {
+        setValue(newValue);
         if (onChange) {
-          onChange(value);
+          onChange(newValue);
         }
       },
       [setValue, onChange],
