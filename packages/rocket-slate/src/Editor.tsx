@@ -60,7 +60,7 @@ const RocketSlateEditor = React.forwardRef<any, IRocketSlateEditorProps>(
           onChange(value);
         }
       },
-      [value, setValue, onChange],
+      [setValue, onChange],
     );
 
     useEffect(() => {
