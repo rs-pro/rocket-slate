@@ -3,6 +3,7 @@ import { Transforms } from 'slate';
 import { RenderElementProps, useSlate, useFocused, useReadOnly, useSelected, ReactEditor } from 'slate-react';
 import { Resizable } from 're-resizable';
 import { IMAGE } from 'slate-plugins-next';
+import styled from 'styled-components';
 
 const regexpDataUrl = /^data:/i;
 const isDataUrl = url => regexpDataUrl.test(url);
@@ -16,6 +17,10 @@ export interface IImageData {
   height?: number;
   isLoading?: boolean;
 }
+
+const RocketSlateImageElementSpan = styled.span`
+  display: block;
+`;
 
 export const RocketImageElement = (props: RenderElementProps) => {
   const { attributes, children, element } = props;
@@ -46,11 +51,19 @@ export const RocketImageElement = (props: RenderElementProps) => {
   const titleImg = title || name || (src && (isDataUrl(src) ? src.slice(0, 10) : src)) || '';
 
   return (
-    <div {...attributes} data-slate-type={IMAGE}>
-      <div contentEditable={false}>
+    <RocketSlateImageElementSpan className="RocketSlateImageElement" {...attributes} data-slate-type={IMAGE}>
+      <RocketSlateImageElementSpan className="RocketSlateImageElement__Holder" contentEditable={false}>
         {isReadOnly || isLoading ? (
-          <div style={{ ...size, ...(isLoading ? { position: 'relative' } : undefined) }}>
-            <a href={isReadOnly ? src : undefined} target="_blank" style={{ display: 'block' }}>
+          <RocketSlateImageElementSpan
+            className="RocketSlateImageElement__Wrapper"
+            style={{ ...size, ...(isLoading ? { position: 'relative' } : undefined) }}
+          >
+            <a
+              href={isReadOnly ? src : undefined}
+              rel="noopener noreferrer"
+              target="_blank"
+              style={{ display: 'block' }}
+            >
               <img
                 ref={image}
                 src={src}
@@ -60,9 +73,15 @@ export const RocketImageElement = (props: RenderElementProps) => {
               />
             </a>
             {isLoading && <div style={{ position: 'absolute', top: 0, left: 0 }}>Загрузка...</div>}
-          </div>
+          </RocketSlateImageElementSpan>
         ) : (
-          <Resizable size={size} minHeight={100} minWidth={100} onResizeStop={handlerResize}>
+          <Resizable
+            className="RocketSlateImageElement__Resizer"
+            size={size}
+            minHeight={100}
+            minWidth={100}
+            onResizeStop={handlerResize}
+          >
             <img
               ref={image}
               src={src}
@@ -72,8 +91,8 @@ export const RocketImageElement = (props: RenderElementProps) => {
             />
           </Resizable>
         )}
-      </div>
+      </RocketSlateImageElementSpan>
       {children}
-    </div>
+    </RocketSlateImageElementSpan>
   );
 };
