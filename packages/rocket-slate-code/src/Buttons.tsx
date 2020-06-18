@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react';
-import { Editor, Transforms, Range } from 'slate';
+import React from 'react';
 import { useSlate } from 'slate-react';
-import { MARK_CODE, CODE, PARAGRAPH, isBlockActive } from 'slate-plugins-next';
+import { MARK_CODE, CODE } from 'slate-plugins-next';
 import { RocketButtonMark, RocketButtonBlock } from '@rocket-slate/editor';
 import { IconCodeBlock, IconCodeInline } from '@rocket-slate/icons';
 
@@ -10,34 +9,12 @@ export const RocketSlateCodeButton: React.FC<{ className?: string; icon?: React.
   icon,
 }) => {
   const editor = useSlate();
-  const handlerMouseDown = useCallback(
-    event => {
-      event.preventDefault();
-      if (isBlockActive(editor, CODE)) {
-        Transforms.setNodes(editor, { type: PARAGRAPH });
-      } else {
-        const { selection } = editor;
-        if (selection) {
-          if (!Range.isCollapsed(selection)) {
-            const text = Editor.string(editor, selection);
-            Transforms.insertNodes(editor, { type: CODE, children: [{ text }] });
-            Transforms.insertNodes(editor, { type: PARAGRAPH, children: [{ text: '' }] });
-          } else {
-            Transforms.setNodes(editor, { type: CODE });
-            Transforms.insertNodes(editor, { type: PARAGRAPH, children: [{ text: '' }] });
-          }
-        }
-      }
-    },
-    [editor],
-  );
   return (
     <RocketButtonBlock
       title={editor.getLocale('code.btns.block')}
       className={className}
       format={CODE}
       icon={icon || <IconCodeBlock />}
-      onMouseDown={handlerMouseDown}
     />
   );
 };
