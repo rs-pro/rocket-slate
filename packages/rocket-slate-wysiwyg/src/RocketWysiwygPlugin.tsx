@@ -87,7 +87,17 @@ const RocketWysiwygPlugin = (
   plugins: Array<WysiwygPluginTypes | WysiwygPluginsWithParams> = [
     WysiwygPluginTypes.BLOCKQUOTE,
     WysiwygPluginTypes.BOLD, // hotkey = 'mod+b'
-    [WysiwygPluginTypes.HEADING, { levels: 6 }],
+    [
+      WysiwygPluginTypes.HEADING,
+      {
+        H1: getElement('h1'),
+        H2: getElement('h2'),
+        H3: getElement('h3'),
+        H4: getElement('h4'),
+        H5: getElement('h5'),
+        H6: getElement('h6'),
+      },
+    ],
     WysiwygPluginTypes.ITALIC, // hotkey = 'mod+i'
     WysiwygPluginTypes.LIST,
     WysiwygPluginTypes.STRIKETHROUGH, // hotkey = 'mod+shift+k'
