@@ -9,17 +9,15 @@ import locale from './locales';
 export const RocketSlateCodePlugin = (options: IHighlights): IRocketSlatePlugin => {
   return {
     plugin: {
-      ...CodePlugin({
-        component: (props: RenderElementProps) => <RocketSlateCodeBlock {...props} {...options} />,
-      }),
+      ...CodePlugin(),
     },
-    withPlugin: editor => {
-      const { isVoid } = editor;
-      editor.addLocale(locale);
-      editor.isVoid = element => {
-        return element.type === CODE ? true : isVoid(element);
-      };
-      return editor;
-    },
+  //   withPlugin: editor => {
+  //     const { isVoid } = editor;
+  //     editor.addLocale(locale);
+  //     editor.isVoid = element => {
+  //       return element.type === CODE ? true : isVoid(element);
+  //     };
+  //     return editor;
+  //   },
   };
 };
