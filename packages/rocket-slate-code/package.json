@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/code",
-  "version": "0.2.15",
+  "version": "0.2.16",
   "description": "Code plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
