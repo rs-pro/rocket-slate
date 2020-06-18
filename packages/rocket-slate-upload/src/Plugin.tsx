@@ -70,7 +70,8 @@ export const insertFiles = (editor: ReactEditor, files: FileList) => {
             onInsertFile(
               file,
               ({ id, url }) => {
-                Transforms.setNodes(editor, { data: { ...imgData, id, src: url } }, { at: range });
+                const { isLoading,  ...restImagData } = imgData
+                Transforms.setNodes(editor, { data: { ...restImagData, id, src: url } }, { at: range });
                 if (window.URL && window.URL.revokeObjectURL && imgData.src) {
                   window.URL.revokeObjectURL(imgData.src);
                 }
