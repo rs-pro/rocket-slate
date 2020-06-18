@@ -1,23 +1,17 @@
-import React from 'react';
-import { RenderElementProps } from 'slate-react';
-import { CODE, CodePlugin } from 'slate-plugins-next';
+import { CODE, CodePlugin, withBreakEmptyReset, withDeleteStartReset } from 'slate-plugins-next';
 import { IRocketSlatePlugin } from '@rocket-slate/editor';
-import { IHighlights, RocketSlateCodeBlock } from './RocketSlateCodeBlock';
 
-import locale from './locales';
+const resetOptions = {
+  types: [CODE],
+};
 
-export const RocketSlateCodePlugin = (options: IHighlights): IRocketSlatePlugin => {
+export const RocketSlateCodePlugin = (options: any): IRocketSlatePlugin => {
   return {
     plugin: {
-      ...CodePlugin(),
+      ...CodePlugin(options),
     },
-  //   withPlugin: editor => {
-  //     const { isVoid } = editor;
-  //     editor.addLocale(locale);
-  //     editor.isVoid = element => {
-  //       return element.type === CODE ? true : isVoid(element);
-  //     };
-  //     return editor;
-  //   },
+    withPlugin: editor => {
+      return withBreakEmptyReset(resetOptions)(withDeleteStartReset(resetOptions)(editor));
+    },
   };
 };
