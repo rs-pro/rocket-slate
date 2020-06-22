@@ -86,7 +86,18 @@ const RocketSlateMentionList = ({
               <>
                 {renderMention
                   ? mentions.map((mention, i) => (
-                      <React.Fragment key={mention.id}>{renderMention(mention, i === index, onHover, onSelect)}</React.Fragment>
+                      <React.Fragment key={mention.id}>
+                        {renderMention(
+                          mention,
+                          i === index,
+                          () => {
+                            onHover(i);
+                          },
+                          () => {
+                            onSelect(i);
+                          },
+                        )}
+                      </React.Fragment>
                     ))
                   : mentions.map((mention, i) => (
                       <RocketSlateMentionListItem
