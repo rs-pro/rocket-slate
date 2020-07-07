@@ -14,10 +14,22 @@ export const insertImage = (editor: Editor, data: IImageData) => {
 
 export const RocketSlateImagePlugin = (options?: RenderElementOptions): IRocketSlatePlugin => {
   return {
-    plugin: ImagePlugin({
-      component: RocketImageElement,
-      ...options,
-    }),
+    plugin: {
+      ...ImagePlugin({
+        component: RocketImageElement,
+        ...options,
+      }),
+      deserialize: {
+        element: {
+          IMG: el => ({
+            type: IMAGE,
+            data: {
+              src: el.getAttribute('src'),
+            },
+          }),
+        },
+      },
+    },
     withPlugin: editor => {
       const { insertData, isVoid } = editor;
 
