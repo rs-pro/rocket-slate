@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/links",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "Links plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
