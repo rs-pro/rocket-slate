@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/checklist",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "Checklist plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "build:tsc": "tsc --project ./tsconfig.build.json --declaration --outDir dist/ --emitDeclarationOnly"
   },
   "dependencies": {
-    "@rocket-slate/editor": "^0.2.13",
+    "@rocket-slate/editor": "^0.2.14",
     "@rocket-slate/icons": "^0.2.6",
     "@types/styled-components": "^4.4.3",
     "react": "^16.12.0",
