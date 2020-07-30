@@ -34,6 +34,7 @@ const RocketSlateEditor = React.forwardRef<any, IRocketSlateEditorProps>(
       renderToolbar,
       locale = 'ru',
       i18n,
+      ...restProps
     },
     ref,
   ) => {
@@ -93,6 +94,7 @@ const RocketSlateEditor = React.forwardRef<any, IRocketSlateEditorProps>(
               </>
             )}
             <RocketSlateEditable
+              {...restProps}
               className="RocketSlate__Editor"
               plugins={slatePlugins}
               placeholder={placeholder}

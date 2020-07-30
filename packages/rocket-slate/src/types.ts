@@ -37,6 +37,7 @@ export type I18n = {
 };
 
 export interface IRocketSlateEditorProps {
+  [key: string]: any;
   value: Node[];
   plugins?: IRocketSlatePlugin[];
   placeholder?: string;
