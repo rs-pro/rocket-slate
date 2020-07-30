@@ -7,7 +7,7 @@ module.exports = (api) => {
         '@babel/env',
         {
           targets: {
-            browsers: 'Last 2 Chrome versions, Firefox ESR',
+            browsers: 'last 2 versions, Firefox ESR, ie >= 11',
             node: '8.9',
           },
         },
