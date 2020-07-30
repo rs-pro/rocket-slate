@@ -1,0 +1,66 @@
+[
+  {
+    "type": "code",
+    "nodes": [
+      {
+        "leaves": [
+          {
+            "text": "<!-- Yandex.Metrika counter -->",
+            "marks": [],
+            "object": "leaf"
+          }
+        ],
+        "object": "text"
+      }
+    ],
+    "object": "block"
+  },
+  {
+    "type": "code",
+    "nodes": [
+      {
+        "leaves": [
+          {
+            "text": "<script type=\"text/javascript\">\n\n    (function (d, w, c) {\n\n        (w[c] = w[c] || []).push(function() {\n\n            try {\n\n                w.yaCounter25757501 = new Ya.Metrika({\n\n                    id:25757501,\n\n                    clickmap:true,\n\n                    trackLinks:true,\n\n                    accurateTrackBounce:true\n\n                });\n\n            } catch(e) { }\n\n        });\n\n\n\n        var n = d.getElementsByTagName(\"script\")[0],\n\n            s = d.createElement(\"script\"),\n\n            f = function () { n.parentNode.insertBefore(s, n); };\n\n        s.type = \"text/javascript\";\n\n        s.async = true;\n\n        s.src = \"https://mc.yandex.ru/metrika/watch.js\";\n\n\n\n        if (w.opera == \"[object Opera]\") {\n\n            d.addEventListener(\"DOMContentLoaded\", f, false);\n\n        } else { f(); }\n\n    })(document, window, \"yandex_metrika_callbacks\");\n\n</script>",
+            "marks": [],
+            "object": "leaf"
+          }
+        ],
+        "object": "text"
+      }
+    ],
+    "object": "block"
+  },
+  {
+    "type": "code",
+    "nodes": [
+      {
+        "leaves": [
+          {
+            "text": "<noscript><div><img src=\"https://mc.yandex.ru/watch/25757501\" style=\"position:absolute; left:-9999px;\" alt=\"\" /></div></noscript>",
+            "marks": [],
+            "object": "leaf"
+          }
+        ],
+        "object": "text"
+      }
+    ],
+    "object": "block"
+  },
+  {
+    "type": "paragraph",
+    "nodes": [
+      {
+        "leaves": [
+          {
+            "text": "<!-- /Yandex.Metrika counter -->",
+            "marks": [],
+            "object": "leaf"
+          }
+        ],
+        "object": "text"
+      }
+    ],
+    "object": "block"
+  }
+]

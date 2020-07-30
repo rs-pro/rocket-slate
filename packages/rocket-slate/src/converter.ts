@@ -103,13 +103,18 @@ function convertChildren(node) {
     return [
       {
         text: node.nodes
-          .map(codeLine =>
-            codeLine.nodes.map(codeLineNode => {
-              if (codeLineNode.leaves) return codeLineNode.leaves.map(leaf => leaf.text).join('');
-              if (codeLineNode.text) return codeLineNode.text;
+          .map(codeLine => {
+            if (codeLine.nodes) {
+              return codeLine.nodes.map(codeLineNode => {
+                if (codeLineNode.leaves) return codeLineNode.leaves.map(leaf => leaf.text).join('');
+                if (codeLineNode.text) return codeLineNode.text;
+                return '';
+              });
+            } else {
+              if (codeLine.leaves) return codeLine.leaves.map(leaf => leaf.text).join('');
               return '';
-            }),
-          )
+            }
+          })
           .join('\n'),
       },
     ];

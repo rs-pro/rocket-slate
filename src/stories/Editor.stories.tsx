@@ -43,6 +43,7 @@ import { RocketSlateAlignmentPlugin, RocketSlateAlignmentButton } from '@rocket-
 
 import editorStateNew from './editorStateNew.json';
 import editorStateOld from './editorStateOld.json';
+import testStateOld from './testState.json';
 
 import locales from './locales';
 
@@ -140,7 +141,7 @@ export const Example = () => {
   }, []);
 
   const initialState = useMemo(() => {
-    return convertSlateState47toRocketSlate(editorStateOld) || editorStateNew || initialValue;
+    return convertSlateState47toRocketSlate(editorStateOld || testStateOld) || editorStateNew || initialValue;
   }, []);
 
   const [editorValue, setValue] = useState(initialState);
