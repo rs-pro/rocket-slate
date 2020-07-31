@@ -1,7 +1,7 @@
 {
   "name": "@rocket-slate/break-exit",
   "version": "0.2.4",
-  "description": "A rich text editor based on SlateJS framework",
+  "description": "Break exit plugin for Rocket Slate editor",
   "author": "Glebtv <glebtv@gmail.com> (http://github.com/glebtv)",
   "homepage": "https://github.com/rs-pro/rocket-slate#readme",
   "license": "MIT",
