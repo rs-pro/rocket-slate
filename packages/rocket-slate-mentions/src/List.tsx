@@ -272,7 +272,6 @@ const RocketSlateMentionSelect = (props: RocketMentionSelect) => {
       editor,
       beforeRegex,
       callback: (targetRange, match) => {
-        console.log(targetRange, match);
         setIndex(0);
         setTarget(targetRange);
         if (match) {

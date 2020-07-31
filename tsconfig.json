@@ -57,7 +57,11 @@
       "@rocket-slate/icons": ["./packages/rocket-slate-icons/src"],
       "@rocket-slate/icons/*": ["./packages/rocket-slate-icons/src/*"],
       "@rocket-slate/alignment": ["./packages/rocket-slate-alignment/src"],
-      "@rocket-slate/alignment/*": ["./packages/rocket-slate-alignment/src/*"]
+      "@rocket-slate/alignment/*": ["./packages/rocket-slate-alignment/src/*"],
+      "@rocket-slate/break-soft": ["./packages/rocket-slate-break-soft/src"],
+      "@rocket-slate/break-soft/*": ["./packages/rocket-slate-break-soft/src/*"],
+      "@rocket-slate/break-exit": ["./packages/rocket-slate-break-exit/src"],
+      "@rocket-slate/break-exit/*": ["./packages/rocket-slate-break-exit/src/*"]
     }
   },
   "exclude": [

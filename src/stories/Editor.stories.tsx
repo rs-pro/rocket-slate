@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
-import { SoftBreakPlugin } from 'slate-plugins-next';
 
 import {
   RocketSlate,
@@ -27,6 +26,8 @@ import { RocketSlateColorsPlugin, RocketSlateColorsButton } from '@rocket-slate/
 import { RocketSlatePastHtmlPlugin } from '@rocket-slate/paste-html';
 import { RocketSlateMarkdownShortcutsPlugin, RocketSlateMarkdownPastePlugin } from '@rocket-slate/markdown';
 import { RocketSlateAlignmentPlugin, RocketSlateAlignmentButton } from '@rocket-slate/alignment';
+import { RocketSlateBreakSoftPlugin } from '@rocket-slate/break-soft';
+import { RocketSlateBreakExitPlugin } from '@rocket-slate/break-exit';
 
 import editorStateNew from './editorStateNew.json';
 import editorStateOld from './editorStateOld.json';
@@ -116,9 +117,24 @@ export const Example = () => {
           });
         },
       }),
-      {
-        plugin: SoftBreakPlugin(),
-      },
+      RocketSlateBreakSoftPlugin({
+        rules: [
+          { hotkey: 'shift+enter' },
+          {
+            hotkey: 'enter',
+            query: {
+              allow: ['code', 'block-quote'],
+            },
+          },
+        ],
+      }),
+      RocketSlateBreakExitPlugin({
+        rules: [
+          {
+            hotkey: 'mod+enter',
+          },
+        ],
+      }),
     ];
   }, []);
 
