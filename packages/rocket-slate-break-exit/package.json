@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/break-exit",
-  "version": "0.2.0",
+  "version": "0.2.4",
   "description": "A rich text editor based on SlateJS framework",
   "author": "Glebtv <glebtv@gmail.com> (http://github.com/glebtv)",
   "homepage": "https://github.com/rs-pro/rocket-slate#readme",
@@ -9,11 +9,11 @@
   "types": "dist/index.d.ts",
   "dependencies": {
     "@rocket-slate/editor": "^0.2.16",
+    "is-hotkey": "^0.1.6",
     "react": "^16.12.0",
     "slate": "0.57.3",
     "slate-plugins-next": "^0.57.12",
-    "slate-react": "0.57.3",
-    "is-hotkey": "^0.1.6"
+    "slate-react": "0.57.3"
   },
   "devDependencies": {
     "cross-env": "^7.0.2"
