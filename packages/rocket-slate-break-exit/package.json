@@ -1,7 +1,7 @@
 {
   "name": "@rocket-slate/break-exit",
   "version": "0.2.0",
-  "description": "@rocket-slate/break-exit",
+  "description": "A rich text editor based on SlateJS framework",
   "author": "Glebtv <glebtv@gmail.com> (http://github.com/glebtv)",
   "homepage": "https://github.com/rs-pro/rocket-slate#readme",
   "license": "MIT",
@@ -19,7 +19,9 @@
     "cross-env": "^7.0.2"
   },
   "files": [
+    "LICENSE",
     "README.md",
+    "CHANGELOG.md",
     "dist"
   ],
   "repository": {

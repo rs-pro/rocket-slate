@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/mentions",
-  "version": "0.2.21",
+  "version": "0.2.22",
   "description": "Mentions plugin for Rocket Slate editor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
