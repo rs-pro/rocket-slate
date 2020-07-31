@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useRef, useEffect, useMemo } from 'react';
-import { Editor, Range, Transforms } from 'slate';
+import { Editor, Point, Location, Range, Transforms } from 'slate';
 import styled from 'styled-components';
 import { useEditor, useSlate, ReactEditor } from 'slate-react';
 import { PortalBody } from 'slate-plugins-next';
@@ -123,8 +123,46 @@ const RocketSlateMentionList = ({
   );
 };
 
-const beforeRegexSpace = /^(\s|$)/;
-const afterRegexSpace = /^(\s|$)/;
+const AFTER_MATCH_REGEX = /^(\s|$)/;
+
+const getText = (editor: Editor, at?: Location) => (at && Editor.string(editor, at)) || '';
+
+const isPointAtWordEnd = (editor: Editor, { at }: { at: Point }) => {
+  // Point after at
+  const after = Editor.after(editor, at);
+
+  // From at to after
+  const afterRange = Editor.range(editor, at, after);
+  const afterText = getText(editor, afterRange);
+
+  // Match regex on after text
+  return !!afterText.match(AFTER_MATCH_REGEX);
+};
+
+const isBeforeMatch = (editor: Editor, at: Point, beforeRegex: RegExp) => {
+  // line before at
+  const beforeLine = Editor.before(editor, at, { unit: 'line' });
+
+  // Range from before to start
+  const beforeLineRange = beforeLine && Editor.range(editor, beforeLine, at);
+
+  // Before text
+  const beforeText = getText(editor, beforeLineRange);
+
+  // Match regex on before text
+  const match = !!beforeText && beforeText.match(beforeRegex);
+
+  let range: any = null;
+  if (beforeLineRange && match) {
+    const before = Editor.before(editor, at, { distance: (match.input || '').length - (match.index || 0) });
+    range = before && Editor.range(editor, before, at);
+  }
+
+  return {
+    range,
+    match,
+  };
+};
 
 const onChangeRocketMention = ({
   editor,
@@ -138,38 +176,11 @@ const onChangeRocketMention = ({
   const { selection } = editor;
 
   if (selection && Range.isCollapsed(selection)) {
-    const [start] = Range.edges(selection);
-    const beforeLine = Editor.before(editor, start, {
-      unit: 'line',
-    });
-
-    if (beforeLine) {
-      const beforeLineRange = beforeLine && Editor.range(editor, beforeLine, start);
-      const beforeLineText = beforeLineRange && Editor.string(editor, beforeLineRange);
-      const beforeLineMatch = beforeLineText && beforeLineText.match(beforeRegex);
-
-      if (beforeLineMatch) {
-        // изменяем указатель на позицию найденную регуляркой
-        beforeLine.offset = beforeLineMatch.index || 0;
-
-        // Проверяем что перед найденным совпадением есть пробел или пустая строка
-        const before = Editor.before(editor, beforeLine);
-        const beforeRange = Editor.range(editor, beforeLine, before);
-        const beforeText = Editor.string(editor, beforeRange);
-        const beforeMatch = beforeText.match(beforeRegexSpace);
-
-        // Проверяем что после найденного совпадения есть пробел или пустая строка
-        const after = Editor.after(editor, start);
-        const afterRange = Editor.range(editor, start, after);
-        const afterText = Editor.string(editor, afterRange);
-        const afterMatch = afterText.match(afterRegexSpace);
-
-        if (beforeMatch && afterMatch) {
-          const targetRange = Editor.range(editor, beforeLine, start);
-          callback(targetRange, beforeLineMatch);
-          return;
-        }
-      }
+    const at = Range.start(selection);
+    const { range, match } = isBeforeMatch(editor, at, beforeRegex);
+    if (match && isPointAtWordEnd(editor, { at })) {
+      callback(range, match);
+      return;
     }
   }
 
@@ -246,7 +257,7 @@ const RocketSlateMentionSelect = (props: RocketMentionSelect) => {
   const [search, setSearch] = useState('');
   const [searchPrefix, setSearchPrefix] = useState<string>();
 
-  const beforeRegex = useMemo(() => new RegExp(`([${[prefix.join('|')]}])([\\wА-Яа-я]+$|$)`), prefix);
+  const beforeRegex = useMemo(() => new RegExp(`(^|\\s)([${[prefix.join('|')]}])([\\wА-Яа-я]+$|$)`), prefix);
 
   useEffect(() => {
     if (target) {
@@ -260,12 +271,13 @@ const RocketSlateMentionSelect = (props: RocketMentionSelect) => {
     onChangeRocketMention({
       editor,
       beforeRegex,
-      callback: (target1, match) => {
+      callback: (targetRange, match) => {
+        console.log(targetRange, match);
         setIndex(0);
-        setTarget(target1);
+        setTarget(targetRange);
         if (match) {
-          setSearch(match[2]);
-          setSearchPrefix(match[1]);
+          setSearch(match[3]);
+          setSearchPrefix(match[2]);
         }
       },
     });

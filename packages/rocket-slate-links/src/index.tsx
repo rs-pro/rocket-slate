@@ -56,7 +56,7 @@ const RocketSlateLinkElement = (props: RenderElementProps) => {
     data: { url },
   } = element;
   return (
-    <a {...attributes} target="_blank" href={url} data-slate-type={LINK}>
+    <a {...attributes} rel="noopener noreferrer" target="_blank" href={url} data-slate-type={LINK}>
       {children}
     </a>
   );

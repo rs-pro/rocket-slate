@@ -5,7 +5,7 @@ const resetOptions = {
   types: [CODE],
 };
 
-export const RocketSlateCodePlugin = (options: any): IRocketSlatePlugin => {
+export const RocketSlateCodePlugin = (options?: any): IRocketSlatePlugin => {
   return {
     plugin: {
       ...CodePlugin(options),

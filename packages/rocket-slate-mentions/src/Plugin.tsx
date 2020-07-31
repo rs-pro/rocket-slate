@@ -42,7 +42,6 @@ type MentionOptionsElementOptions = {
   component: React.ComponentType<MentionComponentProps>;
 };
 
-// TODO: https://github.com/ianstormtaylor/slate/issues/3518
 const RocketSlateMentionElement = (props: RenderElementProps & MentionOptionsElementOptions) => {
   const { attributes, children } = props;
   const { component: ComponentMention, ...restProps } = props;
