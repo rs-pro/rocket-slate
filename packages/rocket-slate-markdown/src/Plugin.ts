@@ -4,7 +4,6 @@ import { IRocketSlatePlugin, withCheckPastSlateFragment } from '@rocket-slate/ed
 export const RocketSlateMarkdownShortcutsPlugin = (): IRocketSlatePlugin => {
   return {
     withPlugin: editor => {
-      const editorWithMd = withShortcuts(editor);
       return withShortcuts(editor);
     },
   };
