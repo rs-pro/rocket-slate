@@ -110,10 +110,9 @@ function convertChildren(node) {
                 if (codeLineNode.text) return codeLineNode.text;
                 return '';
               });
-            } else {
-              if (codeLine.leaves) return codeLine.leaves.map(leaf => leaf.text).join('');
-              return '';
             }
+            if (codeLine.leaves) return codeLine.leaves.map(leaf => leaf.text).join('');
+            return '';
           })
           .join('\n'),
       },
@@ -122,7 +121,7 @@ function convertChildren(node) {
   if (node.type === 'mention') {
     return [
       {
-        text: node.nodes[0].text.split(' (@')[0],
+        text: node.nodes && node.nodes[0] && node.nodes[0].text ? node.nodes[0].text.split(' (@')[0] || '' : '',
       },
     ];
   }
