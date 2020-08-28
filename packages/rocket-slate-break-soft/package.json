@@ -1,6 +1,6 @@
 {
   "name": "@rocket-slate/break-soft",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Break soft plugin for Rocket Slate editor",
   "author": "Glebtv <glebtv@gmail.com> (http://github.com/glebtv)",
   "homepage": "https://github.com/rs-pro/rocket-slate#readme",
@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@rocket-slate/editor": "^0.2.16",
+    "@rocket-slate/editor": "^0.2.17",
     "is-hotkey": "^0.1.6",
     "react": "^16.12.0",
     "slate": "0.57.3",
