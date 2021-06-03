@@ -1,25 +1,10 @@
 {
   "name": "rocket-slate",
-  "private": true,
+  "version": "0.3.0",
   "license": "MIT",
-  "workspaces": [
-    "packages/*",
-    "src/*"
-  ],
   "scripts": {
-    "build": "yarn clean && yarn build:editor && yarn build:icons && yarn build:plugins",
     "build-storybook": "build-storybook",
-    "build:editor": "lerna exec --scope @rocket-slate/editor -- yarn build",
-    "build:icons": "lerna exec --scope @rocket-slate/icons -- yarn build",
-    "build:plugins": "lerna exec --ignore @rocket-slate/icons --ignore @rocket-slate/editor -- yarn build",
-    "clean": "lerna exec rimraf dist",
-    "release": "yarn build && lerna publish",
-    "lint": "run-p -c lint:*",
-    "lint:css": "stylelint 'packages/**/*.ts{,x}'",
-    "prebuild--disabled": "run-p -c lint:*",
-    "storybook": "yarn start-storybook -p 9009",
-    "test": "jest",
-    "tsc": "tsc"
+    "storybook": "yarn start-storybook -p 9009"
   },
   "browserslist": {
     "production": [
@@ -34,9 +19,10 @@
     ]
   },
   "resolutions": {
-    "babel-core": "^7.0.0-bridge.0"
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.0-beta.9",
+    "webpack": "5.38.1"
   },
-  "dependencies": {
+  "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
@@ -44,49 +30,24 @@
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.8.3",
-    "@storybook/addon-actions": "^5.3.0-rc.1",
-    "@storybook/addon-knobs": "^5.2.8",
-    "@storybook/addon-links": "^5.3.0-rc.1",
-    "@storybook/addons": "^5.3.0-rc.1",
-    "@storybook/preset-create-react-app": "1.5.0",
-    "@storybook/react": "5.3.9",
-    "@types/enzyme": "^3.10.4",
-    "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/jest": "^24.0.24",
-    "@types/node": "^12.12.21",
-    "@typescript-eslint/eslint-plugin": "^2.28.0",
-    "@typescript-eslint/parser": "^2.28.0",
-    "babel-core": "7.0.0-bridge.0",
+    "@storybook/builder-webpack5": "6.3.0-beta.6",
+    "@storybook/preset-create-react-app": "3.1.7",
+    "@storybook/react": "6.3.0-beta.6",
+    "@types/node": "^15.6.1",
     "babel-loader": "^8.0.6",
-    "dotenv": "^5.0.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
-    "enzyme-to-json": "^3.0.0-beta6",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-import-resolver-typescript": "^2.0.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-react": "^7.19.0",
-    "jest": "^24.9.0",
-    "lerna": "^3.20.2",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^1.19.1",
-    "prismjs": "^1.19.0",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "^3.3.0",
-    "rimraf": "^2.6.2",
-    "stylelint": "^12.0.0",
-    "stylelint-config-standard": "^19.0.0",
-    "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.9.0",
-    "ts-jest": "^24.2.0",
-    "ts-loader": "^6.2.1",
-    "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "typescript": "^3.7.4"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "ts-loader": "^9.2.2",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "@storybook/manager-webpack5": "6.3.0-beta.6",
+    "@udecode/slate-plugins": "^1.0.0-alpha.25",
+    "react-scripts": "4.0.3",
+    "slate": "/data/slate/packages/slate",
+    "slate-history": "/data/slate/packages/slate-history",
+    "slate-react": "/data/slate/packages/slate-react"
   }
 }

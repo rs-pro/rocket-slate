@@ -2,13 +2,13 @@
 
 ## Project state: pre alpha (not working)
 
-A rich text editor based on [SlateJS](https://github.com/ianstormtaylor/slate) framework and [slate-plugin-next](https://slate-plugins-next.netlify.app/)
+A rich text editor based on [SlateJS](https://github.com/ianstormtaylor/slate) framework and [slate-plugins](https://slate-plugins.udecode.io/)
 
-Supports slate 0.57 only
+Supports slate 0.64 only
 
 ## In the box
 
-- SlateJS 0.57 (no dependency on Immutable.JS)
+- SlateJS 0.64.pre (android support)
 - Fully modular and customizeable
 - A complete wysiwyg with common functions and toolbar
 - Text and background color
@@ -28,8 +28,8 @@ MIT License Copyright (c) 2019-2020 glebtv
 
 Uses code from slate [examples](https://github.com/ianstormtaylor/slate/tree/master/site/examples) (MIT License)
 
-Rocket Slate Plugins:
-Based on [slate-plugins-next](https://github.com/zbeyens/slate-plugins-next) (MIT license)
+Slate Plugins:
+Based on [slate-plugins](https://slate-plugins.udecode.io/) (MIT license)
 
 Rocket Slate Table:
 Based on [slate-deep-table](https://github.com/jasonphillips/slate-deep-table) (Apache 2.0 license)
@@ -37,8 +37,3 @@ Based on [slate-deep-table](https://github.com/jasonphillips/slate-deep-table) (
 Rocket Slate Code:
 Based on [slate-edit-code](https://github.com/GitbookIO/slate-edit-code) (Apache 2.0 license)
 
-Borrows some code and ideas from [slate-editor](https://github.com/nossas/slate-editor) (MIT License)
-
-Includes icons from [google material-design-icons](https://github.com/google/material-design-icons) [Apache 2.0 license](https://github.com/google/material-design-icons/blob/master/LICENSE)
-
-Includes icons from [https://icons8.com](https://icons8.com)
